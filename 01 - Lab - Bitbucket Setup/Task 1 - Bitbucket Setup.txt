@@ -1,0 +1,8 @@
+Name: Sam Huffer
+Student Number: 101633177
+Task: 1
+
+Set up the bitbucket repository, inviting the Games Programming staff
+bitbucket account to the repo. Copied the relevant files and folders
+from Canvas into the repo and pushed it. Gonna add this to the repo 
+and push this too.
