@@ -11,6 +11,9 @@
 
 using namespace std;
 
+//Utility Classes------------------------------------------------------------------------------------------------------------------------------------
+
+//A basic version of C#'s Vector2Int class
 class Vector2Int
 {
 public:
@@ -24,48 +27,36 @@ public:
 	}
 };
 
-void Render(char world[8][8], int size, Vector2Int pos, string output)
-{
-	for (int j = 0; j < size; j++)
-	{
-		for (int i = 0; i < size; i++)
-		{
-			if (i == pos.x && j == pos.y)
-			{
-				cout << "P";
-			}
-			else
-			{				
-				cout << world[i][j];
-			}
-		}
+//Utility Procedures/Functions-----------------------------------------------------------------------------------------------------------------------
 
-		cout << endl;
-	}
-
-	cout << "\n" << output << endl;
-}
-
+//Converts the pointed-to string to all uppercase
 void ConvertToUppercase(string * s)
 {
-	string result = * s;
+	string result = *s;
 	transform(result.begin(), result.end(), result.begin(), ::toupper);
-	* s = result;
+	*s = result;
 }
 
+//Converts the pointed-to string into all-lowercase
 void ConvertToLowercase(string * s)
 {
-	string result = * s;
+	string result = *s;
 	transform(result.begin(), result.end(), result.begin(), ::tolower);
-	* s = result;
+	*s = result;
 }
 
+//Input Procedures/Functions-------------------------------------------------------------------------------------------------------------------------
+
+//Gathers input from the player
 void Input(string * input)
 {
 	cin >> * input;
 	ConvertToUppercase(input);
 }
 
+//Update Procedures/Functions------------------------------------------------------------------------------------------------------------------------
+
+//Checks if the proposed move is valid, moves the player if it is, and checks the consequences
 string MoveTo(bool * finished, char world[8][8], int size, Vector2Int& currentPos, string direction, Vector2Int& newPos)
 {
 	if (newPos.x < 0 || newPos.x > size || newPos.y < 0 || newPos.y > size)
@@ -79,7 +70,7 @@ string MoveTo(bool * finished, char world[8][8], int size, Vector2Int& currentPo
 	}
 	
 	currentPos = newPos;
-	string result = "You moved " + direction + ".\n";
+	string result = "You moved " + direction + ".";
 
 	switch (world[newPos.x][newPos.y])
 	{
@@ -98,16 +89,16 @@ string MoveTo(bool * finished, char world[8][8], int size, Vector2Int& currentPo
 	return result;
 }
 
+//Returns an output string with the directions the player can move
 string GetAvailableDirections(char world[8][8], int size, Vector2Int& pos)
 {
 	string result;
-	
-	if (pos.y + 1 < size && world[pos.x][pos.y + 1] != '#')
+	if (pos.y - 1 > 0 && world[pos.x][pos.y - 1] != '#')
 	{
 		result += "North (N)";
 	}
-
-	if (pos.y - 1 > 0 && world[pos.x][pos.y - 1] != '#')
+	
+	if (pos.y + 1 < size && world[pos.x][pos.y + 1] != '#')
 	{
 		if (result.length() > 0)
 		{
@@ -116,7 +107,7 @@ string GetAvailableDirections(char world[8][8], int size, Vector2Int& pos)
 
 		result += "South (S)";
 	}
-
+	
 	if (pos.x + 1 < size && world[pos.x + 1][pos.y] != '#')
 	{
 		if (result.length() > 0)
@@ -145,6 +136,7 @@ string GetAvailableDirections(char world[8][8], int size, Vector2Int& pos)
 	return result;
 }
 
+//Update processes the input, updates the game state, and produces appropriate output
 void Update(bool * finished, string input, char world[8][8], int size, Vector2Int& pos, string * output)
 {
 	if (input.length() == 1)
@@ -152,31 +144,6 @@ void Update(bool * finished, string input, char world[8][8], int size, Vector2In
 		Vector2Int newPos = Vector2Int(pos.x, pos.y);
 		switch (input[0])
 		{
-
-			//	/*
-//	Char world corresponds to (when seen from player's perspective):
-//	########	N
-//	#G D#D #   W E
-//	#   #  #	S
-//	### # D#
-//	#   #  #
-//	# #### #
-//	#      #
-//	########
-//*/
-//
-//	char world[8][8] =
-//	{
-//		{'#', '#', '#', '#', '#', '#', '#', '#'},	W
-//		{'#', 'G', ' ', '#', ' ', ' ', ' ', '#'},  N S
-//		{'#', ' ', ' ', '#', ' ', '#', ' ', '#'},	E
-//		{'#', 'D', ' ', ' ', ' ', '#', ' ', '#'},
-//		{'#', '#', '#', '#', '#', '#', ' ', '#'},
-//		{'#', 'D', ' ', ' ', ' ', '#', ' ', '#'},
-//		{'#', ' ', ' ', 'D', ' ', ' ', ' ', '#'},
-//		{'#', '#', '#', '#', '#', '#', '#', '#'}
-//	};
-
 			case 'Q':
 				*finished = true;
 				*output = "Goodbye";
@@ -190,11 +157,11 @@ void Update(bool * finished, string input, char world[8][8], int size, Vector2In
 				*output = MoveTo(finished, world, size, pos, "south", newPos);
 				break;
 			case 'E':
-				newPos = Vector2Int(pos.x, pos.x + 1);
+				newPos = Vector2Int(pos.x + 1, pos.y);
 				*output = MoveTo(finished, world, size, pos, "east", newPos);
 				break;
 			case 'W':
-				newPos = Vector2Int(pos.x, pos.x - 1);
+				newPos = Vector2Int(pos.x - 1, pos.y);
 				*output = MoveTo(finished, world, size, pos, "west", newPos);
 				break;
 			default:
@@ -215,6 +182,36 @@ void Update(bool * finished, string input, char world[8][8], int size, Vector2In
 	*output += "\nYou can move " + GetAvailableDirections(world, size, pos) + ": ";
 }
 
+//Redering Procedures/Functions----------------------------------------------------------------------------------------------------------------------
+
+//Prints to the terminal the gamestate and output calculated in Update()
+void Render(char world[8][8], int size, Vector2Int pos, string output)
+{
+	/*cout << "New position: (" << pos.x << "," << pos.y << ")." << endl;
+
+	for (int j = 0; j < size; j++)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (i == pos.x && j == pos.y)
+			{
+				cout << "P";
+			}
+			else
+			{
+				cout << world[i][j];
+			}
+		}
+
+		cout << endl;
+	}*/
+
+	cout << /*"\n" <<*/ output;
+}
+
+//Main Function--------------------------------------------------------------------------------------------------------------------------------------
+
+//The game loop
 int main()
 {
 	bool finished = false;
@@ -259,7 +256,7 @@ int main()
 	cout << "\tW: move West" << endl;
 	cout << "\tQ: Quit" << endl;
 	cout << "Begin" << endl;
-	cout << "You can move North (N): ";
+	cout << "\nYou can move North (N): ";
 	
 	while (!finished)
 	{
