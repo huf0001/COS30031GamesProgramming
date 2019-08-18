@@ -5,6 +5,8 @@ Simple examples of interesting things as a debugging exercise
 Search for #TODO marks and then do ... :)
 
 *******************************************************************************/
+
+#include "pch.h"
 #include <iostream>
 
 using namespace std;
@@ -33,13 +35,16 @@ void showParticleArray2(Particle arr[], int size);
 int main()
 {
     // 1. Warm up. Create a particle, set values, show to screen
-    cout << " << Section 1 >>" << endl;
-    Particle a;
-    showParticle(a);  // #TODO - un-intitalise values? what did it show/why?
-    a.age = 0;
-    a.x = 10;
-    a.y = 20;
-    showParticle(a); // #TODO - worked as expected?
+	if (true)
+	{
+		cout << " << Section 1 >>" << endl;
+		Particle a = *new Particle();
+		showParticle(a);  // #TODO - un-intitalise values? what did it show/why?
+		a.age = 0;
+		a.x = 10;
+		a.y = 20;
+		showParticle(a); // #TODO - worked as expected?
+	}
 
     // Note: uses of an initialisation list. (quicker then setting each as above!)
     // #TODO - Do you know about them? If not, find out and make a note in your report.
@@ -49,7 +54,7 @@ int main()
 
     // 2. Get a particle with the values we pass to the function
     //    (When you are up to this section, change false to true. Keeps things compact)
-    if (false) {
+    if (true) {
         cout << " << Section 2 >>" << endl;
         b = getParticleWith(1,2,3);
         cout << "b with 1,2,3 ... ";
@@ -62,7 +67,7 @@ int main()
     }
 
     // 3. Set values in a particle that we already have
-    if (false) {
+    if (true) {
         cout << " << Section 3 >>" << endl;
         // This compiles/runs, but ...
         setParticleWith(b, 5,6,7);
@@ -72,7 +77,7 @@ int main()
     }
 
     // 4. Use a pointer to an existing particle
-    if (false) {
+    if (true) {
         cout << " << Section 4 >>" << endl;
         Particle *p1_ptr;
         // set b to be something sensible
@@ -185,32 +190,33 @@ int main()
 
 
     // 7. Array of pointers to structs
-    if (false) {
-        cout << " << Section 7 >>" << endl;
-        int n = 5;
-        Particle *ptr_array[n]; // contains pointers to nowhere so far!
-        // #TODO: what is the pointer value? (Is it empty?/nullptr?) Can you trust it?
-        cout << "pointer address " << hex << ptr_array[0] << endl;
+    if (false) 
+	{
+    //    cout << " << Section 7 >>" << endl;
+    //    int n = 5;
+    //    Particle *ptr_array[n]; // contains pointers to nowhere so far!
+    //    // #TODO: what is the pointer value? (Is it empty?/nullptr?) Can you trust it?
+    //    cout << "pointer address " << hex << ptr_array[0] << endl;
 
-        // initialise all the pointers with created Particles
-        for (int i = 0; i < n; i++) {
-            ptr_array[i] = new Particle();
-            //ptr_array[i]->age = i; // #TODO: uncomment this to confirm it's working
-        }
-        // show each particle value
-        cout << "Show each particle pointed to in the pointer array ..." << endl;
-        for (int i = 0; i < n; i++) {
-            showParticle((*ptr_array[i]));
-            // #TODO: why is (*ptr_array[i]) needed?
-        }
-        // cleanup! Can you see what happens if you DON'T do this?
-        if (false) {
-            for (int i = 0; i < n; i++) {
-                delete ptr_array[i];
-                ptr_array[i] = nullptr; // Not always needed but good habit! #TODO: agree? why?
-            }
-        }
-        // Note: if we dynamically created the array (with new), we should clean that up too.
+    //    // initialise all the pointers with created Particles
+    //    for (int i = 0; i < n; i++) {
+    //        ptr_array[i] = new Particle();
+    //        //ptr_array[i]->age = i; // #TODO: uncomment this to confirm it's working
+    //    }
+    //    // show each particle value
+    //    cout << "Show each particle pointed to in the pointer array ..." << endl;
+    //    for (int i = 0; i < n; i++) {
+    //        showParticle((*ptr_array[i]));
+    //        // #TODO: why is (*ptr_array[i]) needed?
+    //    }
+    //    // cleanup! Can you see what happens if you DON'T do this?
+    //    if (false) {
+    //        for (int i = 0; i < n; i++) {
+    //            delete ptr_array[i];
+    //            ptr_array[i] = nullptr; // Not always needed but good habit! #TODO: agree? why?
+    //        }
+    //    }
+    //    // Note: if we dynamically created the array (with new), we should clean that up too.
     }
 
     return 0;
