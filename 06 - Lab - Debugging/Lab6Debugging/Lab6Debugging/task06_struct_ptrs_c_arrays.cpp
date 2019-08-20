@@ -111,7 +111,7 @@ int main()
     }
 
     // 5. Array of structs
-    if (false) {
+    if (true) {
         cout << " << Section 5 >>" << endl;
 
         Particle p_array1[3]; // NOTE: plain old array - not a fancy std::array
@@ -138,7 +138,7 @@ int main()
         showParticleArray(p_array2, 3); // works fine
 
         // #TODO: uncomment this - does it work the same?
-        //showParticleArray2(p_array2, 3); // alternative signature
+        showParticleArray2(p_array2, 3); // alternative signature
 
         // read (access) more then we should ... size 4 (but it's only 3)
         cout << "array position overrun ... " << endl;
@@ -147,12 +147,13 @@ int main()
     }
 
     // 6. Struct pointer with new and delete for memory
-    if (false) {
+    if (true) {
         cout << " << Section 6 >>" << endl;
         // Some pointer warm-up ideas. What you expect?
         Particle *p2_ptr; // points to nothing
-        cout << "pointer address " << hex << p2_ptr << endl;
+        //cout << "pointer address " << hex << p2_ptr << endl;	//VS throws an error here, saying you're accessing an uninitialised variable
         Particle c = {9,9,9}; // a real and initialised Particle variable
+		cout << dec << 100 << endl << hex << 100 << endl << oct << 100 << endl;
         cout << "pointer address " << hex << &c << endl;
         p2_ptr = &c; // copy the point to the same particle
         cout << "pointer address " << hex << p2_ptr << endl;
@@ -172,8 +173,8 @@ int main()
         delete p2_ptr; // #TODO: what is delete and what did it do?
         cout << "pointer address " << hex << p2_ptr << endl;
         // #TODO: what happens if you try this? Explain
-        cout << "Can we still show value at pointer address? (It was deleted, so ...) ";
-        showParticle((*p2_ptr));
+        //cout << "Can we still show value at pointer address? (It was deleted, so ...) ";
+        //showParticle((*p2_ptr));	//Commented out because it throws an access violation following the delete statement
 
         // house keeping - if a pointer isn't valid, set it to nullptr/NULL
         p2_ptr = nullptr; // we used to use NULL (== 0)
@@ -190,33 +191,33 @@ int main()
 
 
     // 7. Array of pointers to structs
-    if (false) 
+    if (true) 
 	{
-    //    cout << " << Section 7 >>" << endl;
-    //    int n = 5;
-    //    Particle *ptr_array[n]; // contains pointers to nowhere so far!
-    //    // #TODO: what is the pointer value? (Is it empty?/nullptr?) Can you trust it?
-    //    cout << "pointer address " << hex << ptr_array[0] << endl;
+        cout << " << Section 7 >>" << endl;
+        int n = 5;
+        Particle *ptr_array[5]; // contains pointers to nowhere so far!
+        // #TODO: what is the pointer value? (Is it empty?/nullptr?) Can you trust it?
+        cout << "pointer address " << hex << ptr_array[0] << endl;
 
-    //    // initialise all the pointers with created Particles
-    //    for (int i = 0; i < n; i++) {
-    //        ptr_array[i] = new Particle();
-    //        //ptr_array[i]->age = i; // #TODO: uncomment this to confirm it's working
-    //    }
-    //    // show each particle value
-    //    cout << "Show each particle pointed to in the pointer array ..." << endl;
-    //    for (int i = 0; i < n; i++) {
-    //        showParticle((*ptr_array[i]));
-    //        // #TODO: why is (*ptr_array[i]) needed?
-    //    }
-    //    // cleanup! Can you see what happens if you DON'T do this?
-    //    if (false) {
-    //        for (int i = 0; i < n; i++) {
-    //            delete ptr_array[i];
-    //            ptr_array[i] = nullptr; // Not always needed but good habit! #TODO: agree? why?
-    //        }
-    //    }
-    //    // Note: if we dynamically created the array (with new), we should clean that up too.
+        // initialise all the pointers with created Particles
+        for (int i = 0; i < n; i++) {
+            ptr_array[i] = new Particle();
+            ptr_array[i]->age = i; // #TODO: uncomment this to confirm it's working
+        }
+        // show each particle value
+        cout << "Show each particle pointed to in the pointer array ..." << endl;
+        for (int i = 0; i < n; i++) {
+            showParticle((*ptr_array[i]));
+            // #TODO: why is (*ptr_array[i]) needed?
+        }
+        // cleanup! Can you see what happens if you DON'T do this?
+        if (true) {
+            for (int i = 0; i < n; i++) {
+                delete ptr_array[i];
+                ptr_array[i] = nullptr; // Not always needed but good habit! #TODO: agree? why?
+            }
+        }
+        // Note: if we dynamically created the array (with new), we should clean that up too.
     }
 
     return 0;
@@ -261,12 +262,12 @@ void showParticleArray(Particle * p_array, int size)
 void showParticleArray2(Particle arr[], int size)
 {
     // #TODO - uncomment this. Does it work?
-    // if (true) { // this does NOT work here. why?
-    //     cout << "Array as arr[] ..." << endl;
-    //     cout << " - sizeof entire array? " << sizeof(arr) << endl;
-    //     cout << " - sizeof array element? " << sizeof(arr) << endl;
-    //     cout << " - array size n is: " << (sizeof(arr) / sizeof(arr[0])) << endl;
-    // }
+     if (true) { // this does NOT work here. why?
+         cout << "Array as arr[] ..." << endl;
+         cout << " - sizeof entire array? " << sizeof(arr) << endl;
+         cout << " - sizeof array element? " << sizeof(arr) << endl;
+         cout << " - array size n is: " << (sizeof(arr) / sizeof(arr[0])) << endl;
+     }
     // #TODO: The above might get warnings (good!). Not all compilers though. Why?
 
     for (int i = 0; i < size; i++) {
