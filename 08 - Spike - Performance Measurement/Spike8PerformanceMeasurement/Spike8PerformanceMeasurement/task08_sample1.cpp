@@ -60,9 +60,9 @@ void linear_rampup_test()
 {
     cout << " << Linear Ramp-up Test >> " << endl;
     int total;
-    for (auto size = 1; size <= 5; size += 1) 
+    for (auto size = 1; size <= 20; size += 1) 
     {
-        int vec_size = size * 10000;
+        int vec_size = 1 * 100000;
         // 1. get start time
         auto start = steady_clock::now();
         // 2. do some work (create, fill, find sum)
@@ -87,9 +87,9 @@ int main()
     // Simple wrapper around a linaer set of time tests
     linear_rampup_test();
 
-	//TODO: 2b: exponential ramp up test
-    // Simple wrapper around an exponential set of time tests
-    exponential_rampup_test();
+	////TODO: 2b: exponential ramp up test
+ //   // Simple wrapper around an exponential set of time tests
+ //   exponential_rampup_test();
 
 	////TODO: 4: function comparison
  //   // Compare the two different methods of counting in a string
