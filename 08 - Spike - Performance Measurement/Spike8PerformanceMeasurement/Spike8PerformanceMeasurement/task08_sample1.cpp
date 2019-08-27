@@ -83,18 +83,34 @@ void linear_rampup_test()
 
 int main()
 {
-	////TODO: 2a: linear rampup test
- //   // Simple wrapper around a linaer set of time tests
- //   linear_rampup_test();
+	vector<float> times = vector<float>();
 
-	cout << "1: Single Method" << endl;
-	auto start = steady_clock::now();
+	for (int i = 0; i < 50; i++)
+	{
+		//TODO: 2a: linear rampup test
+		// Simple wrapper around a linaer set of time tests
+		auto start = steady_clock::now();
+		linear_rampup_test();
+		auto end = steady_clock::now();
+		duration<double> diff = end - start;
+		cout << "Time: " << diff.count() << endl;
+
+		times.push_back(diff.count());
+	}
+
+	cout << endl;
+	cout << "<< Repeatability Testing (on linear_rampup_test()) >>" << endl;
+
+	for (int i = 0; i < times.size(); i++)
+	{
+		cout << times[i] << endl;
+	}
+
+	cout << "done" << endl;
+
 	//TODO: 2b: exponential ramp up test
-    // Simple wrapper around an exponential set of time tests
-	exponential_rampup_test();
-	auto end = steady_clock::now();
-	duration<double> diff = end - start;
-	cout << "Time: " << diff.count() << endl;
+	// Simple wrapper around an exponential set of time tests
+	//exponential_rampup_test();
 
 	////TODO: 4: function comparison
  //   // Compare the two different methods of counting in a string
