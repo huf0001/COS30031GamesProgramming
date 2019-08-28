@@ -1,0 +1,23 @@
+﻿  Game.cpp
+  Location.cpp
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\location.cpp(1): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Spike9GameStateManagement.cpp
+  StageManager.cpp
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(7): error C2653: 'StageManager': is not a class or namespace name
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(9): error C2065: 'stages': undeclared identifier
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(9): error C2065: 'map': undeclared identifier
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(9): error C2065: 'string': undeclared identifier
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(9): error C2059: syntax error: ')'
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(10): warning C4508: 'StageManager': function should return a value; 'void' return type assumed
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(12): error C2510: 'StageManager': left of '::' must be a class/struct/union
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(12): error C2065: 'string': undeclared identifier
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(12): error C2146: syntax error: missing ')' before identifier 'stage'
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(13): error C2143: syntax error: missing ';' before '{'
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\stagemanager.cpp(13): error C2447: '{': missing function header (old-style formal list?)
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\game.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\game.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\game.h(17): error C2238: unexpected token(s) preceding ';'
+  World.cpp
+c:\users\sam huffer\coding\cos30031 - 101633177\09 - spike - game state management\spike9gamestatemanagement\spike9gamestatemanagement\world.cpp(1): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Generating Code...

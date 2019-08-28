@@ -151,7 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="StageManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="About.cpp" />
