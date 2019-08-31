@@ -24,6 +24,12 @@
     <ClInclude Include="StageManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

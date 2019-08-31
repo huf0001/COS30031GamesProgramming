@@ -1,19 +1,23 @@
 #include "pch.h"
-#pragma once
 
-#include "Game.h"
+#ifndef STAGEMANAGER_H
+#define STAGEMANAGER_H
 
 #include <iostream>
-#include <string>
 #include <map>
+#include <string>
 
-using namespace std;
+#include "MainMenu.h"
+
+class Stage;
 
 class StageManager
 {
 private:
-	map<string, Stage> stages;
+	std::map<std::string, Stage*> stages;
 public:
 	StageManager();
-	Stage* GetStage(string stage);
+	Stage* GetStage(std::string stage);
 };
+
+#endif

@@ -152,7 +152,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
   </ItemGroup>
   <ItemGroup>

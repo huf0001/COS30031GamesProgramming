@@ -1,15 +1,10 @@
-#pragma once
-
 #include "pch.h"
 
 #include "StageManager.h"
 
-StageManager::StageManager()
-{
-	stages = map<string, Stage>();
-}
+//Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-Stage* StageManager::GetStage(string stage)
+Stage* StageManager::GetStage(std::string stage)
 {
 	if (stages.find(stage) == stages.end())
 	{
@@ -17,6 +12,23 @@ Stage* StageManager::GetStage(string stage)
 	}
 	else
 	{
-		return &(stages[stage]);
+		return stages[stage];
 	}
 }
+
+//Constructor----------------------------------------------------------------------------------------------------------------------------------------
+
+StageManager::StageManager()
+{
+	stages = std::map<std::string, Stage*>();
+	stages["MainMenu"] = (Stage*) new MainMenu();
+	//Add about stage
+	//Add help stage
+	//Add select adventure stage
+	//Add gameplay stage
+	//Add new high score stage
+	//Add hall of fame stage
+}
+
+//Methods--------------------------------------------------------------------------------------------------------------------------------------------
+
