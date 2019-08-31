@@ -30,6 +30,30 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="About.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HallOfFame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectAdventure.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Location.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewHighScore.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

@@ -17,7 +17,7 @@ protected:
 	//Protected Fields
 
 	//Protected Methods
-	std::string Setup(std::string input);
+	std::string Setup();
 public:
 	//Constructor
 	MainMenu();

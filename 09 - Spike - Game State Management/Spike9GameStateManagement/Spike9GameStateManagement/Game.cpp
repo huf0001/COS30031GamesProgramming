@@ -4,18 +4,26 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-void Game::SetStage(Stage* stage)
+//Sets instance; required for singleton, or there will be a compilation error
+Game* Game::instance = 0;
+
+//Accessor for instance
+Game* Game::Instance()
 {
-	(*currentStage).SetSetup(false);
-	currentStage = stage;
+	if (!instance)
+	{
+		instance = new Game();
+	}
+
+	return instance;
 }
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
 Game::Game()
 {
-	stageManager = new StageManager();
-	currentStage = (*stageManager).GetStage("MainMenu");
+	currentStage = (*StageManager::Instance()).GetStage("MainMenu");
+	nextStage = nullptr;
 	input = "";
 	output = "";
 	finished = false;
@@ -40,7 +48,7 @@ void Game::ConvertToLowercase(std::string * s)
 
 void Game::Input()
 {
-	std::cin >> input;
+	std::getline(std::cin, input);
 	ConvertToLowercase(&input);
 }
 
@@ -49,6 +57,20 @@ void Game::Input()
 void Game::Update()
 {
 	output = (*currentStage).Update(input);
+
+	if (nextStage != nullptr)
+	{
+		(*currentStage).SetSetup(false);
+		currentStage = nextStage;
+		nextStage = nullptr;
+
+		output += (*currentStage).Update(input);
+	}
+}
+
+void Game::SetNextStage(std::string stage)
+{
+	nextStage = (*StageManager::Instance()).GetStage(stage);
 }
 
 //Render Loop Methods--------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +80,7 @@ void Game::Render()
 	std::cout << output;
 }
 
-//Main Execution-------------------------------------------------------------------------------------------------------------------------------------
+//Core Execution-------------------------------------------------------------------------------------------------------------------------------------
 
 void Game::Run()
 {
@@ -71,5 +93,10 @@ void Game::Run()
 		Update();
 		Render();
 	}
+}
+
+void Game::Quit()
+{
+	finished = true;
 }
 

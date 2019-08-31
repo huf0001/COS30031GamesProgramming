@@ -18,11 +18,10 @@ protected:
 	bool setup;
 
 	//Protected Methods
-	virtual std::string Setup(std::string input) = 0;
+	virtual std::string Setup() = 0;
 public:
 	//Public Properties
 	std::string GetName();
-	void SetName(std::string value);
 	bool GetSetup();
 	void SetSetup(bool value);
 

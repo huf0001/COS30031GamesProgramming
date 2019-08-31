@@ -4,7 +4,6 @@
 #define GAME_H
 
 #include <array>
-#include <iostream>
 #include <string>
 
 #include "MainMenu.h"
@@ -15,11 +14,16 @@ class Game
 {
 private:
 	//Private Fields
-	StageManager * stageManager;
-	Stage * currentStage;
+	static Game* instance;
+	//StageManager* stageManager;
+	Stage* currentStage;
+	Stage* nextStage;
 	std::string input;
 	std::string output;
 	bool finished;
+
+	//Constructor
+	Game();
 
 	//Private Methods
 	void ConvertToUppercase(std::string* string);
@@ -34,13 +38,12 @@ private:
 
 public:
 	//Public Properties
-	void SetStage(Stage* stage);
-
-	//Constructor
-	Game();	
+	static Game* Instance();
 
 	//Public Methods
+	void SetNextStage(std::string stage);
 	void Run();
+	void Quit();
 };
 
 #endif

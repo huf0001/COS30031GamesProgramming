@@ -151,11 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="About.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="HallOfFame.h" />
+    <ClInclude Include="Help.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="NewHighScore.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SelectAdventure.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="About.cpp" />
