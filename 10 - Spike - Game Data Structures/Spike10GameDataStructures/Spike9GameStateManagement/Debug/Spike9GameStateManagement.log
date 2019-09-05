@@ -1,6 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Spike9GameStateManagement.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Gameplay.cpp
-c:\users\sam huffer\coding\cos30031 - 101633177\10 - spike - game data structures\spike10gamedatastructures\spike9gamestatemanagement\gameplay.cpp(131): warning C4018: '<': signed/unsigned mismatch
-c:\users\sam huffer\coding\cos30031 - 101633177\10 - spike - game data structures\spike10gamedatastructures\spike9gamestatemanagement\gameplay.cpp(310): warning C4018: '<': signed/unsigned mismatch
-c:\users\sam huffer\coding\cos30031 - 101633177\10 - spike - game data structures\spike10gamedatastructures\spike9gamestatemanagement\gameplay.cpp(436): warning C4018: '<': signed/unsigned mismatch
+  Help.cpp
   Spike9GameStateManagement.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\10 - Spike - Game Data Structures\Spike10GameDataStructures\Debug\Spike10GameDataStructures.exe
