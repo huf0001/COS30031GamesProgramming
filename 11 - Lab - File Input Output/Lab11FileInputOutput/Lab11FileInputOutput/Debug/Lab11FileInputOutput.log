@@ -1,3 +1,7 @@
 ﻿  Lab11FileInputOutput.cpp
-c:\users\sam huffer\coding\cos30031 - 101633177\11 - lab - file input output\lab11fileinputoutput\lab11fileinputoutput\lab11fileinputoutput.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Lab11FileInputOutput\Lab11FileInputOutput.cpp(46,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Lab11FileInputOutput\Lab11FileInputOutput.cpp(116,38): warning C4305:  '=': truncation from 'double' to 'float'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Lab11FileInputOutput\Lab11FileInputOutput.cpp(138,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Lab11FileInputOutput\Lab11FileInputOutput.cpp(236,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Lab11FileInputOutput\Lab11FileInputOutput.cpp(305,22): warning C4018:  '<': signed/unsigned mismatch
   Lab11FileInputOutput.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\11 - Lab - File Input Output\Lab11FileInputOutput\Debug\Lab11FileInputOutput.exe
