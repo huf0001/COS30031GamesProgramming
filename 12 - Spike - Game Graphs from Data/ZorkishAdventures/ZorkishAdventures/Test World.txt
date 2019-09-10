@@ -69,13 +69,13 @@ P:east_room:south west:south_room:a door to the SOUTH WEST.
 P:east_room:up:east_attic:a ladder UP.
 
 #Paths from east_attic
-P:east_attic:down:a ladder back DOWN.
+P:east_attic:down:east_room:a ladder back DOWN.
 
 #Paths from north_room
 P:north_room:south_west:west_room:a door to the SOUTH WEST.
 P:north_room:south:middle_room:a door to the SOUTH.
-P:north_room:south_east:a door to the SOUTH EAST.
-P:north_room:down:a trapdoor DOWN.
+P:north_room:south_east:east_room:a door to the SOUTH EAST.
+P:north_room:down:north_cellar:a trapdoor DOWN.
 
 #Paths from north_cellar
-P:north_cellar:up:a ladder back UP.
+P:north_cellar:up:north_room:a ladder back UP.

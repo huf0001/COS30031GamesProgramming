@@ -14,7 +14,6 @@ bool World::GetLoadedSuccessfully()
 	return loadedSuccessfully;
 }
 
-
 std::string World::GetName()
 {
 	return name;
@@ -26,6 +25,8 @@ World::World(std::string filename)
 {
 	locations = std::map<std::string, Location*>();
 	loadedSuccessfully = true;
+	name = "";
+	currentLocation = nullptr;
 
 	//Read available worlds from file
 	std::ifstream ifs(filename);
@@ -52,74 +53,70 @@ World::World(std::string filename)
 			//Check prefixes
 			if (splitLine[0] == "W")
 			{
-				//Check formatting
+				//Check Formatting
 				if (splitLine.size() != 2)
 				{
 					std::cout << "Error, '" << filename << "', line " << lineCount << ": Wrong number of values for loading world name. Values required (including prefix 'W'): 2. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"W:World Name\".\n\n";
+					std::cout << "\tFormat: \"W:World Name\".\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[1].length() == 0)
 				{
 					std::cout << "Error, '" << filename << "', line " << lineCount << ": You must specify the world name.\n";
-					std::cout << "Format: \"W:World Name\".\n\n";
+					std::cout << "\tFormat: \"W:World Name\".\n";
 					loadedSuccessfully = false;
-					break;
-				}
-			}
-			else if (splitLine[0] == "S")
-			{
-				//Check formatting
-				if (splitLine.size() != 2)
-				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading starting location. Values required (including prefix \"S\"): 2. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"S:starting_location_id\".\n\n";
-					loadedSuccessfully = false;
-					break;
-				}
-				else if (splitLine[1].length() == 0)
-				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the starting location.\n";
-					std::cout << "Format: \"S:starting_location_id\".\n\n";
-					loadedSuccessfully = false;
-					break;
 				}
 				else
 				{
 					name = splitLine[1];
 				}
 			}
+			else if (splitLine[0] == "S")
+			{
+				//Check Formatting
+				if (splitLine.size() != 2)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading starting location. Values required (including prefix \"S\"): 2. Values given: " << splitLine.size() << ".\n";
+					std::cout << "\tFormat: \"S:starting_location_id\".\n";
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[1].length() == 0)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the starting location.\n";
+					std::cout << "\tFormat: \"S:starting_location_id\".\n";
+					loadedSuccessfully = false;
+				}
+				else
+				{
+					currentLocation = locations[splitLine[1]];
+				}
+			}
 			else if (splitLine[0] == "L")
 			{
-				//Check formatting
+				//Check Formatting
 				if (splitLine.size() != 4)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading location. Values required (including prefix \"L\"): 4. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"L:location_id_:Location Name:location description\".\n";
+					std::cout << "\tFormat: \"L:location_id_:Location Name:location description\".\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[1].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the location's id.\n";
-					std::cout << "Format: \"L:location_id_:Location Name:location description\".\n";
+					std::cout << "\tFormat: \"L:location_id_:Location Name:location description\".\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[2].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the location's name.\n";
-					std::cout << "Format: \"L:location_id_:Location Name:location description\".\n";
+					std::cout << "\tFormat: \"L:location_id_:Location Name:location description\".\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[3].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the location's description.\n";
-					std::cout << "Format: \"L:location_id_:Location Name:location description\".\n";
+					std::cout << "\tFormat: \"L:location_id_:Location Name:location description\".\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else
 				{
@@ -129,56 +126,49 @@ World::World(std::string filename)
 			}
 			else if (splitLine[0] == "P")
 			{
-				//Check formatting
+				//Check Formatting
 				if (splitLine.size() != 5)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading path between locations. Values required (including prefix \"P\"): 5. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[1].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the location the path leads away from.\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[2].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the direction the path leads in.\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[3].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the location the path leads towards.\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[4].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the description of the path.\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				//Check endpoints of path exist
 				else if (!locations.count(splitLine[1]))
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The path's location_from_id must be the id of a location that has already been created. World.locations doesn't contain a location with id \"" + splitLine[1] + "\".\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (!locations.count(splitLine[3]))
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The path's location_to_id must be the id of a location that has already been created. World.locations doesn't contain a location with id \"" + splitLine[1] + "\".\n";
-					std::cout << "Format: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
+					std::cout << "\tFormat: \"P:location_from_id:direction:location_to_id:path description\".\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				//Create the path
 				else
@@ -188,80 +178,97 @@ World::World(std::string filename)
 			}
 			else if (splitLine[0] == "C")
 			{
-				//Check formatting
+				//Check Formatting
 				if (splitLine.size() != 5)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading container item. Values required (including prefix \"C\"): 5. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[1].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's id.\n";
-					std::cout << "Format: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the container (location or container item) that holds the container item.\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[2].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's name.\n";
-					std::cout << "Format: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's id.\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[3].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's description.\n";
-					std::cout << "Format: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's name.\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[4].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the container (location or container item) that holds the container item.\n";
-					std::cout << "Format: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the container item's description.\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
+				}
+				//Check the container item's container exists
+				else if (!containers.count(splitLine[1]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The container item's container_id must be the id of a container (i.e. location or container item) that has already been created. Map \"containers\" in World.World does not include container \"" + splitLine[4] + "\".\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					loadedSuccessfully = false;
+				}
+				//Create the container item
+				else
+				{
+					ContainerItem* c = new ContainerItem(splitLine[2], splitLine[3], splitLine[4]);
+					containers[splitLine[1]]->AddItem(c);
+					containers[splitLine[2]] = c;
 				}
 			}
 			else if (splitLine[0] == "I")
 			{
-				//Check formatting
+				//Check Formatting
 				if (splitLine.size() != 5)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading item. Values required (including prefix \"I\"): 5. Values given: " << splitLine.size() << ".\n";
-					std::cout << "Format: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
+					std::cout << "\tFormat: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[1].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's id.\n";
-					std::cout << "Format: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the container (location or container item) that holds the item.\n";
+					std::cout << "\tFormat: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[2].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's name.\n";
-					std::cout << "Format: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's id.\n";
+					std::cout << "\tFormat: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[3].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's description.\n";
-					std::cout << "Format: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's name.\n";
+					std::cout << "\tFormat: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
 				}
 				else if (splitLine[4].length() == 0)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the container (location or container item) that holds the item.\n";
-					std::cout << "Format: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the item's description.\n";
+					std::cout << "\tFormat: \"I:item_id:Item Name:item description:container_id\". (container_id: the location or container item the item is being stored inside.)\n\n";
 					loadedSuccessfully = false;
-					break;
+				}
+				//Check the item's container exists
+				else if (!containers.count(splitLine[1]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The item's container_id must be the id of a container (i.e. location or container item) that has already been created. Map \"containers\" in World.World() does not include container \"" + splitLine[4] + "\".\n";
+					std::cout << "\tFormat: \"C:container_item_id:Container Item Name:container item description:container_id\". (container_id: the location or container item the container item is being stored inside.)\n\n";
+					loadedSuccessfully = false;
+				}
+				//Create the container item
+				else
+				{
+					Item* i = new Item(splitLine[2], splitLine[3], splitLine[4]);
+					containers[splitLine[1]]->AddItem(i);
 				}
 			}
 			else
@@ -269,24 +276,39 @@ World::World(std::string filename)
 				//Formatting error
 				std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Invalid prefix. Values prefixes: W, S, L, P, C or I. Prefix given: \"" << splitLine[0] << "\".\n";
 				loadedSuccessfully = false;
-				break;
 			}
 		}
 
-		//TODO: check that a location was loaded
-		//TODO: check that a starting location was specified
+		if (name == "")
+		{
+			std::cout << "Error: No world name was provided.\n";
+			std::cout << "\tFormat: \"W:World Name\".\n";
+		}
+		
+		if (locations.size() == 0)
+		{
+			std::cout << "Error: No locations were provided.\n";
+			std::cout << "\tFormat: \"L:location_id_:Location Name:location description\".\n";			
+		}
+
+		if (currentLocation == nullptr)
+		{
+			std::cout << "Error: No starting location was provided.\n";
+			std::cout << "\tFormat: \"S:starting_location_id\".\n";
+		}
 	}
 	else
 	{
-		std::cout << "\tUnable to open file\n";
+		std::cout << "Error: Unable to open file \"" + filename + "\".\n";
 		loadedSuccessfully = false;
 	}
 
+	if (!loadedSuccessfully)
+	{
+		std::cout << "Error: Could not load world from \"" + filename + "\" successfully.\n\n";
+	}
+
 	ifs.close();
-
-
-
-
 	
 	////Assign to fields
 	//this->name = filename;

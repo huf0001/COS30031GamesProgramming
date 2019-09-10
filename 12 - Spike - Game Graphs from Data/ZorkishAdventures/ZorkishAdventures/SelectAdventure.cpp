@@ -7,8 +7,6 @@
 SelectAdventure::SelectAdventure()
 {
 	name = "SelectAdventure";
-	worldNames = std::vector<std::string>();
-	worldFilenames = std::vector<std::string>();
 	worldsFilename = "Worlds.txt";
 }
 
@@ -17,6 +15,8 @@ SelectAdventure::SelectAdventure()
 std::string SelectAdventure::Setup()
 {
 	setup = true;
+	worldNames = std::vector<std::string>();
+	worldFilenames = std::vector<std::string>();
 
 	//Read available worlds from file
 	std::ifstream ifs(worldsFilename);
@@ -72,7 +72,16 @@ std::string SelectAdventure::Setup()
 	}
 	
 	result += "\n";
-	result += "\nSelect 1-3";
+	
+	if (worldNames.size() == 0)
+	{
+		result += "\nThere are no adventures to choose from.";
+	}
+	else
+	{
+		result += "\nSelect 1-" + std::to_string(worldNames.size());
+	}
+	
 	result += "\n:> ";
 
 	return result;
@@ -103,13 +112,13 @@ std::string SelectAdventure::SelectWorld(std::string name, std::string filename)
 
 	if (world == nullptr || !world->GetLoadedSuccessfully())
 	{
-		return "Developer Error: Could not load " + name + " from file.\n:>";
+		return "\n:>";
 	}
 	else
 	{
 		Gameplay* gameplay = (Gameplay*)StageManager::Instance()->GetStage("Gameplay");
 		gameplay->SetWorld(world);
 		Game::Instance()->SetNextStage("Gameplay");
-		return name + " selected . . . Re-routing to Void World . . .\n\n";
+		return "Loading " + name + " . . .\n\n";
 	}
 }

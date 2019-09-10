@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 
+class Path;
+
 class Location : public Container
 {
 private:

@@ -30,7 +30,7 @@ std::string Gameplay::Setup()
 	result += "Zorkish :: " + world->GetName();
 	result += "\n--------------------------------------------------------";
 	result += "\n";
-	result += "\n" + world->DescribeCurrentLocation();
+	result += "\nYou awaken in " + world->DescribeCurrentLocation();
 	result += "\n:> ";
 
 	return result;
@@ -39,19 +39,6 @@ std::string Gameplay::Setup()
 void Gameplay::SetWorld(World* world)
 {
 	this->world = world;
-
-
-
-	
-	/*if (worlds.find(world) == worlds.end())
-	{
-		return "Error";
-	}
-	else
-	{
-		this->world = worlds[world];
-		return "Success";
-	}*/
 }
 
 std::string Gameplay::Update(std::string input)
@@ -108,7 +95,8 @@ std::string Gameplay::Look(std::vector<std::string> input)
 {
 	if (input.size() == 1)
 	{
-		return "At your current location, you can see" + world->ViewItemsInCurrentLocation();
+		//Assume the description ends in a full stop.
+		return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + world->ViewItemsInCurrentLocation();
 	}
 	else if (input.size() >= 3)
 	{
@@ -120,7 +108,8 @@ std::string Gameplay::Look(std::vector<std::string> input)
 			}
 			else if (input[2] == "location")
 			{
-				return "At your current location, you can see" + world->ViewItemsInCurrentLocation();
+				//Assume the description ends in a full stop.
+				return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + world->ViewItemsInCurrentLocation();
 			}
 
 			input.erase(input.begin());
