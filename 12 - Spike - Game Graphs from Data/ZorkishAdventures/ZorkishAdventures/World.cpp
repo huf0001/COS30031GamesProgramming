@@ -9,6 +9,11 @@ Location* World::GetCurrentLocation()
 	return currentLocation;
 }
 
+void World::SetCurrentLocation(Location* value)
+{
+	currentLocation = value;
+}
+
 bool World::GetLoadedSuccessfully()
 {
 	return loadedSuccessfully;
@@ -24,6 +29,7 @@ std::string World::GetName()
 World::World(std::string filename)
 {
 	locations = std::map<std::string, Location*>();
+	directionAliases = std::map<std::string, std::string>();
 	loadedSuccessfully = true;
 	name = "";
 	currentLocation = nullptr;
@@ -176,6 +182,40 @@ World::World(std::string filename)
 					locations[splitLine[1]]->AddPath(splitLine[2], new Path(splitLine[3], splitLine[4]));
 				}
 			}
+			else if (splitLine[0] == "A")
+			{
+				//Check Formatting
+				if (splitLine.size() != 3)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading direction alias. Values required (including prefix \"A\"): 5. Values given: " << splitLine.size() << ".\n";
+					std::cout << "\tFormat: \"A:direction name:direction alias\".\n\n";
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[1].length() == 0)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the name of the direction to be given an alias.\n";
+					std::cout << "\tFormat: \"A:direction name:direction alias\".\n\n";
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[2].length() == 0)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the alias of the direction.\n";
+					std::cout << "\tFormat: \"A:direction name:direction alias\".\n\n";
+					loadedSuccessfully = false;
+				}
+				//Check the container item's container exists
+				else if (containers.count(splitLine[2]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": A given alias can only be given to a single direction. A direction already has the alias \"" + splitLine[2] + "\".\n";
+					std::cout << "\tFormat: \"A:direction name:direction alias\".\n\n";
+					loadedSuccessfully = false;
+				}
+				//Create the container item
+				else
+				{
+					directionAliases[splitLine[2]] = splitLine[1];
+				}
+			}
 			else if (splitLine[0] == "C")
 			{
 				//Check Formatting
@@ -309,29 +349,6 @@ World::World(std::string filename)
 	}
 
 	ifs.close();
-	
-	////Assign to fields
-	//this->name = filename;
-	//locations = std::map<std::string, Location*>();
-
-	////Setup locations in world
-	//locations["Void"] = new Location("Void", "The Void", "This world is simple and pointless. Used to test Zorkish phase 1 spec.");
-
-	////Set starting location
-	//currentLocation = locations["Void"];
-
-	////Flesh out testing location "Void"
-	//currentLocation->AddItem(new Item("book", "Book", "A dusty old book."));
-	//currentLocation->AddItem(new Item("pencil", "Pencil", "A short, used pencil."));
-	//currentLocation->AddItem(new Item("glasses", "Glasses", "A pair of glasses."));
-	//currentLocation->AddItem(new Item("quill", "Quill", "A black and grey quill."));
-
-	//currentLocation->AddItem((Item*) new ContainerItem("bag", "Bag", "A red bag."));
-	//ContainerItem* bag = (ContainerItem*)currentLocation->GetItem(StringManager::Instance()->StringToVector("bag", ' '));
-	//bag->AddItem(new Item("gold coin", "Gold Coin", "A gold coin. This is valuable."));
-	//bag->AddItem(new Item("silver coin", "Silver Coin", "A silver coin. This is worth a bit."));
-	//bag->AddItem(new Item("copper coin", "Copper Coin", "A copper coin. This is not worth much."));
-	//bag->AddItem(new ContainerItem("box", "Box", "A small wooden box."));
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -344,4 +361,61 @@ std::string World::DescribeCurrentLocation()
 std::string World::ViewItemsInCurrentLocation()
 {
 	return currentLocation->ViewItems();
+}
+
+std::string World::ViewPathsAtCurrentLocation()
+{
+	return currentLocation->ViewPaths();
+}
+
+bool World::HasLocation(std::string location)
+{
+	for(std::pair<std::string, Location*> p: locations)
+	{
+		if (p.first == location)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+Location* World::GetLocation(std::string location)
+{
+	for (std::pair<std::string, Location*> p : locations)
+	{
+		if (p.first == location)
+		{
+			return p.second;
+		}
+	}
+
+	return nullptr;
+}
+
+bool World::HasDirectionWithAlias(std::string alias)
+{
+	for(std::pair<std::string, std::string> p: directionAliases)
+	{
+		if (p.first == alias)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+std::string World::GetDirectionWithAlias(std::string alias)
+{
+	for (std::pair<std::string, std::string> p : directionAliases)
+	{
+		if (p.first == alias)
+		{
+			return p.second;
+		}
+	}
+
+	return "";
 }

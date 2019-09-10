@@ -87,16 +87,59 @@ std::string Gameplay::Update(std::string input)
 	{
 		return Drop(inputStrings) + "\n:> ";
 	}
+	else if (inputStrings[0] == "move")
+	{
+		return Move(inputStrings) + "\n:> ";
+	}
+	else if (inputStrings[0] == "go")
+	{
+		inputStrings[0] = "move";
+		return Move(inputStrings) + "\n:> ";
+	}
+	else if (world->GetCurrentLocation()->HasPath(input))
+	{
+		inputStrings.insert(inputStrings.begin(), "move");
+		return Move(inputStrings) + "\n:> ";
+	}
+	else if (world->HasDirectionWithAlias(input) && world->GetCurrentLocation()->HasPath(world->GetDirectionWithAlias(input)))
+	{
+		inputStrings = StringManager::Instance()->StringToVector("move " + world->GetDirectionWithAlias(input), ' ');
+		return Move(inputStrings) + "\n:> ";
+	}
 
 	return "I'm sorry, that is not valid input.\n:> ";
+}
+
+std::string Gameplay::LookAtLocation()
+{
+	//Assume the description ends in a full stop.
+	std::string visible = ":" + world->ViewItemsInCurrentLocation() + world->ViewPathsAtCurrentLocation();
+
+	if (visible == ":")
+	{
+		visible = " nothing; it's empty.";
+	}
+
+	return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + visible;
+}
+
+std::string Gameplay::LookAtInventory()
+{
+	std::string visible = ":" + player->ViewItems();
+
+	if (visible == ":")
+	{
+		visible = " nothing; it's empty.";
+	}
+
+	return "In your inventory, you have" + visible;
 }
 
 std::string Gameplay::Look(std::vector<std::string> input)
 {
 	if (input.size() == 1)
 	{
-		//Assume the description ends in a full stop.
-		return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + world->ViewItemsInCurrentLocation();
+		return LookAtLocation();
 	}
 	else if (input.size() >= 3)
 	{
@@ -104,12 +147,11 @@ std::string Gameplay::Look(std::vector<std::string> input)
 		{
 			if (input[2] == "inventory")
 			{
-				return "In your inventory, you have" + player->ViewItems();
+				return LookAtInventory();
 			}
 			else if (input[2] == "location")
 			{
-				//Assume the description ends in a full stop.
-				return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + world->ViewItemsInCurrentLocation();
+				return LookAtLocation();
 			}
 
 			input.erase(input.begin());
@@ -217,11 +259,11 @@ std::string Gameplay::Look(std::vector<std::string> input)
 		{
 			if (input[2] == "inventory")
 			{
-				return "In your inventory, you have" + player->ViewItems();
+				return LookAtInventory();
 			}
 			else if (input[2] == "location")
 			{
-				return "At your current location, you can see" + world->ViewItemsInCurrentLocation();
+				return LookAtLocation();
 			}
 
 			input.erase(input.begin());
@@ -624,4 +666,38 @@ std::string Gameplay::Drop(std::vector<std::string> input)
 		world->GetCurrentLocation()->AddItem(item);
 		return "You dropped " + item->GetName() + ".";
 	//}
+}
+
+std::string Gameplay::Move(std::vector<std::string> input)
+{
+	input.erase(input.begin());
+	std::string direction = StringManager::Instance()->VectorToString(input, ' ');
+
+	if (world->HasDirectionWithAlias(direction) && world->GetDirectionWithAlias(direction) != "")
+	{
+		direction = world->GetDirectionWithAlias(direction);
+	}
+	
+	if (world->GetCurrentLocation()->HasPath(direction))
+	{
+		Path* path = world->GetCurrentLocation()->GetPath(direction);
+
+		if (path != nullptr)
+		{
+			std::string destination = path->GetDestination();
+
+			if (world->HasLocation(destination))
+			{
+				Location* location = world->GetLocation(destination);
+
+				if (location != nullptr)
+				{
+					world->SetCurrentLocation(location);
+					return "Moving " + direction + " . . .\n" + LookAtLocation();
+				}				
+			}
+		}
+	}
+
+	return "There is nothing in that direction.";
 }

@@ -33,7 +33,9 @@ public:
 	Location(std::string id, std::string name, std::string description);
 
 	//Public Methods
-	//std::string Move(std::string direction);
+	std::string ViewPaths();
+	bool HasPath(std::string);
+	Path* GetPath(std::string);
 };
 
 #endif

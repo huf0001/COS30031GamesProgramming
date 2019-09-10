@@ -1,5 +1,5 @@
 ﻿  Gameplay.cpp
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(125,24): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(304,24): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(430,23): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(167,24): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(346,24): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(472,23): warning C4018:  '<': signed/unsigned mismatch
   ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\Debug\ZorkishAdventures.exe

@@ -111,10 +111,10 @@ std::string Container::ViewItems()
 {
 	if (items.empty())
 	{
-		return " nothing; it's empty.";
+		return "";
 	}
 
-	std::string result = ":";
+	std::string result = "";
 
 	for (int i = 0; i < items.size(); i++)
 	{

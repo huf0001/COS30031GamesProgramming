@@ -21,6 +21,10 @@ private:
 	/*std::map<std::string, World*> worlds;*/
 	World* world;
 	Player* player;
+
+	//Private Methods
+	std::string LookAtLocation();
+	std::string LookAtInventory();
 protected:
 	//Protected Fields
 
@@ -40,6 +44,7 @@ public:
 	std::string TakeFrom(std::vector<std::string> input);
 	std::string PutIn(std::vector<std::string> input);
 	std::string Drop(std::vector<std::string> input);
+	std::string Move(std::vector<std::string> input);
 };
 
 #endif

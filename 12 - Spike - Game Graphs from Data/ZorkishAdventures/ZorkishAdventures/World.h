@@ -20,6 +20,7 @@ private:
 	//Private Fields
 	std::string name;
 	std::map<std::string, Location*> locations;
+	std::map<std::string, std::string> directionAliases;
 	Location* currentLocation;
 	bool loadedSuccessfully;
 
@@ -27,8 +28,9 @@ private:
 
 public:
 	//Public Properties
-	bool GetLoadedSuccessfully();
 	Location* GetCurrentLocation();
+	void SetCurrentLocation(Location* value);
+	bool GetLoadedSuccessfully();
 	std::string GetName();
 
 	//Constructor
@@ -37,6 +39,11 @@ public:
 	//Public Methods
 	std::string DescribeCurrentLocation();
 	std::string ViewItemsInCurrentLocation();
+	std::string ViewPathsAtCurrentLocation();
+	bool HasLocation(std::string location);
+	Location* GetLocation(std::string location);
+	bool HasDirectionWithAlias(std::string alias);
+	std::string GetDirectionWithAlias(std::string alias);
 };
 
 #endif
