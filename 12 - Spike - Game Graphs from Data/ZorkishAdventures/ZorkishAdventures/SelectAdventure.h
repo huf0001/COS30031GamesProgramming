@@ -4,7 +4,7 @@
 #include "Stage.h"
 #include "Game.h"
 #include "StageManager.h"
-#include "Gameplay.h"
+#include "StageGameplay.h"
 #include "StringManager.h"
 
 #include <fstream>
@@ -12,7 +12,7 @@
 #include <map>
 #include <vector>
 
-class SelectAdventure : Stage
+class StageSelectAdventure : Stage
 {
 private:
 	//Private Fields
@@ -28,7 +28,7 @@ protected:
 	std::string Setup();
 public:
 	//Constructor
-	SelectAdventure();
+	StageSelectAdventure();
 
 	//Public Methods
 	std::string Update(std::string input);

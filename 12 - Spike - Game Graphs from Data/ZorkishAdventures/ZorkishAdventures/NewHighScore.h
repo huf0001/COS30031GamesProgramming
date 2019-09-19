@@ -4,9 +4,9 @@
 #define NEWHIGHSCORE_H
 
 #include "Stage.h"
-#include "Gameplay.h"
+#include "StageGameplay.h"
 
-class NewHighScore : Stage
+class StageNewHighScore : Stage
 {
 private:
 	//Private Fields
@@ -20,7 +20,7 @@ protected:
 	std::string Setup();
 public:
 	//Constructor
-	NewHighScore();
+	StageNewHighScore();
 
 	//Public Methods
 	std::string Update(std::string input);

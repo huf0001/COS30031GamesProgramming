@@ -1,0 +1,108 @@
+#include "pch.h"
+
+#include "CommandMove.h"
+
+//Public Properties----------------------------------------------------------------------------------------------------------------------------------
+
+void CommandMove::SetDirectionAliases(std::map<std::string, std::string> directionAliases)
+{
+	this->directionAliases = directionAliases;
+}
+
+//Constructor----------------------------------------------------------------------------------------------------------------------------------------
+
+CommandMove::CommandMove()
+{
+	AddKeyword("move");
+	AddKeyword("go");
+}
+
+//Methods--------------------------------------------------------------------------------------------------------------------------------------------
+
+void CommandMove::AddDirectionAlias(std::string direction, std::string alias)
+{
+	directionAliases[alias] = direction;
+}
+
+bool CommandMove::HasDirectionWithAlias(std::string alias)
+{
+	for (std::pair<std::string, std::string> p : directionAliases)
+	{
+		if (p.first == alias)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+std::string CommandMove::GetDirectionWithAlias(std::string alias)
+{
+	for (std::pair<std::string, std::string> p : directionAliases)
+	{
+		if (p.first == alias)
+		{
+			return p.second;
+		}
+	}
+
+	return "";
+}
+
+std::string CommandMove::DeAliasDirection(std::string direction)
+{
+	if (HasDirectionWithAlias(direction))
+	{
+		return GetDirectionWithAlias(direction);
+	}
+
+	return direction;
+}
+
+bool CommandMove::CanProcess(std::vector<std::string> input, World* world, Player* player)
+{
+	std::string inputString = StringManager::Instance()->VectorToString(input, ' ');
+
+	return HasKeyword(input[0]) 
+		|| world->GetCurrentLocation()->HasPath(inputString)
+		|| (HasDirectionWithAlias(inputString) && world->GetCurrentLocation()->HasPath(GetDirectionWithAlias(inputString)));
+}
+
+std::string CommandMove::Process(std::vector<std::string> input, World* world, Player* player)
+{
+	if (HasKeyword(input[0]))
+	{
+		input.erase(input.begin());
+	}
+
+	std::string direction = StringManager::Instance()->VectorToString(input, ' ');
+
+	if (HasDirectionWithAlias(direction) && GetDirectionWithAlias(direction) != "")
+	{
+		direction = GetDirectionWithAlias(direction);
+	}
+
+	if (world->GetCurrentLocation()->HasPath(direction))
+	{
+		Path* path = world->GetCurrentLocation()->GetPath(direction);
+
+		if (path != nullptr)
+		{
+			std::string destination = path->GetDestination();
+
+			if (world->HasLocation(destination))
+			{
+				Location* location = world->GetLocation(destination);
+
+				if (location != nullptr)
+				{
+					world->SetCurrentLocation(location);
+					return "Moving " + direction + " . . .\n" + CommandManager::Instance()->GetCommand("look")->Process(StringManager::Instance()->StringToVector("look", ' '), world, player);
+				}
+			}
+		}
+	}
+
+	return "There is nothing in that direction.";
+}
