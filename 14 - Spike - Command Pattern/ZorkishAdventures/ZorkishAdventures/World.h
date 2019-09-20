@@ -30,8 +30,6 @@ public:
 	std::string ViewPathsAtCurrentLocation();
 	bool HasLocation(std::string location);
 	Location* GetLocation(std::string location);
-	//bool HasDirectionWithAlias(std::string alias);
-	//std::string GetDirectionWithAlias(std::string alias);
 };
 
 #endif

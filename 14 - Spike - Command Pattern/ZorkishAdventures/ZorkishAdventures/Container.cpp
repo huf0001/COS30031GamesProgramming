@@ -24,7 +24,7 @@ bool Container::HasItem(std::vector<std::string> input)
 	{
 		std::string string = StringManager::Instance()->VectorToString(input, ' ');
 
-		for (int i = 0; i < items.size(); i++)
+		for (int i = 0; i < (int)items.size(); i++)
 		{
 			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
 			{
@@ -42,7 +42,7 @@ Item* Container::GetItem(std::vector<std::string> input)
 	{
 		std::string string = StringManager::Instance()->VectorToString(input, ' ');
 
-		for (int i = 0; i < items.size(); i++)
+		for (int i = 0; i < (int)items.size(); i++)
 		{
 			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
 			{
@@ -96,7 +96,7 @@ void Container::RemoveItem(std::vector<std::string> input)
 	{
 		std::string string = StringManager::Instance()->VectorToString(input, ' ');
 
-		for (int i = 0; i < items.size(); i++)
+		for (int i = 0; i < (int)items.size(); i++)
 		{
 			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
 			{
@@ -116,7 +116,7 @@ std::string Container::ViewItems()
 
 	std::string result = "";
 
-	for (int i = 0; i < items.size(); i++)
+	for (int i = 0; i < (int)items.size(); i++)
 	{
 		result += "\n\t- " + items[i]->GetName();
 	}

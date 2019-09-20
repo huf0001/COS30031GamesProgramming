@@ -11,8 +11,7 @@ private:
 	Player* player;
 
 	//Private Methods
-	/*std::string LookAtLocation();
-	std::string LookAtInventory();*/
+
 protected:
 	//Protected Fields
 
@@ -28,11 +27,6 @@ public:
 
 	//Public Methods
 	std::string Update(std::string input);
-	/*std::string Look(std::vector<std::string> input);*/
-	std::string TakeFrom(std::vector<std::string> input);
-	std::string PutIn(std::vector<std::string> input);
-	std::string Drop(std::vector<std::string> input);
-	/*std::string Move(std::vector<std::string> input);*/
 };
 
 #endif

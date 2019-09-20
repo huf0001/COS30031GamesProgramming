@@ -45,6 +45,12 @@
 #include "CommandManager.h"
 #include "CommandLook.h"
 #include "CommandMove.h"
+#include "CommandTake.h"
+#include "CommandPut.h"
+#include "CommandDrop.h"
+#include "CommandHelp.h"
+#include "CommandHiScore.h"
+#include "CommandQuit.h"
 
 //Stages
 #include "Stage.h"

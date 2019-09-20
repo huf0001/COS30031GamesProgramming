@@ -19,6 +19,7 @@ protected:
 public:
 	//Public Properties
 	void SetDirectionAliases(std::map<std::string, std::string> directionAliases);
+	std::string GetSyntax();
 
 	//Constructor
 	CommandMove();
@@ -30,6 +31,7 @@ public:
 
 	bool CanProcess(std::vector<std::string> input, World* world, Player* player);
 	std::string Process(std::vector<std::string> input, World* world, Player* player);
+	void ResetAliases();
 };
 
 #endif

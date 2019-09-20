@@ -55,6 +55,11 @@ void Game::Update()
 
 void Game::SetNextStage(std::string stage)
 {
+	if (currentStage->GetName() == "Gameplay")
+	{
+		CommandManager::Instance()->ResetAliases();
+	}
+
 	nextStage = StageManager::Instance()->GetStage(stage);
 }
 

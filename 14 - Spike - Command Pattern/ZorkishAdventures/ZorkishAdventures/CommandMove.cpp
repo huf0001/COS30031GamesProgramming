@@ -9,12 +9,47 @@ void CommandMove::SetDirectionAliases(std::map<std::string, std::string> directi
 	this->directionAliases = directionAliases;
 }
 
+std::string CommandMove::GetSyntax()
+{
+	std::string result;
+
+	result += "MOVE\n";
+	result += "----------------------------\n";
+	result += "Function:\n";
+	result += "\t- Move to a new location.\n";
+	result += "Syntax:\n";
+	result += "\t- \"move [direction]\"\n";
+	result += "\t- \"[direction]\"\n";
+
+	if (aliases.size() > 0)
+	{
+		result += "Aliases for \"move\":\n";
+
+		for (std::string alias : aliases)
+		{
+			result += "\t- \"" + alias + "\"\n";
+		}
+	}
+
+	if (directionAliases.size() > 0)
+	{
+		result += "Aliases for common directions:\n";
+
+		for (std::pair<std::string, std::string> pair : directionAliases)
+		{
+			result += "\t- \"" + pair.first + "\" = \"" + pair.second + "\"\n";
+		}
+	}
+
+	return result;
+}
+
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
 CommandMove::CommandMove()
 {
 	AddKeyword("move");
-	AddKeyword("go");
+	AddAlias("go");
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,6 +100,7 @@ bool CommandMove::CanProcess(std::vector<std::string> input, World* world, Playe
 	std::string inputString = StringManager::Instance()->VectorToString(input, ' ');
 
 	return HasKeyword(input[0]) 
+		|| HasAlias(input[0])
 		|| world->GetCurrentLocation()->HasPath(inputString)
 		|| (HasDirectionWithAlias(inputString) && world->GetCurrentLocation()->HasPath(GetDirectionWithAlias(inputString)));
 }
@@ -76,12 +112,7 @@ std::string CommandMove::Process(std::vector<std::string> input, World* world, P
 		input.erase(input.begin());
 	}
 
-	std::string direction = StringManager::Instance()->VectorToString(input, ' ');
-
-	if (HasDirectionWithAlias(direction) && GetDirectionWithAlias(direction) != "")
-	{
-		direction = GetDirectionWithAlias(direction);
-	}
+	std::string direction = DeAliasDirection(StringManager::Instance()->VectorToString(input, ' '));
 
 	if (world->GetCurrentLocation()->HasPath(direction))
 	{
@@ -105,4 +136,10 @@ std::string CommandMove::Process(std::vector<std::string> input, World* world, P
 	}
 
 	return "There is nothing in that direction.";
+}
+
+void CommandMove::ResetAliases()
+{
+	aliases = std::vector<std::string>();
+	directionAliases = std::map<std::string, std::string>();
 }

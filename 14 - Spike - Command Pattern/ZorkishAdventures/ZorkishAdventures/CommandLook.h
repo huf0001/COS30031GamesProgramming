@@ -11,6 +11,7 @@ private:
 	//Private Methods
 	std::string LookAtLocation(World* world);
 	std::string LookAtInventory(Player* player);
+	std::vector<std::string> StandardiseInput(std::vector<std::string> input);
 protected:
 	//Protected Fields
 
@@ -18,6 +19,7 @@ protected:
 
 public:
 	//Public Properties
+	std::string GetSyntax();
 
 	//Constructor
 	CommandLook();

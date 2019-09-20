@@ -2,6 +2,44 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
+std::string CommandLook::GetSyntax()
+{
+	std::string result;
+
+	result += "LOOK\n";
+	result += "----------------------------\n";
+	result += "Function:\n";
+	result += "\t- Look at your current location. Directions you can move in are CAPITALISED.\n";
+	result += "\t- Look at your inventory.\n";
+	result += "\t- Look at an item.\n";
+	result += "\t- Look at an item in a container (including your current location or inventory).\n";
+	result += "Syntax:\n";
+	result += "\t- \"look\" (same as \"look at location\")\n";
+	result += "\t- \"look at [item]\"\n";
+	result += "\t- \"look in [container]\"\n";
+	//result += "\t- \"look inside ___\"\n";
+	result += "\t- \"look at [item] in [container]\"\n";
+	//result += "\t- \"look at ___ inside ___\"\n";
+	//result += "\t- \"inspect ___\"\n";	==> inspect = alias of "look"
+	//result += "\t- \"inspect in ___\"\n";
+	//result += "\t- \"inspect inside ___\"\n";
+	//result += "\t- \"inspect ___ in ___\"\n";
+	//result += "\t- \"inspect ___ inside ___\"\n";
+	result += "\t- \"inventory\" (same as \"look at inventory\")\n";
+
+	if (aliases.size() > 0)
+	{
+		result += "Aliases for \"look\":\n";
+
+		for (std::string alias : aliases)
+		{
+			result += "\t- \"" + alias + "\"\n";
+		}
+	}
+
+	return result;
+}
+
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
 CommandLook::CommandLook()
@@ -18,7 +56,7 @@ std::string CommandLook::LookAtLocation(World* world)
 
 	if (visible == ":")
 	{
-		visible = " nothing; it's empty.";
+		visible = " nothing; it\"\ns empty.";
 	}
 
 	return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + visible;
@@ -30,24 +68,29 @@ std::string CommandLook::LookAtInventory(Player* player)
 
 	if (visible == ":")
 	{
-		visible = " nothing; it's empty.";
+		visible = " nothing; it\"\ns empty.";
 	}
 
 	return "In your inventory, you have" + visible;
 }
 
+std::vector<std::string> CommandLook::StandardiseInput(std::vector<std::string> input)
+{
+	if (input.size() == 1 && input[0] == "inventory")
+	{
+		input = StringManager::Instance()->StringToVector("look at inventory", ' ');
+	}
+
+	return input;
+}
+
 std::string CommandLook::Process(std::vector<std::string> input, World* world, Player* player)
 {
+	input = StandardiseInput(input);
+
 	if (input.size() == 1)
-	{
-		if (input[0] == "inventory")
-		{
-			return LookAtInventory(player);
-		}
-		else
-		{
-			return LookAtLocation(world);
-		}
+	{	
+		return LookAtLocation(world);
 	}
 	else if (input.size() >= 3)
 	{
@@ -65,14 +108,14 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 			input.erase(input.begin());
 			input.erase(input.begin());
 
-			for (int i = input.size() - 1; i >= 0; i--)
+			for (int i = (int)input.size() - 1; i >= 0; i--)
 			{
 				if (input[i] == "in")
 				{
 					std::vector<std::string> itemName = std::vector<std::string>();
 					std::vector<std::string> containerName = std::vector<std::string>();
 
-					for (int j = 0; j < input.size(); j++)
+					for (int j = 0; j < (int)input.size(); j++)
 					{
 						if (j < i)
 						{
@@ -86,7 +129,7 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 					if (i == input.size() - 1)
 					{
-						return "What do you want to look inside to look for '" + StringManager::Instance()->VectorToString(itemName, ' ') + "'?";
+						return "What do you want to look inside to look for \"\n" + StringManager::Instance()->VectorToString(itemName, ' ') + "\"\n?";
 					}
 					else
 					{
@@ -100,7 +143,7 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 							}
 							else
 							{
-								return "You can't find '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' in your inventory.";
+								return "You can\"\nt find \"\n" + StringManager::Instance()->VectorToString(itemName, ' ') + "\"\n in your inventory.";
 							}
 						}
 						else if (StringManager::Instance()->VectorToString(containerName, ' ') == "location")
@@ -111,7 +154,7 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 							}
 							else
 							{
-								return "You can't find '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' at your current location.";
+								return "You can\"\nt find \"\n" + StringManager::Instance()->VectorToString(itemName, ' ') + "\"\n at your current location.";
 							}
 						}
 						else
@@ -127,11 +170,11 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 							if (item == nullptr)
 							{
-								return "You can't look in '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'.";
+								return "You can\"\nt look in \"\n" + StringManager::Instance()->VectorToString(containerName, ' ') + "\"\n.";
 							}
 							else if (!item->GetIsContainer())
 							{
-								return "You can't look in '" + item->GetName() + "'; it's not a container.";
+								return "You can\"\nt look in \"\n" + item->GetName() + "\"\n; it\"\ns not a container.";
 							}
 							else
 							{
@@ -156,7 +199,7 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 			if (item == nullptr)
 			{
-				return "You cannot find '" + StringManager::Instance()->VectorToString(input, ' ') + "'.";
+				return "You cannot find \"\n" + StringManager::Instance()->VectorToString(input, ' ') + "\"\n.";
 			}
 			else
 			{
@@ -189,11 +232,11 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 			if (item == nullptr)
 			{
-				return "You cannot look in '" + StringManager::Instance()->VectorToString(input, ' ') + "'.";
+				return "You cannot look in \"\n" + StringManager::Instance()->VectorToString(input, ' ') + "\"\n.";
 			}
 			else if (!item->GetIsContainer())
 			{
-				return "You can't look in '" + item->GetName() + "'; it's not a container.";
+				return "You can\"\nt look in \"\n" + item->GetName() + "\"\n; it\"\ns not a container.";
 			}
 			else
 			{
@@ -214,5 +257,5 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 		}
 	}
 
-	return "You can't look like that.";
+	return "You can\"\nt look like that.";
 }

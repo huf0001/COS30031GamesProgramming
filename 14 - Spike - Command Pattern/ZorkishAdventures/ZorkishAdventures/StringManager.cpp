@@ -33,7 +33,7 @@ std::string StringManager::ToUppercase(std::string string)
 
 std::vector<std::string> StringManager::ToUppercase(std::vector<std::string> strings)
 {
-	for (int i = 0; i < strings.size(); i++)
+	for (int i = 0; i < (int)strings.size(); i++)
 	{
 		strings[i] = ToUppercase(strings[i]);
 	}
@@ -49,7 +49,7 @@ std::string StringManager::ToLowercase(std::string string)
 
 std::vector<std::string> StringManager::ToLowercase(std::vector<std::string> strings)
 {
-	for (int i = 0; i < strings.size(); i++)
+	for (int i = 0; i < (int)strings.size(); i++)
 	{
 		strings[i] = ToLowercase(strings[i]);
 	}
@@ -75,7 +75,7 @@ std::string StringManager::VectorToString(std::vector<std::string> vector, char 
 {
 	std::string result;
 
-	for (int i = 0; i < vector.size(); i++)
+	for (int i = 0; i < (int)vector.size(); i++)
 	{
 		if (i > 0)
 		{
@@ -90,7 +90,7 @@ std::string StringManager::VectorToString(std::vector<std::string> vector, char 
 
 bool StringManager::VectorContainsString(std::vector<std::string> vector, std::string string)
 {
-	for (int i = 0; i < vector.size(); i++)
+	for (int i = 0; i < (int)vector.size(); i++)
 	{
 		if (vector[i] == string)
 		{

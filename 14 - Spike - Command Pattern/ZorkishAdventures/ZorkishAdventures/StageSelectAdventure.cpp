@@ -66,7 +66,7 @@ std::string StageSelectAdventure::Setup()
 	result += "\nChoose your adventure:";
 	result += "\n";
 
-	for (int i = 1; i <= worldNames.size(); i++)
+	for (int i = 1; i <= (int)worldNames.size(); i++)
 	{
 		result += "\n\t" + std::to_string(i) + (std::string)". " + worldNames[i - 1];		//It was complaining I can't append stuff like this without the string cast
 	}
@@ -94,7 +94,7 @@ std::string StageSelectAdventure::Update(std::string input)
 		return Setup();
 	}
 
-	for (int i = 0; i < worldNames.size(); i++)
+	for (int i = 0; i < (int)worldNames.size(); i++)
 	{
 		if (input == std::to_string(i + 1))
 		{

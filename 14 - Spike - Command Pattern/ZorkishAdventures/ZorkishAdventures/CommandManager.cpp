@@ -23,6 +23,12 @@ CommandManager::CommandManager()
 	commands = std::map<std::string, Command*>();
 	commands["look"] = (Command*) new CommandLook();
 	commands["move"] = (Command*) new CommandMove();
+	commands["take"] = (Command*) new CommandTake();
+	commands["put"] = (Command*) new CommandPut();
+	commands["drop"] = (Command*) new CommandDrop();
+	commands["help"] = (Command*) new CommandHelp();
+	commands["hiscore"] = (Command*) new CommandHiScore();
+	commands["quit"] = (Command*) new CommandQuit();
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,6 +43,18 @@ Command* CommandManager::GetCommand(std::string command)
 	{
 		return commands[command];
 	}
+}
+
+std::string CommandManager::GetCommandSyntaxes()
+{
+	std::string result;
+
+	for (std::pair<std::string, Command*> pair : commands)
+	{
+		result += "\n" + pair.second->GetSyntax();
+	}
+
+	return result;
 }
 
 bool CommandManager::CanProcess(std::vector<std::string> input, World* world, Player* player)
@@ -63,4 +81,12 @@ std::string CommandManager::Process(std::vector<std::string> input, World* world
 	}
 
 	return "Error";
+}
+
+void CommandManager::ResetAliases()
+{
+	for (std::pair<std::string, Command*> pair : commands)
+	{
+		pair.second->ResetAliases();
+	}
 }

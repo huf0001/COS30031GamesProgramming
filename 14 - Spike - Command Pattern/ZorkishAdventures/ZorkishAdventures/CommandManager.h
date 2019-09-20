@@ -17,8 +17,10 @@ public:
 
 	//Public Methods
 	Command* GetCommand(std::string command);
+	std::string GetCommandSyntaxes();
 	bool CanProcess(std::vector<std::string> input, World* world, Player* player);
 	std::string Process(std::vector<std::string> input, World* world, Player* player);
+	void ResetAliases();
 };
 
 #endif
