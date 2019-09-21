@@ -23,6 +23,7 @@ public:
 	void AddItem(Item* item);
 	bool HasItem(std::vector<std::string> input);
 	Item* GetItem(std::vector<std::string> input);
+	std::vector<Item*> GetItems();	//for testing only
 	std::string ViewItem(std::vector<std::string> input);
 	void RemoveItem(std::vector<std::string> input);
 	std::string ViewItems();

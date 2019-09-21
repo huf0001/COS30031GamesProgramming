@@ -105,6 +105,12 @@
     <ClCompile Include="CommandHelp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandAlias.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h">
@@ -192,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CommandHelp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandAlias.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandDebug.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

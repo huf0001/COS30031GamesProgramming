@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandAlias.cpp" />
+    <ClCompile Include="CommandDebug.cpp" />
     <ClCompile Include="CommandDrop.cpp" />
     <ClCompile Include="CommandHelp.cpp" />
     <ClCompile Include="CommandHiScore.cpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="ZorkishAdventures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandAlias.h" />
+    <ClInclude Include="CommandDebug.h" />
     <ClInclude Include="CommandDrop.h" />
     <ClInclude Include="CommandHelp.h" />
     <ClInclude Include="CommandHiScore.h" />

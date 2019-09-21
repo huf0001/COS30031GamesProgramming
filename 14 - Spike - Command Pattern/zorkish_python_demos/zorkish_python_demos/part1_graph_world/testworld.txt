@@ -1,0 +1,11 @@
+# [1] = start location id.
+# [2] = Adventure description...
+S:0:Test world one. Basic locations and paths...
+
+# [2]=name eg. "You have moved ... to [2]"
+# [3]=desc eg. "You are [3]"
+# [4]=edges, n=5 means "north" direction path to location id "5"
+L:0: a field : standing at home sweet home. :u=1,s=3
+L:1: a tree : up a tree for a nice view. Quite a nice view really. :d=0
+L:3: a ponds edge : next to a medium sized pond. :n=0,e=5
+L:5: a wall : standing next to a tall brick wall. :w=3

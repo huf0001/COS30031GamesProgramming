@@ -54,6 +54,12 @@ Item* Container::GetItem(std::vector<std::string> input)
 	return nullptr;
 }
 
+//For testing only
+std::vector<Item*> Container::GetItems()
+{
+	return items;
+}
+
 std::string Container::ViewItem(std::vector<std::string> input)
 {
 	/*std::vector<std::string> inputCopy = std::vector<std::string>(input);

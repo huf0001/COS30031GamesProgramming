@@ -14,6 +14,10 @@ void Location::AddPath(std::string direction, Path* path)
 	paths[direction] = path;
 }
 
+std::string Location::GetID()
+{
+	return id;
+}
 
 std::string Location::GetName()
 {
@@ -23,6 +27,11 @@ std::string Location::GetName()
 std::string Location::GetDescription()
 {
 	return description;
+}
+
+std::map<std::string, Path*> Location::GetPaths()
+{
+	return paths;
 }
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------

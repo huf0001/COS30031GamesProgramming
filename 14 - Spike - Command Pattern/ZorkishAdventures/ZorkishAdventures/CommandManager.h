@@ -16,6 +16,7 @@ public:
 	CommandManager();
 
 	//Public Methods
+	bool HasCommand(std::string command);
 	Command* GetCommand(std::string command);
 	std::string GetCommandSyntaxes();
 	bool CanProcess(std::vector<std::string> input, World* world, Player* player);

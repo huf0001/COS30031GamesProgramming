@@ -43,6 +43,8 @@
 //Commands
 #include "Command.h"
 #include "CommandManager.h"
+#include "CommandAlias.h"
+#include "CommandDebug.h"
 #include "CommandLook.h"
 #include "CommandMove.h"
 #include "CommandTake.h"

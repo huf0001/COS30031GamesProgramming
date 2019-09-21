@@ -16,9 +16,11 @@ private:
 
 public:
 	//Public Properties
+	std::string GetID();
 	std::string GetName();
 	std::string GetDescription();
 	void AddPath(std::string direction, Path* path);
+	std::map<std::string, Path*> GetPaths();	//For testing only
 
 	//Constructor
 	Location(std::string id, std::string name, std::string description);

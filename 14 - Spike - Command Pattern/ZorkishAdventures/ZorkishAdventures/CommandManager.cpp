@@ -27,22 +27,39 @@ CommandManager::CommandManager()
 	commands["put"] = (Command*) new CommandPut();
 	commands["drop"] = (Command*) new CommandDrop();
 	commands["help"] = (Command*) new CommandHelp();
+	commands["alias"] = (Command*) new CommandAlias();
+	commands["debug"] = (Command*) new CommandDebug();
 	commands["hiscore"] = (Command*) new CommandHiScore();
 	commands["quit"] = (Command*) new CommandQuit();
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
 
+bool CommandManager::HasCommand(std::string command)
+{
+	for (std::pair<std::string, Command*> pair : commands)
+	{
+		if (pair.second->HasKeyword(command) || pair.second->HasAlias(command))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 Command* CommandManager::GetCommand(std::string command)
 {
-	if (commands.find(command) == commands.end())
+
+	for (std::pair<std::string, Command*> pair : commands)
 	{
-		return nullptr;
+		if (pair.second->HasKeyword(command) || pair.second->HasAlias(command))
+		{
+			return pair.second;
+		}
 	}
-	else
-	{
-		return commands[command];
-	}
+
+	return nullptr;
 }
 
 std::string CommandManager::GetCommandSyntaxes()
