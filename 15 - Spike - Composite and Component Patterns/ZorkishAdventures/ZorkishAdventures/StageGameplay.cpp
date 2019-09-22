@@ -13,7 +13,7 @@ StageGameplay::StageGameplay()
 {
 	name = "Gameplay";
 	world = nullptr;
-	player = new Player("Player 1");
+	player = new Player("player_1", "Player 1");
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

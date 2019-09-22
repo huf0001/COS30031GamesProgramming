@@ -79,11 +79,11 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 		}
 		else if (StringManager::Instance()->VectorToString(containerName, ' ') == "inventory")
 		{
-			if (world->GetCurrentLocation()->HasItem(itemName))
+			if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 			{
-				Item* item = world->GetCurrentLocation()->GetItem(itemName);
-				world->GetCurrentLocation()->RemoveItem(itemName);
-				player->AddItem(item);
+				Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(itemName);
+				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
+				((Container*)player->GetComponent("container"))->AddItem(item);
 				return "You put " + item->GetName() + " in your inventory.";
 			}
 			else
@@ -93,11 +93,11 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 		}
 		else if (StringManager::Instance()->VectorToString(containerName, ' ') == "location")
 		{
-			if (player->HasItem(itemName))
+			if (((Container*)player->GetComponent("container"))->HasItem(itemName))
 			{
-				Item* item = player->GetItem(itemName);
-				player->RemoveItem(itemName);
-				world->GetCurrentLocation()->AddItem(item);
+				Item* item = ((Container*)player->GetComponent("container"))->GetItem(itemName);
+				((Container*)player->GetComponent("container"))->RemoveItem(itemName);
+				((Container*)world->GetCurrentLocation()->GetComponent("container"))->AddItem(item);
 				return "You put down " + item->GetName() + " at your current location.";
 			}
 			else
@@ -111,14 +111,14 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 			Item* item = nullptr;
 			std::string itemLocation;
 
-			if (player->HasItem(itemName))
+			if (((Container*)player->GetComponent("container"))->HasItem(itemName))
 			{
-				item = player->GetItem(itemName);
+				item = ((Container*)player->GetComponent("container"))->GetItem(itemName);
 				itemLocation = "inventory";
 			}
-			else if (world->GetCurrentLocation()->HasItem(itemName))
+			else if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 			{
-				item = world->GetCurrentLocation()->GetItem(itemName);
+				item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(itemName);
 				itemLocation = "current location";
 			}
 
@@ -128,44 +128,41 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 			}
 
 			//Find container in inventory or location
-			Item* containerItemAsItem = nullptr;
+			Item* containerItem = nullptr;
 
-			if (world->GetCurrentLocation()->HasItem(containerName))
+			if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerName))
 			{
-				containerItemAsItem = world->GetCurrentLocation()->GetItem(containerName);
+				containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerName);
 			}
-			else if (player->HasItem(containerName))
+			else if (((Container*)player->GetComponent("container"))->HasItem(containerName))
 			{
-				containerItemAsItem = player->GetItem(containerName);
+				containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerName);
 			}
 
-			if (containerItemAsItem == nullptr)
+			if (containerItem == nullptr)
 			{
 				return "You can't find '" + StringManager::Instance()->VectorToString(containerName, ' ') + "' at your current location or in your inventory.";
 			}
-			else if (!containerItemAsItem->GetIsContainer())
+			else if (!containerItem->HasComponent("container"))
 			{
-				return "You cannot put " + item->GetName() + " in " + containerItemAsItem->GetName() + ". '" +
-					containerItemAsItem->GetName() + "' is not a container.";
+				return "You cannot put " + item->GetName() + " in " + containerItem->GetName() + ". '" +
+					containerItem->GetName() + "' is not a container.";
 			}
-			else if (containerItemAsItem == item)
+			else if (containerItem == item)
 			{
 				return "You cannot put " + item->GetName() + " inside itself.";
 			}
 
-			//Put item in container
-			ContainerItem* containerItem = (ContainerItem*)containerItemAsItem;
-
 			if (itemLocation == "inventory")
 			{
-				player->RemoveItem(itemName);
-				containerItem->AddItem(item);
+				((Container*)player->GetComponent("container"))->RemoveItem(itemName);
+				((Container*)item->GetComponent("container"))->AddItem(item);
 				return "You took " + item->GetName() + " from your inventory and put it in " + containerItem->GetName() + ".";
 			}
 			else if (itemLocation == "current location")
 			{
-				world->GetCurrentLocation()->RemoveItem(itemName);
-				containerItem->AddItem(item);
+				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
+				((Container*)item->GetComponent("container"))->AddItem(item);
 				return "You took " + item->GetName() + " from your current location and put it in " + containerItem->GetName() + ".";
 			}
 		}

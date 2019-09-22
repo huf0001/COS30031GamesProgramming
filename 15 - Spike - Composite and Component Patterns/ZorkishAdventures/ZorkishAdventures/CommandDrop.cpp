@@ -105,14 +105,14 @@ std::string CommandDrop::Process(std::vector<std::string> input, World* world, P
 	//}
 	//else
 	//{
-	if (!player->HasItem(input))
+	if (!((Container*)player->GetComponent("container"))->HasItem(input))
 	{
 		return "Item '" + StringManager::Instance()->VectorToString(input, ' ') + "' is not in your inventory";
 	}
 
-	Item* item = player->GetItem(input);
-	player->RemoveItem(input);
-	world->GetCurrentLocation()->AddItem(item);
+	Item* item = ((Container*)player->GetComponent("container"))->GetItem(input);
+	((Container*)player->GetComponent("container"))->RemoveItem(input);
+	((Container*)world->GetCurrentLocation()->GetComponent("container"))->AddItem(item);
 	return "You dropped " + item->GetName() + ".";
 	//}
 }

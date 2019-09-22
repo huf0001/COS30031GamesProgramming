@@ -16,7 +16,7 @@ public:
 	//std::string GetID();
 	/*std::string GetName();
 	std::string GetDescription();*/
-	bool GetIsContainer();
+	//bool GetIsContainer();
 
 	//Constructor
 	Item(std::string id, std::string name, std::string description);

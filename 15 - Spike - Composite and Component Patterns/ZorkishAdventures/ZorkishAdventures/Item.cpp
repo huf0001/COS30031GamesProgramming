@@ -17,10 +17,10 @@
 //	return description;
 //}
 
-bool Item::GetIsContainer()
-{
-	return HasComponent("container");
-}
+//bool Item::GetIsContainer()
+//{
+//	return HasComponent("container");
+//}
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 

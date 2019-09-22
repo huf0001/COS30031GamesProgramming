@@ -180,7 +180,7 @@ World::World(std::string filename)
 				//Create the path
 				else
 				{
-					locations[splitLine[1]]->AddPath(splitLine[2], new Path(splitLine[3], splitLine[4]));
+					locations[splitLine[1]]->AddPath(splitLine[2], new Path(locations[splitLine[1]], splitLine[3], splitLine[4]));
 				}
 			}
 			else if (splitLine[0] == "A")

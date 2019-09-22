@@ -50,13 +50,13 @@
 #include "Command.h"
 #include "CommandManager.h"
 #include "CommandAlias.h"
-#include "CommandDebug.h"	//Update
+#include "CommandDebug.h"				//Update
 #include "CommandLook.h"	//Update
 //#include "CommandOpen.h"	//Not Implemented	Wait until everything else is implemented before adding
 #include "CommandMove.h"	//Update
 #include "CommandTake.h"	//Update
 #include "CommandPut.h"		//Update
-#include "CommandDrop.h"	//Update
+#include "CommandDrop.h"				//Update
 #include "CommandHelp.h"	//Update
 #include "CommandHiScore.h"
 #include "CommandQuit.h"

@@ -64,7 +64,7 @@ std::string CommandLook::LookAtLocation(World* world)
 
 std::string CommandLook::LookAtInventory(Player* player)
 {
-	std::string visible = ":" + player->ViewItems();
+	std::string visible = ":" + ((Container*)player->GetComponent("container"))->ViewItems();
 
 	if (visible == ":")
 	{
@@ -137,9 +137,9 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 						if (StringManager::Instance()->VectorToString(containerName, ' ') == "inventory")
 						{
-							if (player->HasItem(itemName))
+							if (((Container*)player->GetComponent("container"))->HasItem(itemName))
 							{
-								return player->ViewItem(itemName);
+								return ((Container*)player->GetComponent("container"))->ViewItem(itemName);
 							}
 							else
 							{
@@ -148,9 +148,9 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 						}
 						else if (StringManager::Instance()->VectorToString(containerName, ' ') == "location")
 						{
-							if (world->GetCurrentLocation()->HasItem(itemName))
+							if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 							{
-								return world->GetCurrentLocation()->ViewItem(itemName);
+								return ((Container*)world->GetCurrentLocation()->GetComponent("container"))->ViewItem(itemName);
 							}
 							else
 							{
@@ -159,27 +159,26 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 						}
 						else
 						{
-							if (player->HasItem(containerName))
+							if (((Container*)player->GetComponent("container"))->HasItem(containerName))
 							{
-								item = player->GetItem(containerName);
+								item = ((Container*)player->GetComponent("container"))->GetItem(containerName);
 							}
-							else if (world->GetCurrentLocation()->HasItem(containerName))
+							else if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerName))
 							{
-								item = world->GetCurrentLocation()->GetItem(containerName);
+								item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerName);
 							}
 
 							if (item == nullptr)
 							{
 								return "You can\"\nt look in \"\n" + StringManager::Instance()->VectorToString(containerName, ' ') + "\"\n.";
 							}
-							else if (!item->GetIsContainer())
+							else if (!item->HasComponent("container"))
 							{
 								return "You can\"\nt look in \"\n" + item->GetName() + "\"\n; it\"\ns not a container.";
 							}
 							else
 							{
-								ContainerItem* containerItem = (ContainerItem*)item;
-								return containerItem->ViewItem(itemName);
+								return ((Container*)item->GetComponent("container"))->ViewItem(itemName);
 							}
 						}
 					}
@@ -188,13 +187,13 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 
 			Item* item = nullptr;
 
-			if (player->HasItem(input))
+			if (((Container*)player->GetComponent("container"))->HasItem(input))
 			{
-				item = player->GetItem(input);
+				item = ((Container*)player->GetComponent("container"))->GetItem(input);
 			}
-			else if (world->GetCurrentLocation()->HasItem(input))
+			else if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(input))
 			{
-				item = world->GetCurrentLocation()->GetItem(input);
+				item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(input);
 			}
 
 			if (item == nullptr)
@@ -203,7 +202,7 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 			}
 			else
 			{
-				return item->GetDescription();
+				return ((Description*)item->GetComponent("description"))->GetDescription();
 			}
 		}
 		else if (input[1] == "in")
@@ -221,27 +220,26 @@ std::string CommandLook::Process(std::vector<std::string> input, World* world, P
 			input.erase(input.begin());
 			Item* item = nullptr;
 
-			if (player->HasItem(input))
+			if (((Container*)player->GetComponent("container"))->HasItem(input))
 			{
-				item = player->GetItem(input);
+				item = ((Container*)player->GetComponent("container"))->GetItem(input);
 			}
-			else if (world->GetCurrentLocation()->HasItem(input))
+			else if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(input))
 			{
-				item = world->GetCurrentLocation()->GetItem(input);
+				item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(input);
 			}
 
 			if (item == nullptr)
 			{
 				return "You cannot look in \"\n" + StringManager::Instance()->VectorToString(input, ' ') + "\"\n.";
 			}
-			else if (!item->GetIsContainer())
+			else if (!item->HasComponent("container"))
 			{
 				return "You can\"\nt look in \"\n" + item->GetName() + "\"\n; it\"\ns not a container.";
 			}
 			else
 			{
-				ContainerItem* containerItem = (ContainerItem*)item;
-				return "In " + StringManager::Instance()->VectorToString(input, ' ') + ", you can see" + containerItem->ViewItems();
+				return "In " + StringManager::Instance()->VectorToString(input, ' ') + ", you can see" + ((Container*)item->GetComponent("container"))->ViewItems();
 			}
 		}
 	}

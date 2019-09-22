@@ -61,16 +61,16 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 		if (!StringManager::Instance()->VectorContainsString(input, "from"))
 		{
 			//Find item in location
-			if (!world->GetCurrentLocation()->HasItem(input))
+			if (!((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(input))
 			{
 				return "You cannot find item '" + StringManager::Instance()->VectorToString(input, ' ') + "' at your current location";
 			}
 			else
 			{
 				//Add item to inventory
-				Item* item = world->GetCurrentLocation()->GetItem(input);
-				world->GetCurrentLocation()->RemoveItem(input);
-				player->AddItem(item);
+				Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(input);
+				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(input);
+				((Container*)player->GetComponent("container"))->AddItem(item);
 				return "You added " + item->GetName() + " to your inventory.";
 			}
 		}
@@ -108,7 +108,7 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 			}
 			else if (StringManager::Instance()->VectorToString(containerName, ' ') == "inventory")
 			{
-				if (player->HasItem(itemName))
+				if (((Container*)player->GetComponent("container"))->HasItem(itemName))
 				{
 					return "You remove " + StringManager::Instance()->VectorToString(itemName, ' ') + " from your inventory, and add it back to your inventory";
 				}
@@ -119,12 +119,12 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 			}
 			else if (StringManager::Instance()->VectorToString(containerName, ' ') == "location")
 			{
-				if (world->GetCurrentLocation()->HasItem(itemName))
+				if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 				{
 					//Add item to inventory
-					Item* item = world->GetCurrentLocation()->GetItem(itemName);
-					world->GetCurrentLocation()->RemoveItem(itemName);
-					player->AddItem(item);
+					Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(itemName);
+					((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
+					((Container*)player->GetComponent("container"))->AddItem(item);
 					return "You added " + item->GetName() + " to your inventory.";
 				}
 				else
@@ -135,41 +135,38 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 			else
 			{
 				//Find container in inventory or location
-				Item* containerItemAsItem = nullptr;
+				Item* containerItem = nullptr;
 
-				if (world->GetCurrentLocation()->HasItem(containerName))
+				if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerName))
 				{
-					containerItemAsItem = world->GetCurrentLocation()->GetItem(containerName);
+					containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerName);
 				}
-				else if (player->HasItem(containerName))
+				else if (((Container*)player->GetComponent("container"))->HasItem(containerName))
 				{
-					containerItemAsItem = player->GetItem(containerName);
+					containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerName);
 				}
 
-				if (containerItemAsItem == nullptr)
+				if (containerItem == nullptr)
 				{
 					return "You can't find '" + StringManager::Instance()->VectorToString(containerName, ' ') + "' at your current location or in your inventory.";
 				}
-				else if (!containerItemAsItem->GetIsContainer())
+				else if (!containerItem->HasComponent("container"))
 				{
 					return "You cannot take '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' from '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'. '" +
 						StringManager::Instance()->VectorToString(containerName, ' ') + "' is not a container.";
 				}
 				else
 				{
-					//Find item in container
-					ContainerItem* containerItem = (ContainerItem*)containerItemAsItem;
-
-					if (!containerItem->HasItem(itemName))
+					if (!((Container*)containerItem->GetComponent("container"))->HasItem(itemName))
 					{
 						return "You cannot find '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' inside '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'.";
 					}
 					else
 					{
 						//Take item from container
-						Item* item = containerItem->GetItem(itemName);
-						containerItem->RemoveItem(itemName);
-						player->AddItem(item);
+						Item* item = ((Container*)containerItem->GetComponent("container"))->GetItem(itemName);
+						((Container*)containerItem->GetComponent("container"))->RemoveItem(itemName);
+						((Container*)player->GetComponent("container"))->AddItem(item);
 						return "You added " + item->GetName() + " to your inventory";
 					}
 				}
