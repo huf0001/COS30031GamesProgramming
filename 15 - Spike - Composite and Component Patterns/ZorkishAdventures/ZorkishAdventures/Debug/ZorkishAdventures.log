@@ -1,0 +1,200 @@
+﻿  CommandAlias.cpp
+  CommandDebug.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(41,45): error C2039:  'GetItems': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(84,47): error C2039:  'GetItems': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(91,54): error C2039:  'GetDescription': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(118,50): error C2039:  'GetDescription': is not a member of 'Path'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Path.h(6): message :  see declaration of 'Path'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(133,50): error C2039:  'GetDescription': is not a member of 'Item'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Item.h(6): message :  see declaration of 'Item'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(137,3): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(137,18): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(137,35): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(137,49): error C2059:  syntax error: ')'
+  CommandDrop.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDebug.cpp(138,30): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDrop.cpp(108,5): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDrop.cpp(113,30): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDrop.cpp(114,20): error C2039:  'RemoveItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandDrop.cpp(115,38): error C2039:  'AddItem': is not a member of 'Location'
+  CommandHelp.cpp
+  CommandHiScore.cpp
+  CommandLook.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(67,47): error C2039:  'ViewItems': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(140,11): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(142,32): error C2039:  'ViewItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(151,11): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(153,53): error C2039:  'ViewItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(162,11): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(164,31): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(166,16): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(168,52): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(181,9): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(181,24): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(181,41): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(181,55): error C2059:  syntax error: ')'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(182,16): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(191,7): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(193,27): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(195,12): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(197,48): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(206,32): error C2039:  'GetDescription': is not a member of 'Item'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Item.h(6): message :  see declaration of 'Item'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(224,7): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(226,27): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(228,12): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(230,48): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(243,5): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(243,20): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(243,37): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(243,51): error C2059:  syntax error: ')'
+  CommandPut.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandLook.cpp(244,94): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(82,7): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(84,54): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(85,44): error C2039:  'RemoveItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(86,20): error C2039:  'AddItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(96,7): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(98,33): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(99,23): error C2039:  'RemoveItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(100,41): error C2039:  'AddItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(114,7): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(116,27): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(119,12): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(121,48): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(133,7): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(135,63): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(137,12): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(139,42): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(157,4): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(157,19): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(157,36): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(157,50): error C2059:  syntax error: ')'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(161,23): error C2039:  'RemoveItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(162,5): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(163,84): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(167,44): error C2039:  'RemoveItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(168,5): error C2065:  'containerItem': undeclared identifier
+  CommandQuit.cpp
+  CommandTake.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandPut.cpp(169,91): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(64,7): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(71,54): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(72,44): error C2039:  'RemoveItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(73,20): error C2039:  'AddItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(111,8): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(122,8): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(125,55): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(126,45): error C2039:  'RemoveItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(127,21): error C2039:  'AddItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(140,8): error C2039:  'HasItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(142,64): error C2039:  'GetItem': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(144,13): error C2039:  'HasItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(146,43): error C2039:  'GetItem': is not a member of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(161,6): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(161,21): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(161,38): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(161,52): error C2059:  syntax error: ')'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(163,11): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(170,20): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(171,7): error C2065:  'containerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\CommandTake.cpp(172,22): error C2039:  'AddItem': is not a member of 'Player'
+  Component.cpp
+  Description.cpp
+  GameObject.cpp
+  StageAbout.cpp
+  Command.cpp
+  CommandManager.cpp
+  Container.cpp
+  Game.cpp
+  StageGameplay.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Player.h(6): message :  see declaration of 'Player'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\StageGameplay.cpp(16,33): error C2664:  'Player::Player(Player &&)': cannot convert argument 1 from 'const char [9]' to 'const Player &'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\StageGameplay.cpp(16,33): message :  Reason: cannot convert from 'const char [9]' to 'const Player'
+  StageHallOfFame.cpp
+  StageHelp.cpp
+  Generating Code...
+  Compiling...
+  Item.cpp
+  Location.cpp
+  StageMainMenu.cpp
+  CommandMove.cpp
+  StageNewHighScore.cpp
+  Path.cpp
+  pch.cpp
+  Player.cpp
+  StageSelectAdventure.cpp
+  Stage.cpp
+  StageManager.cpp
+  StringManager.cpp
+  World.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\StageGameplay.cpp(16,33): message :  No constructor could take the source type, or constructor overload resolution was ambiguous
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(183,89): error C2661:  'Path::Path': no overloaded function takes 2 arguments
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(183,89): error C2660:  'Location::AddPath': function does not take 1 arguments
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(28,7): message :  see declaration of 'Location::AddPath'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,6): error C2065:  'ContainerItem': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,21): error C2065:  'c': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,42): error C2061:  syntax error: identifier 'ContainerItem'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(264,40): error C2065:  'c': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(265,33): error C2065:  'c': undeclared identifier
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(362,40): error C2039:  'GetDescription': is not a member of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(367,35): error C2039:  'ViewItems': is not a member of 'Location'
+  ZorkishAdventures.cpp
+  Generating Code...
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
