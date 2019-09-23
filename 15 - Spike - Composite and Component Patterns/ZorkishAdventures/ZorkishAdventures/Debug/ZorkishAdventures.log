@@ -1,26 +1,2 @@
-﻿  CommandAlias.cpp
-  CommandDebug.cpp
-  CommandDrop.cpp
-  CommandLook.cpp
-  CommandPut.cpp
-  CommandQuit.cpp
-  CommandTake.cpp
-  Component.cpp
-  StageGameplay.cpp
-  StageHallOfFame.cpp
-  StageHelp.cpp
-  World.cpp
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(183,89): error C2661:  'Path::Path': no overloaded function takes 2 arguments
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(183,89): error C2660:  'Location::AddPath': function does not take 1 arguments
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(28,7): message :  see declaration of 'Location::AddPath'
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,6): error C2065:  'ContainerItem': undeclared identifier
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,21): error C2065:  'c': undeclared identifier
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(263,42): error C2061:  syntax error: identifier 'ContainerItem'
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(264,40): error C2065:  'c': undeclared identifier
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(265,33): error C2065:  'c': undeclared identifier
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(362,40): error C2039:  'GetDescription': is not a member of 'Location'
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\World.cpp(367,35): error C2039:  'ViewItems': is not a member of 'Location'
-  ZorkishAdventures.cpp
-  Generating Code...
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\ZorkishAdventures\Location.h(6): message :  see declaration of 'Location'
+﻿  Location.cpp
+  ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\15 - Spike - Composite and Component Patterns\ZorkishAdventures\Debug\ZorkishAdventures.exe

@@ -19,8 +19,10 @@ protected:
 public:
 	//Public Properties
 	std::string GetDescription();
+	//std::string SetDescription(std::string value);
 
 	//Constructor
+	//Description(GameObject* gameObject);
 	Description(GameObject* gameObject, std::string description);
 
 	//Public Methods

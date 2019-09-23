@@ -39,25 +39,26 @@
 //GameObjects
 #include "GameObject.h"
 #include "Item.h"						//Updated
-#include "Player.h"						//Update
+#include "Player.h"						//Updated
 #include "Path.h"						//Updated
 #include "Location.h"					//Updated
 
 //World
-#include "World.h"			//Update
+#include "ComponentFactory.h"
+#include "World.h"						//Updated
 
 //Commands
 #include "Command.h"
 #include "CommandManager.h"
 #include "CommandAlias.h"
-#include "CommandDebug.h"				//Update
-#include "CommandLook.h"	//Update
+#include "CommandDebug.h"				//Updated
+#include "CommandLook.h"				//Updated
 //#include "CommandOpen.h"	//Not Implemented	Wait until everything else is implemented before adding
-#include "CommandMove.h"	//Update
-#include "CommandTake.h"	//Update
-#include "CommandPut.h"		//Update
-#include "CommandDrop.h"				//Update
-#include "CommandHelp.h"	//Update
+#include "CommandMove.h"				//Updated
+#include "CommandTake.h"				//Updated
+#include "CommandPut.h"					//Updated
+#include "CommandDrop.h"				//Updated
+#include "CommandHelp.h"				//Updated
 #include "CommandHiScore.h"
 #include "CommandQuit.h"
 

@@ -161,6 +161,7 @@
     <ClCompile Include="CommandQuit.cpp" />
     <ClCompile Include="CommandTake.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="Description.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Lock.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="CommandQuit.h" />
     <ClInclude Include="CommandTake.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Description.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Lock.h" />

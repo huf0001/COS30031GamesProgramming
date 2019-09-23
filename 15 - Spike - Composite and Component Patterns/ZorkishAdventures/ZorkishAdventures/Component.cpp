@@ -16,6 +16,7 @@ GameObject* Component::GetGameObject()
 
 Component::Component(std::string id, GameObject* gameObject)
 {
+	this->componentId = id;
 	this->gameObject = gameObject;
 }
 

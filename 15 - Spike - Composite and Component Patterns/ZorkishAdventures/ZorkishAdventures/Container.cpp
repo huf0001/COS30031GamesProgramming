@@ -33,6 +33,7 @@ bool Container::HasItem(std::vector<std::string> input)
 
 void Container::AddItem(Item* item)
 {
+	std::cout << "Items.count in " << gameObject->GetID() << "'s container component: " << items.size() << std::endl;
 	items.push_back(item);
 }
 

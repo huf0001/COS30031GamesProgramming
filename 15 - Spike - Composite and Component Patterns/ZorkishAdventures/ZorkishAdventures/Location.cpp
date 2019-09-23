@@ -24,7 +24,7 @@
 
 Location::Location(std::string id, std::string name, std::string description) : GameObject(id, name)
 {
-	paths = std::map<std::string, Path*>();
+	this->paths = std::map<std::string, Path*>();
 	AddComponent((Component*) new Description((GameObject*)this, description));
 	AddComponent((Component*) new Container((GameObject*)this));
 }
