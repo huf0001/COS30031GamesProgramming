@@ -1,17 +1,17 @@
 #include "pch.h"
 
-#include "StageGameplay.h"
+#include "Gameplay.h"
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-std::string StageGameplay::GetCurrentWorldName()
+std::string Gameplay::GetCurrentWorldName()
 {
 	return world->GetName();
 }
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-StageGameplay::StageGameplay()
+Gameplay::Gameplay()
 {
 	name = "Gameplay";
 	/*worlds = std::map<std::string, World*>();
@@ -22,7 +22,7 @@ StageGameplay::StageGameplay()
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
 
-std::string StageGameplay::Setup()
+std::string Gameplay::Setup()
 {
 	setup = true;
 	std::string result;
@@ -36,12 +36,12 @@ std::string StageGameplay::Setup()
 	return result;
 }
 
-void StageGameplay::SetWorld(World* world)
+void Gameplay::SetWorld(World* world)
 {
 	this->world = world;
 }
 
-std::string StageGameplay::Update(std::string input)
+std::string Gameplay::Update(std::string input)
 {
 	if (!setup)
 	{
@@ -110,7 +110,7 @@ std::string StageGameplay::Update(std::string input)
 	return "I'm sorry, that is not valid input.\n:> ";
 }
 
-std::string StageGameplay::LookAtLocation()
+std::string Gameplay::LookAtLocation()
 {
 	//Assume the description ends in a full stop.
 	std::string visible = ":" + world->ViewItemsInCurrentLocation() + world->ViewPathsAtCurrentLocation();
@@ -123,7 +123,7 @@ std::string StageGameplay::LookAtLocation()
 	return "You are in " + world->DescribeCurrentLocation() + " There, you can see" + visible;
 }
 
-std::string StageGameplay::LookAtInventory()
+std::string Gameplay::LookAtInventory()
 {
 	std::string visible = ":" + player->ViewItems();
 
@@ -135,7 +135,7 @@ std::string StageGameplay::LookAtInventory()
 	return "In your inventory, you have" + visible;
 }
 
-std::string StageGameplay::Look(std::vector<std::string> input)
+std::string Gameplay::Look(std::vector<std::string> input)
 {
 	if (input.size() == 1)
 	{
@@ -309,7 +309,7 @@ std::string StageGameplay::Look(std::vector<std::string> input)
 	return "You can't look like that.";
 }
 
-std::string StageGameplay::TakeFrom(std::vector<std::string> input)
+std::string Gameplay::TakeFrom(std::vector<std::string> input)
 {
 	if (input.size() >= 2)
 	{
@@ -448,7 +448,7 @@ std::string StageGameplay::TakeFrom(std::vector<std::string> input)
 	return "You can't take stuff like that.";
 }
 
-std::string StageGameplay::PutIn(std::vector<std::string> input)
+std::string Gameplay::PutIn(std::vector<std::string> input)
 {
 	input.erase(input.begin());
 
@@ -586,7 +586,7 @@ std::string StageGameplay::PutIn(std::vector<std::string> input)
 	return "You can't put an item in something else like that.";
 }
 
-std::string StageGameplay::Drop(std::vector<std::string> input)
+std::string Gameplay::Drop(std::vector<std::string> input)
 {
 	input.erase(input.begin());
 
@@ -668,7 +668,7 @@ std::string StageGameplay::Drop(std::vector<std::string> input)
 	//}
 }
 
-std::string StageGameplay::Move(std::vector<std::string> input)
+std::string Gameplay::Move(std::vector<std::string> input)
 {
 	input.erase(input.begin());
 	std::string direction = StringManager::Instance()->VectorToString(input, ' ');

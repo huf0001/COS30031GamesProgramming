@@ -14,7 +14,7 @@
 #include <string>
 #include <sstream>
 
-class StageGameplay : Stage
+class Gameplay : Stage
 {
 private:
 	//Private Fields
@@ -36,7 +36,7 @@ public:
 	void SetWorld(World* world);
 
 	//Constructor
-	StageGameplay();
+	Gameplay();
 
 	//Public Methods
 	std::string Update(std::string input);

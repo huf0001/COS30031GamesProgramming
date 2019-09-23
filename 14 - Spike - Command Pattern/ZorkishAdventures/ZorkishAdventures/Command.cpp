@@ -24,6 +24,11 @@ void Command::AddKeyword(std::string string)
 	keywords.push_back(string);
 }
 
+void Command::AddAlias(std::string string)
+{
+	aliases.push_back(string);
+}
+
 bool Command::HasKeyword(std::string string)
 {
 	for (std::string keyword : keywords)
@@ -35,11 +40,6 @@ bool Command::HasKeyword(std::string string)
 	}
 
 	return false;
-}
-
-void Command::AddAlias(std::string string)
-{
-	aliases.push_back(string);
 }
 
 bool Command::HasAlias(std::string string)
