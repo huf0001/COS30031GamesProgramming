@@ -36,9 +36,9 @@ Component* ComponentFactory::CreateComponent(std::string componentId, GameObject
 		//case ComponentID::DescriptionID:
 		//	return (Component*) new Description(gameObject);
 		/*case ComponentID::LockID:
-			return (Component*) new Lock(gameObject);
+			return (Component*) new Lock(gameObject);*/
 		case ComponentID::MovableID:
-			return (Component*) new Movable(gameObject);*/
+			return (Component*) new Movable(gameObject);
 		default:
 			return nullptr;
 	}

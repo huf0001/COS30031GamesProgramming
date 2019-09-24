@@ -50,6 +50,22 @@ std::vector<std::string> CommandTake::StandardiseInput(std::vector<std::string> 
 	return input;
 }
 
+std::string CommandTake::TakeFromContainer(std::vector<std::string> itemName, GameObject* containerFrom, Player* player)
+{
+	Item* item = ((Container*)containerFrom->GetComponent("container"))->GetItem(itemName);
+
+	if (!item->HasComponent("movable"))
+	{
+		return "You cannot move " + item->GetName() + ".";
+	}
+	else
+	{
+		((Container*)containerFrom->GetComponent("container"))->RemoveItem(itemName);
+		((Container*)player->GetComponent("container"))->AddItem(item);
+		return "You added " + item->GetName() + " to your inventory.";
+	}
+}
+
 std::string CommandTake::Process(std::vector<std::string> input, World* world, Player* player)
 {
 	input = StandardiseInput(input);
@@ -67,11 +83,7 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 			}
 			else
 			{
-				//Add item to inventory
-				Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(input);
-				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(input);
-				((Container*)player->GetComponent("container"))->AddItem(item);
-				return "You added " + item->GetName() + " to your inventory.";
+				return TakeFromContainer(input, (GameObject*)world->GetCurrentLocation(), player);
 			}
 		}
 		else
@@ -121,11 +133,7 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 			{
 				if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 				{
-					//Add item to inventory
-					Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(itemName);
-					((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
-					((Container*)player->GetComponent("container"))->AddItem(item);
-					return "You added " + item->GetName() + " to your inventory.";
+					return TakeFromContainer(itemName, (GameObject*)world->GetCurrentLocation(), player);
 				}
 				else
 				{
@@ -163,11 +171,7 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 					}
 					else
 					{
-						//Take item from container
-						Item* item = ((Container*)containerItem->GetComponent("container"))->GetItem(itemName);
-						((Container*)containerItem->GetComponent("container"))->RemoveItem(itemName);
-						((Container*)player->GetComponent("container"))->AddItem(item);
-						return "You added " + item->GetName() + " to your inventory";
+						return TakeFromContainer(itemName, (GameObject*)containerItem, player);
 					}
 				}
 			}

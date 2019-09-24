@@ -55,7 +55,7 @@ I:east_attic:glasses:Glasses:A pair of glasses.:movable
 I:east_attic:quill:Quill:A black and grey quill.:movable
 I:east_attic:red_bag:Bag:A red bag.:movable,container
 I:east_attic:wardrobe:Wardrobe:An old wardrobe.:container
-I:east_attic:boulder:Boulder:A boulder someone must have hauled up the ladder. It's not going anywhere.:container
+I:east_attic:boulder:Boulder:A boulder someone must have hauled up the ladder. It's not going anywhere.:none
 I:red_bag:gold_coin:Gold Coin:A gold coin. This is valuable.:movable
 I:red_bag:silver_coin:Silver Coin:A silver coin. This is worth a bit.:movable
 I:red_bag:copper_coin:Copper Coin:A copper coin. This isn't worth much.:movable
@@ -70,7 +70,7 @@ L:north_cellar:The Cellar:a dark cellar.
 ##Paths--------------------------------------------------------------------------------------------
 
 #Paths from void
-P:void:forward:south_room:A glowing white . . . something . . . in front of you . . . slowly moving FORWARD.
+P:::void:forward:south_room:A glowing white . . . something . . . in front of you . . . slowly moving FORWARD.
 
 #Paths from south_room
 P:::south_room:north west:west_room:A door to the NORTH WEST.

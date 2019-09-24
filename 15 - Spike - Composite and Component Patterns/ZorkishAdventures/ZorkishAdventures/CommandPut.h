@@ -9,7 +9,7 @@ private:
 	//Private Fields
 
 	//Private Methods
-
+	std::string PutInContainer(std::vector<std::string> itemName, GameObject* containerFrom, GameObject* containerTo, std::vector<std::string> successMessage);
 protected:
 	//Protected Fields
 

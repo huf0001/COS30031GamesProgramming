@@ -126,7 +126,7 @@ World::World(std::string filename)
 				else
 				{
 					locations[splitLine[1]] = new Location(splitLine[1], splitLine[2], splitLine[3]);
-					containers[splitLine[1]] = (Container*)locations[splitLine[1]];
+					containers[splitLine[1]] = (Container*)locations[splitLine[1]]->GetComponent("container");
 				}
 			}
 			else if (splitLine[0] == "P")
@@ -134,7 +134,7 @@ World::World(std::string filename)
 				//Check Formatting
 				if (splitLine.size() != 7)
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading path between locations. Values required (including prefix \"P\"): 5. Values given: " << splitLine.size() << ".\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading path between locations. Values required (including prefix \"P\"): 7. Values given: " << splitLine.size() << ".\n";
 					std::cout << "\tFormat: \"P:path_id:Path Name:location_from_id:direction:location_to_id:path description\". If Path ID and name are blank, they will be constructed from location_from_id and location_to_id.\n\n";
 					loadedSuccessfully = false;
 				}
@@ -277,8 +277,8 @@ World::World(std::string filename)
 				//Create the item
 				else
 				{	
-					Item* i = new Item(splitLine[2], splitLine[3], splitLine[4]);
-					containers[splitLine[1]]->AddItem(i);
+					Item* item = new Item(splitLine[2], splitLine[3], splitLine[4]);
+					containers[splitLine[1]]->AddItem(item);
 
 					if (splitLine[5] != "none")
 					{
@@ -286,7 +286,7 @@ World::World(std::string filename)
 
 						for (std::string componentId : componentIds)
 						{
-							Component* component = ComponentFactory::Instance()->CreateComponent(componentId, (GameObject*)i);
+							Component* component = ComponentFactory::Instance()->CreateComponent(componentId, (GameObject*)item);
 
 							if (component == nullptr)
 							{
@@ -296,7 +296,12 @@ World::World(std::string filename)
 							}
 							else
 							{
-								i->AddComponent(component);
+								item->AddComponent(component);
+
+								if (componentId == "container")
+								{
+									containers[item->GetID()] = (Container*)component;
+								}
 							}
 						}
 					}				

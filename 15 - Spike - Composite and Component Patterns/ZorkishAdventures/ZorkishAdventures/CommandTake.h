@@ -10,6 +10,7 @@ private:
 
 	//Private Methods
 	std::vector<std::string> StandardiseInput(std::vector<std::string> input);
+	std::string TakeFromContainer(std::vector<std::string> item, GameObject* containerFrom, Player* player);
 protected:
 	//Protected Fields
 

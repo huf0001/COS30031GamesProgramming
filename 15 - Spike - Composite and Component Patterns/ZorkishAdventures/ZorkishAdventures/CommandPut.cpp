@@ -36,6 +36,39 @@ CommandPut::CommandPut()
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
 
+std::string CommandPut::PutInContainer(std::vector<std::string> itemName, GameObject* containerFrom, GameObject* containerTo, std::vector<std::string> successMessage)
+{
+	Item* item = ((Container*)containerFrom->GetComponent("container"))->GetItem(itemName);
+
+	if (!item->HasComponent("movable"))
+	{
+		return "You cannot move " + item->GetName() + ".";
+	}
+	else
+	{
+		((Container*)containerFrom->GetComponent("container"))->RemoveItem(itemName);
+		((Container*)containerTo->GetComponent("container"))->AddItem(item);
+		
+		for (int i = 0; i < (int)successMessage.size(); i++)
+		{
+			if (successMessage[i] == "[ITEM NAME]")
+			{
+				successMessage[i] = item->GetName();
+			}
+			else if (successMessage[i] == "[CONTAINER FROM NAME]")
+			{
+				successMessage[i] = containerFrom->GetName();
+			}
+			else if (successMessage[i] == "[CONTAINER TO NAME]")
+			{
+				successMessage[i] = containerTo->GetName();
+			}
+		}
+
+		return StringManager::Instance()->VectorToString(successMessage, ' ');
+	}
+}
+
 std::string CommandPut::Process(std::vector<std::string> input, World* world, Player* player)
 {
 	input.erase(input.begin());
@@ -81,10 +114,8 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 		{
 			if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(itemName))
 			{
-				Item* item = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(itemName);
-				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
-				((Container*)player->GetComponent("container"))->AddItem(item);
-				return "You put " + item->GetName() + " in your inventory.";
+				std::vector<std::string> successMessage = { "You put", "[ITEM NAME]", "in your inventory." };
+				return PutInContainer(itemName, (GameObject*)world->GetCurrentLocation(), (GameObject*)player, successMessage);
 			}
 			else
 			{
@@ -95,10 +126,8 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 		{
 			if (((Container*)player->GetComponent("container"))->HasItem(itemName))
 			{
-				Item* item = ((Container*)player->GetComponent("container"))->GetItem(itemName);
-				((Container*)player->GetComponent("container"))->RemoveItem(itemName);
-				((Container*)world->GetCurrentLocation()->GetComponent("container"))->AddItem(item);
-				return "You put down " + item->GetName() + " at your current location.";
+				std::vector<std::string> successMessage = { "You put down", "[ITEM NAME]", "at your current location." };
+				return PutInContainer(itemName, (GameObject*)player, (GameObject*)world->GetCurrentLocation(), successMessage);
 			}
 			else
 			{
@@ -155,15 +184,13 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 
 			if (itemLocation == "inventory")
 			{
-				((Container*)player->GetComponent("container"))->RemoveItem(itemName);
-				((Container*)item->GetComponent("container"))->AddItem(item);
-				return "You took " + item->GetName() + " from your inventory and put it in " + containerItem->GetName() + ".";
+				std::vector<std::string> successMessage = { "You took", "[ITEM NAME]", "from your inventory and put it in " + containerItem->GetName() + "." };
+				return PutInContainer(itemName, (GameObject*)player, (GameObject*)containerItem, successMessage);
 			}
 			else if (itemLocation == "current location")
 			{
-				((Container*)world->GetCurrentLocation()->GetComponent("container"))->RemoveItem(itemName);
-				((Container*)item->GetComponent("container"))->AddItem(item);
-				return "You took " + item->GetName() + " from your current location and put it in " + containerItem->GetName() + ".";
+				std::vector<std::string> successMessage = { "You took", "[ITEM NAME]", "from your current location and put it in " + containerItem->GetName() + "." };
+				return PutInContainer(itemName, (GameObject*)world->GetCurrentLocation(), (GameObject*)containerItem, successMessage);
 			}
 		}
 	}
