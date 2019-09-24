@@ -76,6 +76,13 @@ std::string CommandLook::LookAtInventory(Player* player)
 
 std::string CommandLook::LookInItem(Item* item)
 {
+	Container* container = (Container*)item->GetComponent("container");
+
+	if (!container->GetIsOpen())
+	{
+		return "You cannot look inside " + item->GetName() + "; it is closed.";
+	}
+
 	std::string visible = ":" + ((Container*)item->GetComponent("container"))->ViewItems();
 
 	if (visible == ":")

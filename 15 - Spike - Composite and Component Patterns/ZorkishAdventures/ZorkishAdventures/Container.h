@@ -10,6 +10,8 @@ class Container : Component
 private:
 	//Private Fields
 	std::vector<Item*> items;
+	bool isOpen;
+	bool alwaysOpen;
 
 	//Private Methods
 
@@ -20,9 +22,12 @@ protected:
 
 public:
 	//Public Properties
+	bool GetAlwaysOpen();
+	bool GetIsOpen();
+	void SetIsOpen(bool value);
 
 	//Constructor
-	Container(GameObject* gameObject);
+	Container(GameObject* gameObject, bool alwaysOpen, bool isOpen);
 
 	//Public Methods
 	bool HasItem(std::vector<std::string> input);

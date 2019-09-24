@@ -14,7 +14,7 @@
 Player::Player(std::string id, std::string name) : GameObject(id, name)
 {
 	/*this->name = name;*/
-	AddComponent((Component*) new Container((GameObject*)this));
+	AddComponent((Component*) new Container((GameObject*)this, true, true));
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

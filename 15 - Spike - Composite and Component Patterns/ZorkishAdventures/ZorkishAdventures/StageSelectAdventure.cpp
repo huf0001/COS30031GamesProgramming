@@ -102,7 +102,7 @@ std::string StageSelectAdventure::Update(std::string input)
 		}
 	}
 
-	return "I'm sorry, that is not valid input. Please select 1-3.\n:> ";
+	return "I'm sorry, that is not valid input. Please select 1-" + std::to_string(worldNames.size())+ ".\n:> ";
 }
 
 std::string StageSelectAdventure::SelectWorld(std::string name, std::string filename)

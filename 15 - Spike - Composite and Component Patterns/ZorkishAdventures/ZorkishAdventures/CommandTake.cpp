@@ -163,16 +163,17 @@ std::string CommandTake::Process(std::vector<std::string> input, World* world, P
 					return "You cannot take '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' from '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'. '" +
 						StringManager::Instance()->VectorToString(containerName, ' ') + "' is not a container.";
 				}
+				else if (!((Container*)containerItem->GetComponent("container"))->GetIsOpen())
+				{
+					return "You don't know if \"" + StringManager::Instance()->VectorToString(itemName, ' ') +"\" is inside " + containerItem->GetName() + "; " + containerItem->GetName() + " is closed.";
+				}
+				else if (!((Container*)containerItem->GetComponent("container"))->HasItem(itemName))
+				{
+					return "You cannot find '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' inside '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'.";
+				}
 				else
 				{
-					if (!((Container*)containerItem->GetComponent("container"))->HasItem(itemName))
-					{
-						return "You cannot find '" + StringManager::Instance()->VectorToString(itemName, ' ') + "' inside '" + StringManager::Instance()->VectorToString(containerName, ' ') + "'.";
-					}
-					else
-					{
-						return TakeFromContainer(itemName, (GameObject*)containerItem, player);
-					}
+					return TakeFromContainer(itemName, (GameObject*)containerItem, player);
 				}
 			}
 		}

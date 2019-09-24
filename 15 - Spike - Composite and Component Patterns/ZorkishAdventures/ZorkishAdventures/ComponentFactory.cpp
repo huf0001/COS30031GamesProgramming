@@ -21,7 +21,7 @@ ComponentFactory::ComponentFactory()
 	componentIds = std::map<std::string, ComponentID>();
 	componentIds["container"] = ComponentID::ContainerID;
 	//componentIds["description"] = ComponentID::DescriptionID;
-	componentIds["lock"] = ComponentID::LockID;
+	//componentIds["lock"] = ComponentID::LockID;
 	componentIds["movable"] = ComponentID::MovableID;
 }
 
@@ -32,11 +32,11 @@ Component* ComponentFactory::CreateComponent(std::string componentId, GameObject
 	switch (componentIds[componentId])
 	{
 		case ComponentID::ContainerID:
-			return (Component*) new Container(gameObject);
+			return (Component*) new Container(gameObject, false, false);
 		//case ComponentID::DescriptionID:
 		//	return (Component*) new Description(gameObject);
-		/*case ComponentID::LockID:
-			return (Component*) new Lock(gameObject);*/
+		//case ComponentID::LockID:
+		//	return (Component*) new Lock(gameObject, true, std::vector<std::string>());
 		case ComponentID::MovableID:
 			return (Component*) new Movable(gameObject);
 		default:

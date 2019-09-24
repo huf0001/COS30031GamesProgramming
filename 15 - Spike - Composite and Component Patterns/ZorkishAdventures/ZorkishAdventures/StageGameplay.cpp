@@ -13,7 +13,7 @@ StageGameplay::StageGameplay()
 {
 	name = "Gameplay";
 	world = nullptr;
-	player = new Player("player_1", "Player 1");
+	player = nullptr;
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,6 +21,7 @@ StageGameplay::StageGameplay()
 std::string StageGameplay::Setup()
 {
 	setup = true;
+	player = new Player("player_1", "Player 1");
 	std::string result;
 
 	result += "Zorkish :: " + world->GetName();

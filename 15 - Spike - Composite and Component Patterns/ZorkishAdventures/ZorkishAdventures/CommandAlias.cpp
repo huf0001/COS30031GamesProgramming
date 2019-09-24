@@ -30,6 +30,7 @@ std::string CommandAlias::GetSyntax()
 
 CommandAlias::CommandAlias()
 {
+	name = "alias";
 	AddKeyword("alias");
 }
 

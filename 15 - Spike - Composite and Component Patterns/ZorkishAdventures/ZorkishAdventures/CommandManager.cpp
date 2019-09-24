@@ -23,6 +23,7 @@ CommandManager::CommandManager()
 	commands = std::map<std::string, Command*>();
 	commands["look"] = (Command*) new CommandLook();
 	commands["move"] = (Command*) new CommandMove();
+	commands["open"] = (Command*) new CommandOpen();
 	commands["take"] = (Command*) new CommandTake();
 	commands["put"] = (Command*) new CommandPut();
 	commands["drop"] = (Command*) new CommandDrop();

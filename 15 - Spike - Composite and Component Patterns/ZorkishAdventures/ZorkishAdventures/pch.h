@@ -34,7 +34,7 @@
 #include "Container.h"					//Updated
 #include "Description.h"				//Implemented
 #include "Lock.h"			//Not Implemented	Wait until everything else is implemented before adding
-#include "Movable.h"		//Not Implemented	Wait until everything else is implemented before adding
+#include "Movable.h"					//Implemented
 
 //GameObjects
 #include "GameObject.h"
@@ -53,7 +53,7 @@
 #include "CommandAlias.h"
 #include "CommandDebug.h"				//Updated
 #include "CommandLook.h"				//Updated
-//#include "CommandOpen.h"	//Not Implemented	Wait until everything else is implemented before adding
+#include "CommandOpen.h"	//Not Implemented	Wait until everything else is implemented before adding
 #include "CommandMove.h"				//Updated
 #include "CommandTake.h"				//Updated
 #include "CommandPut.h"					//Updated

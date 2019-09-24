@@ -4,11 +4,46 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
+bool Container::GetAlwaysOpen()
+{
+	return alwaysOpen;
+}
+
+bool Container::GetIsOpen()
+{
+	if (alwaysOpen)
+	{
+		return true;
+	}
+
+	if (gameObject->HasComponent("lock") && ((Lock*)gameObject->GetComponent("lock"))->GetIsLocked())
+	{
+		return false;
+	}
+	
+	return isOpen;
+}
+
+void Container::SetIsOpen(bool value)
+{
+	if(!alwaysOpen)
+	{
+		if (value && gameObject->HasComponent("lock") && ((Lock*)gameObject->GetComponent("lock"))->GetIsLocked())
+		{
+			return;
+		}
+
+		isOpen = value;		
+	}
+}
+
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Container::Container(GameObject* gameObject) : Component("container", gameObject)
+Container::Container(GameObject* gameObject, bool alwaysOpen, bool isOpen) : Component("container", gameObject)
 {
 	items = std::vector<Item*>();
+	this->alwaysOpen = alwaysOpen;
+	this->isOpen = isOpen;
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

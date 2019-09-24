@@ -26,7 +26,7 @@ Location::Location(std::string id, std::string name, std::string description) : 
 {
 	this->paths = std::map<std::string, Path*>();
 	AddComponent((Component*) new Description((GameObject*)this, description));
-	AddComponent((Component*) new Container((GameObject*)this));
+	AddComponent((Component*) new Container((GameObject*)this, true, true));
 }
 
 //Public Methods-------------------------------------------------------------------------------------------------------------------------------------

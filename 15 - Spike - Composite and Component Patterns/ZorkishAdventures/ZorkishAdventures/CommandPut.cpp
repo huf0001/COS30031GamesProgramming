@@ -181,6 +181,10 @@ std::string CommandPut::Process(std::vector<std::string> input, World* world, Pl
 			{
 				return "You cannot put " + item->GetName() + " inside itself.";
 			}
+			else if (!((Container*)containerItem->GetComponent("container"))->GetIsOpen())
+			{
+				return "You cannot put " + item->GetName() + " inside " + containerItem->GetName() + "; " + containerItem->GetName() + " is closed.";
+			}
 
 			if (itemLocation == "inventory")
 			{

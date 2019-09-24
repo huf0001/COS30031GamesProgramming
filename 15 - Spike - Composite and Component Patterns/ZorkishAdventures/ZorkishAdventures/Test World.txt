@@ -18,10 +18,15 @@
 #Items				"I:container_id:item_id:Item Name:item description:component_id_1,component_id_2, . . .". 
 #					Default components: description.
 
-#Components			"C:component_id:game_object_id"
-#					Components: none (for no components), container, description, lock, movable.
-#					WARNING: only specify description components separately; ComponentFactory won't return Descriptions as it can't
-#						handle extra parameters.
+#Components			"C:component_type:game_object_id[:component-specific parameters]"
+#						"C:container:game_object_id:is_open?:always_open?"
+#						"C:description:game_object_id:description of game object"
+#						"C:lock:game_object_id:is_locked?:unlockable_with_item_id_1,unlockable_with_item_id_2, . . .". 
+#							If not unlockable, specify "none".
+#						"C:movable:game_object_id"
+
+#WARNING: don't specify lock or description components in an item's basic specification; ComponentFactory won't return them
+#as it can't handle extra parameters.
 
 #Locations, Paths, Items and the Player are game objects
 
@@ -34,6 +39,11 @@ W:Test World
 #Starting location: the void
 L:void:The Void:an empty, formless void.
 S:void
+I:void:strongbox_key:Strongbox Key:A key for a strongbox.:movable
+I:void:strongbox:Strongbox:A strange-looking strongbox.:none
+C:container:strongbox:No:No
+C:lock:strongbox:Yes:strongbox_key
+C:movable:strongbox
 
 #Where the player moves to next: the south room
 L:south_room:The South Room:an empty room.

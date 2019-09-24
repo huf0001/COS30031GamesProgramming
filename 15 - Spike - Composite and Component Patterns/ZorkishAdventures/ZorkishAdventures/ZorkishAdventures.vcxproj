@@ -157,6 +157,7 @@
     <ClCompile Include="CommandHelp.cpp" />
     <ClCompile Include="CommandHiScore.cpp" />
     <ClCompile Include="CommandLook.cpp" />
+    <ClCompile Include="CommandOpen.cpp" />
     <ClCompile Include="CommandPut.cpp" />
     <ClCompile Include="CommandQuit.cpp" />
     <ClCompile Include="CommandTake.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="CommandHelp.h" />
     <ClInclude Include="CommandHiScore.h" />
     <ClInclude Include="CommandLook.h" />
+    <ClInclude Include="CommandOpen.h" />
     <ClInclude Include="CommandPut.h" />
     <ClInclude Include="CommandQuit.h" />
     <ClInclude Include="CommandTake.h" />

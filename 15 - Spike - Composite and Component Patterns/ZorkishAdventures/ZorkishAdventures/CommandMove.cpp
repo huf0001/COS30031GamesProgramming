@@ -4,9 +4,9 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-void CommandMove::SetDirectionAliases(std::map<std::string, std::string> directionAliases)
+void CommandMove::SetDirectionAliases(std::map<std::string, std::string> value)
 {
-	this->directionAliases = directionAliases;
+	directionAliases = value;
 }
 
 std::string CommandMove::GetSyntax()
@@ -48,8 +48,10 @@ std::string CommandMove::GetSyntax()
 
 CommandMove::CommandMove()
 {
+	name = "move";
 	AddKeyword("move");
 	AddAlias("go");
+	directionAliases = std::map<std::string, std::string>();
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

@@ -41,6 +41,7 @@ World::World(std::string filename)
 		std::string line;
 		std::vector<std::string> splitLine;
 		std::map<std::string, Container*> containers = std::map<std::string, Container*>();
+		std::map<std::string, GameObject*> gameObjects = std::map<std::string, GameObject*>();
 		int lineCount = 0;
 
 		while (std::getline(ifs, line))
@@ -127,6 +128,7 @@ World::World(std::string filename)
 				{
 					locations[splitLine[1]] = new Location(splitLine[1], splitLine[2], splitLine[3]);
 					containers[splitLine[1]] = (Container*)locations[splitLine[1]]->GetComponent("container");
+					gameObjects[splitLine[1]] = (GameObject*)locations[splitLine[1]];
 				}
 			}
 			else if (splitLine[0] == "P")
@@ -188,8 +190,9 @@ World::World(std::string filename)
 						splitLine[2] = splitLine[3] + " to " + splitLine[5];
 					}
 
-					locations[splitLine[3]]->AddPath(splitLine[4], new Path(splitLine[1], splitLine[2], splitLine[5], splitLine[6]));
-					//locations[splitLine[3]]->AddPath(splitLine[4], new Path(locations[splitLine[3]], splitLine[5], splitLine[6]));
+					Path* path = new Path(splitLine[1], splitLine[2], splitLine[5], splitLine[6]);
+					locations[splitLine[3]]->AddPath(splitLine[4], path);
+					gameObjects[path->GetID()] = (GameObject*)path;
 				}
 			}
 			else if (splitLine[0] == "A")
@@ -279,6 +282,7 @@ World::World(std::string filename)
 				{	
 					Item* item = new Item(splitLine[2], splitLine[3], splitLine[4]);
 					containers[splitLine[1]]->AddItem(item);
+					gameObjects[item->GetID()] = (GameObject*)item;
 
 					if (splitLine[5] != "none")
 					{
@@ -309,8 +313,148 @@ World::World(std::string filename)
 			}
 			else if (splitLine[0] == "C")
 			{
-				//Handles components
-				//"C:component_id:game_object_id"
+				std::string generalFormat = "\tGeneral Format: \"C:component_type:game_object_id[:component specific parameters]\".\n\n";
+				
+				if (splitLine.size() < 3)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading components. Values required (including prefix \"C\"): 3 or more. Values given: " << splitLine.size() << ".\n";
+					std::cout << generalFormat;
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[1].length() == 0)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the type of component to be created.\n";
+					std::cout << generalFormat;
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[2].length() == 0)
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the game object the component will be assigned to.\n";
+					std::cout << generalFormat;
+					loadedSuccessfully = false;
+				}
+				else if (!gameObjects.count(splitLine[2]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The component's game_object_id must be the id of a game object that has already been created. Map \"gameObjects\" in World.World() does not include game object \"" + splitLine[2] + "\".\n";
+					std::cout << generalFormat;
+					loadedSuccessfully = false;
+				}
+				else if (splitLine[1] == "container")
+				{
+					std::string containerFormat = "\tContainer Format: \"C:container:game_object_id:is_open?:always_open?\".\n\n";
+
+					if (splitLine.size() != 5)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading container component. Values required (including prefix \"C\"): 5. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalFormat;
+						std::cout << containerFormat;
+						loadedSuccessfully = false;
+					}
+					else if (splitLine[3] != "Yes" && splitLine[3] != "No")
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": is_open? must be \"Yes\" or \"No\".\n";
+						std::cout << generalFormat;
+						std::cout << containerFormat;
+						loadedSuccessfully = false;
+					}
+					else if (splitLine[4] != "Yes" && splitLine[4] != "No")
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": always_open? must be \"Yes\" or \"No\".\n";
+						std::cout << generalFormat;
+						std::cout << containerFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Container(gameObjects[splitLine[2]], splitLine[3] == "Yes", splitLine[4] == "Yes"));
+					}					
+				}
+				else if (splitLine[1] == "description")
+				{
+					std::string descriptionFormat = "\tDescription Format: \"C:description:game_object_id:description of game object\".\n\n";
+
+					if (splitLine.size() != 4)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading container component. Values required (including prefix \"C\"): 5. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalFormat;
+						std::cout << descriptionFormat;
+						loadedSuccessfully = false;
+					}
+					else if (splitLine[3].length() == 0)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the description to be assigned to the description component.\n";
+						std::cout << generalFormat;
+						std::cout << descriptionFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Description(gameObjects[splitLine[2]], splitLine[3]));
+					}
+				}
+				else if (splitLine[1] == "lock")
+				{
+					std::string lockFormat = "\tLock Format: \"C:lock:game_object_id:is_locked?:unlockable_with_item_id_1,unlockable_with_item_id_2, . . .\". If not unlockable, specify \"none\".\n\n";
+
+					if (splitLine[3] != "Yes" && splitLine[3] != "No")
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": is_locked? must be \"Yes\" or \"No\".\n";
+						std::cout << generalFormat;
+						std::cout << lockFormat;
+						loadedSuccessfully = false;
+					}
+					else if (splitLine[4].size() == 0)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must list the items that the lock can be unlocked with, or \"none\" if not unlockable.\n";
+						std::cout << generalFormat;
+						std::cout << lockFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						std::vector<std::string> keys = StringManager::Instance()->StringToVector(splitLine[4], ',');
+						bool validLock = true;
+
+						for (std::string key : keys)
+						{
+							if (!gameObjects.count(key))
+							{
+								std::cout << "Error, \"" << filename << "\", line " << lineCount << ": No game object with ID \"" + key + "\" exists. You must create the item(s) that unlock a lock before creating said lock.\n";
+								std::cout << generalFormat;
+								std::cout << lockFormat;
+								loadedSuccessfully = false;
+								validLock = false;
+							}
+						}
+
+						if (validLock)
+						{
+							gameObjects[splitLine[2]]->AddComponent((Component*) new Lock(gameObjects[splitLine[2]], splitLine[3] == "Yes", keys));
+						}
+					}
+				}
+				else if (splitLine[1] == "movable")
+				{
+					std::string movableFormat = "\tMovable Format: \"C:movable:game_object_id\".\n\n";
+
+					if (splitLine.size() != 3)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading movable component. Values required (including prefix \"C\"): 3. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalFormat;
+						std::cout << movableFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Movable(gameObjects[splitLine[2]]));
+					}					
+				}
+				else
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Invalid component type \"" + splitLine[1] + "\". No component exists of that type.\n";
+					std::cout << generalFormat;
+					loadedSuccessfully = false;
+				}				
 			}
 			else
 			{

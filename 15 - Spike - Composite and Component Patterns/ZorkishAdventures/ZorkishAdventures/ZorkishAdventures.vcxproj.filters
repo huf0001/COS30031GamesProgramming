@@ -126,6 +126,9 @@
     <ClCompile Include="ComponentFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandOpen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h">
@@ -234,6 +237,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ComponentFactory.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandOpen.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
