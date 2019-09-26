@@ -24,7 +24,7 @@
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Item::Item(std::string id, std::string name, std::string description) : GameObject(id, name)
+Item::Item(std::string id, std::string name, std::string description) : GameObject(id, name, "item")
 {
 	/*this->id = id;
 	this->name = name;*/

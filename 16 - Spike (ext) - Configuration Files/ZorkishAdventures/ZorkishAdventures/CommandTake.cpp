@@ -54,17 +54,26 @@ std::vector<std::string> CommandTake::StandardiseInput(std::vector<std::string> 
 std::string CommandTake::TakeFromContainer(std::vector<std::string> itemName, GameObject* containerFrom, Player* player)
 {
 	Item* item = ((Container*)containerFrom->GetComponent("container"))->GetItem(itemName);
+	std::string result = "";
 
 	if (!item->HasComponent("movable"))
 	{
-		return "You cannot move " + item->GetName() + ".";
+		result += "You cannot move " + item->GetName() + ".";
 	}
 	else
 	{
 		((Container*)containerFrom->GetComponent("container"))->RemoveItem(itemName);
 		((Container*)player->GetComponent("container"))->AddItem(item);
-		return "You added " + item->GetName() + " to your inventory.";
+		result += "You added " + item->GetName() + " to your inventory.";
+
+		if (item->HasComponent("unlock_commands"))
+		{
+			result += CommandManager::Instance()->UnlockCommands(((UnlockCommands*)item->GetComponent("unlock_commands"))->GetCommands());
+			item->RemoveComponent("unlock_commands");
+		}
 	}
+
+	return result;
 }
 
 std::string CommandTake::Process(std::vector<std::string> input, World* world, Player* player)

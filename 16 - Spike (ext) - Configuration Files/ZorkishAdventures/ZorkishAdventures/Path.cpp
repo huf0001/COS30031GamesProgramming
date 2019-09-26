@@ -9,7 +9,7 @@ std::string Path::GetDestination()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Path::Path(std::string id, std::string name, std::string destination, std::string description) : GameObject(id, name)
+Path::Path(std::string id, std::string name, std::string destination, std::string description) : GameObject(id, name, "path")
 {
 	this->destination = destination;
 	AddComponent((Component*) new Description((GameObject*)this, description));

@@ -11,7 +11,7 @@
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Player::Player(std::string id, std::string name) : GameObject(id, name)
+Player::Player(std::string id, std::string name) : GameObject(id, name, "player")
 {
 	/*this->name = name;*/
 	AddComponent((Component*) new Container((GameObject*)this, true, true));

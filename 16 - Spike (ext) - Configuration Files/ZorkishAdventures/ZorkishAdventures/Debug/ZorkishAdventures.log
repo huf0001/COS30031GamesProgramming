@@ -1,43 +1,46 @@
-﻿  CommandAlias.cpp
+﻿  Command.cpp
+  CommandAlias.cpp
   CommandDebug.cpp
   CommandDrop.cpp
   CommandHelp.cpp
   CommandHiScore.cpp
   CommandLook.cpp
+  CommandManager.cpp
+  CommandMove.cpp
   CommandOpen.cpp
   CommandPut.cpp
   CommandQuit.cpp
   CommandTake.cpp
   Component.cpp
   ComponentFactory.cpp
-  Description.cpp
-  GameObject.cpp
-  Lock.cpp
-  Movable.cpp
-  StageAbout.cpp
-  Command.cpp
-  CommandManager.cpp
   Container.cpp
+  Description.cpp
+  Game.cpp
+  GameObject.cpp
+  Item.cpp
   Generating Code...
   Compiling...
-  Game.cpp
+  Location.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\16 - Spike (ext) - Configuration Files\ZorkishAdventures\ZorkishAdventures\Item.cpp(27,83): error C2661:  'GameObject::GameObject': no overloaded function takes 2 arguments
+  Lock.cpp
+  Movable.cpp
+  Path.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\16 - Spike (ext) - Configuration Files\ZorkishAdventures\ZorkishAdventures\Location.cpp(25,91): error C2661:  'GameObject::GameObject': no overloaded function takes 2 arguments
+  Player.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\16 - Spike (ext) - Configuration Files\ZorkishAdventures\ZorkishAdventures\Path.cpp(12,108): error C2661:  'GameObject::GameObject': no overloaded function takes 2 arguments
+  Stage.cpp
+  StageAbout.cpp
   StageGameplay.cpp
   StageHallOfFame.cpp
   StageHelp.cpp
-  Item.cpp
-  Location.cpp
   StageMainMenu.cpp
-  CommandMove.cpp
-  StageNewHighScore.cpp
-  Path.cpp
-  pch.cpp
-  Player.cpp
-  StageSelectAdventure.cpp
-  Stage.cpp
   StageManager.cpp
+  StageNewHighScore.cpp
+  StageSelectAdventure.cpp
   StringManager.cpp
   UnlockCommands.cpp
   World.cpp
   ZorkishAdventures.cpp
+  pch.cpp
   Generating Code...
-  ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\16 - Spike (ext) - Configuration Files\ZorkishAdventures\Debug\ZorkishAdventures.exe
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\16 - Spike (ext) - Configuration Files\ZorkishAdventures\ZorkishAdventures\Player.cpp(14,62): error C2661:  'GameObject::GameObject': no overloaded function takes 2 arguments

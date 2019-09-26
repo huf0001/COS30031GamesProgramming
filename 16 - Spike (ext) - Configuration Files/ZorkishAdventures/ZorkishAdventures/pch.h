@@ -50,14 +50,14 @@
 
 //Commands
 #include "Command.h"
-#include "CommandManager.h"		//Update
+#include "CommandManager.h"					//Updated
 #include "CommandAlias.h"		
 #include "CommandDebug.h"		
 #include "CommandLook.h"				
 #include "CommandOpen.h"				
-#include "CommandMove.h"		//Update		
-#include "CommandTake.h"		//Update		
-#include "CommandPut.h"			//Update		
+#include "CommandMove.h"					//Updated		
+#include "CommandTake.h"					//Updated		
+#include "CommandPut.h"						//Updated	
 #include "CommandDrop.h"				
 #include "CommandHelp.h"			
 #include "CommandHiScore.h"

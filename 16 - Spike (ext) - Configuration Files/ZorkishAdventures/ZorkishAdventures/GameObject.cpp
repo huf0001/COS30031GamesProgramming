@@ -12,12 +12,18 @@ std::string GameObject::GetName()
 	return name;
 }
 
+std::string GameObject::GetType()
+{
+	return type;
+}
+
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-GameObject::GameObject(std::string id, std::string name)
+GameObject::GameObject(std::string id, std::string name, std::string type)
 {
 	this->id = id;
 	this->name = name;
+	this->type = type;
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

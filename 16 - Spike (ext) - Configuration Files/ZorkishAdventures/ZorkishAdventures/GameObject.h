@@ -14,6 +14,7 @@ protected:
 	//Protected Fields
 	std::string id;
 	std::string name;
+	std::string type;
 	std::map<std::string, Component*> components;
 
 	//Protected Methods
@@ -22,9 +23,10 @@ public:
 	//Public Properties
 	std::string GetID();
 	std::string GetName();
+	std::string GetType();
 
 	//Constructor
-	GameObject(std::string id, std::string name);
+	GameObject(std::string id, std::string name, std::string type);
 
 	//Public Methods
 	bool HasComponent(std::string component);

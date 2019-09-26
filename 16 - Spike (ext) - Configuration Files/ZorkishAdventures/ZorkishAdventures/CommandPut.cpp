@@ -36,14 +36,14 @@ CommandPut::CommandPut()
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
 
-//TODO: add check for UnlockCommands component when adding to inventory
 std::string CommandPut::PutInContainer(std::vector<std::string> itemName, GameObject* containerFrom, GameObject* containerTo, std::vector<std::string> successMessage)
 {
 	Item* item = ((Container*)containerFrom->GetComponent("container"))->GetItem(itemName);
+	std::string result = "";
 
 	if (!item->HasComponent("movable"))
 	{
-		return "You cannot move " + item->GetName() + ".";
+		result += "You cannot move " + item->GetName() + ".";
 	}
 	else
 	{
@@ -66,8 +66,16 @@ std::string CommandPut::PutInContainer(std::vector<std::string> itemName, GameOb
 			}
 		}
 
-		return StringManager::Instance()->VectorToString(successMessage, ' ');
+		result += StringManager::Instance()->VectorToString(successMessage, ' ');
+
+		if (containerTo->GetType() == "player" && item->HasComponent("unlock_commands"))
+		{
+			result += CommandManager::Instance()->UnlockCommands(((UnlockCommands*)item->GetComponent("unlock_commands"))->GetCommands());
+			item->RemoveComponent("unlock_commands");
+		}
 	}
+
+	return result;
 }
 
 std::string CommandPut::Process(std::vector<std::string> input, World* world, Player* player)
