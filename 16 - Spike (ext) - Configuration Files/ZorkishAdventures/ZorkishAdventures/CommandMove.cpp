@@ -46,9 +46,8 @@ std::string CommandMove::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandMove::CommandMove()
+CommandMove::CommandMove() : Command("MOVE")
 {
-	name = "move";
 	AddKeyword("move");
 	AddAlias("go");
 	directionAliases = std::map<std::string, std::string>();
@@ -135,7 +134,7 @@ std::string CommandMove::Process(std::vector<std::string> input, World* world, P
 						
 					if (location->HasComponent("unlock_commands"))
 					{
-						result += CommandManager::Instance()->UnlockCommands(((UnlockCommands*)location->GetComponent("unlock_commands"))->GetCommands());
+						result += CommandManager::Instance()->UnlockCommands(((UnlockCommands*)location->GetComponent("unlock_commands"))->GetCommands()) + "\n\n";
 						location->RemoveComponent("unlock_commands");
 					}
 

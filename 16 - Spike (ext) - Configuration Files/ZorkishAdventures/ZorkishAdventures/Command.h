@@ -24,7 +24,7 @@ public:
 	virtual std::string GetSyntax() = 0;
 
 	//Constructor
-	Command();
+	Command(std::string name);
 
 	//Public Methods
 	void AddKeyword(std::string keyword);

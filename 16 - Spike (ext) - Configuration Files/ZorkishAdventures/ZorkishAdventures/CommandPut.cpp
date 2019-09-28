@@ -29,7 +29,7 @@ std::string CommandPut::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandPut::CommandPut()
+CommandPut::CommandPut() : Command("PUT")
 {
 	AddKeyword("put");
 }

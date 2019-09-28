@@ -31,7 +31,7 @@ std::string CommandTake::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandTake::CommandTake()
+CommandTake::CommandTake() : Command("TAKE")
 {
 	AddKeyword("take");
 	AddKeyword("pick");
@@ -68,7 +68,7 @@ std::string CommandTake::TakeFromContainer(std::vector<std::string> itemName, Ga
 
 		if (item->HasComponent("unlock_commands"))
 		{
-			result += CommandManager::Instance()->UnlockCommands(((UnlockCommands*)item->GetComponent("unlock_commands"))->GetCommands());
+			result += "\n" + CommandManager::Instance()->UnlockCommands(((UnlockCommands*)item->GetComponent("unlock_commands"))->GetCommands());
 			item->RemoveComponent("unlock_commands");
 		}
 	}

@@ -28,7 +28,7 @@ std::string CommandHelp::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandHelp::CommandHelp()
+CommandHelp::CommandHelp() : Command("HELP")
 {
 	AddKeyword("help");
 }
@@ -40,7 +40,7 @@ std::string CommandHelp::Process(std::vector<std::string> input, World* world, P
 	std::string result;
 
 	result += "Available Commands:\n";
-	result += CommandManager::Instance()->GetCommandSyntaxes();
+	result += CommandManager::Instance()->GetCommandSyntaxes(false);
 
 	return result;
 }

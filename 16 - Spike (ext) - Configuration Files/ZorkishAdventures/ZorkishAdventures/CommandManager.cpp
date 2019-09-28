@@ -20,20 +20,33 @@ CommandManager* CommandManager::Instance()
 
 CommandManager::CommandManager()
 {
+	allCommands = std::map<std::string, Command*>();
+	allCommands["look"] = (Command*) new CommandLook();
+	allCommands["move"] = (Command*) new CommandMove();
+	allCommands["open"] = (Command*) new CommandOpen();
+	allCommands["take"] = (Command*) new CommandTake();
+	allCommands["put"] = (Command*) new CommandPut();
+	allCommands["drop"] = (Command*) new CommandDrop();
+	allCommands["help"] = (Command*) new CommandHelp();
+	allCommands["quit"] = (Command*) new CommandQuit();
+	allCommands["alias"] = (Command*) new CommandAlias();
+	allCommands["debug"] = (Command*) new CommandDebug();
+	allCommands["hiscore"] = (Command*) new CommandHiScore();
+
 	availableCommands = std::map<std::string, Command*>();
-	availableCommands["look"] = (Command*) new CommandLook();
-	availableCommands["help"] = (Command*) new CommandHelp();
-	availableCommands["quit"] = (Command*) new CommandQuit();
+	availableCommands["look"] = allCommands["look"];
+	availableCommands["help"] = allCommands["help"];
+	availableCommands["quit"] = allCommands["quit"];
 
 	unavailableCommands = std::map<std::string, Command*>();
-	unavailableCommands["move"] = (Command*) new CommandMove();
-	unavailableCommands["open"] = (Command*) new CommandOpen();
-	unavailableCommands["take"] = (Command*) new CommandTake();
-	unavailableCommands["put"] = (Command*) new CommandPut();
-	unavailableCommands["drop"] = (Command*) new CommandDrop();
-	unavailableCommands["alias"] = (Command*) new CommandAlias();
-	unavailableCommands["debug"] = (Command*) new CommandDebug();
-	unavailableCommands["hiscore"] = (Command*) new CommandHiScore();
+	unavailableCommands["move"] = allCommands["move"];
+	unavailableCommands["open"] = allCommands["open"];
+	unavailableCommands["take"] = allCommands["take"];
+	unavailableCommands["put"] = allCommands["put"];
+	unavailableCommands["drop"] = allCommands["drop"];
+	unavailableCommands["alias"] = allCommands["alias"];
+	unavailableCommands["debug"] = allCommands["debug"];
+	unavailableCommands["hiscore"] = allCommands["hiscore"];
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,17 +77,17 @@ std::string CommandManager::UnlockCommands(std::vector<std::string> commands)
 			{
 				if (HasCommand(pair.first))
 				{
-					result += "Error: Command " + pair.second->GetName() + " is already unlocked.\n";
+					result += "\nError: Command " + pair.second->GetName() + " is already unlocked.";
 				}
 				else if (!unavailableCommands.count(pair.first))
 				{
-					result += "Error: Command " + pair.second->GetName() + " is not available to be unlocked.\n";
+					result += "\nError: Command " + pair.second->GetName() + " is not available to be unlocked.";
 				}
 				else
 				{
 					unlockedCommands.push_back(pair.first);
 					availableCommands[pair.first] = pair.second;
-					result += "New command unlocked: command " + pair.second->GetName() + ".\n";
+					result += "\nNew command unlocked: Command " + pair.second->GetName() + ".";
 				}
 			}
 		}
@@ -102,11 +115,21 @@ Command* CommandManager::GetCommand(std::string command)
 	return nullptr;
 }
 
-std::string CommandManager::GetCommandSyntaxes()
+std::string CommandManager::GetCommandSyntaxes(bool getAllCommands)
 {
 	std::string result;
+	std::map<std::string, Command*> commands;
 
-	for (std::pair<std::string, Command*> pair : availableCommands)
+	if (getAllCommands)
+	{
+		commands = allCommands;
+	}
+	else
+	{
+		commands = availableCommands;
+	}
+
+	for (std::pair<std::string, Command*> pair : commands)
 	{
 		result += "\n" + pair.second->GetSyntax();
 	}

@@ -42,7 +42,7 @@ std::string CommandLook::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandLook::CommandLook()
+CommandLook::CommandLook() : Command("LOOK")
 {
 	AddKeyword("look");
 	AddKeyword("inventory");

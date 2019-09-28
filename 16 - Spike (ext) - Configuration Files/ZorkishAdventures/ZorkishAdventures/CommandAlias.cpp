@@ -28,9 +28,8 @@ std::string CommandAlias::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandAlias::CommandAlias()
+CommandAlias::CommandAlias() : Command("ALIAS")
 {
-	name = "alias";
 	AddKeyword("alias");
 }
 

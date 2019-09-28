@@ -29,9 +29,8 @@ std::string CommandOpen::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandOpen::CommandOpen()
+CommandOpen::CommandOpen() : Command("OPEN")
 {
-	name = "open";
 	AddKeyword("open");
 }
 

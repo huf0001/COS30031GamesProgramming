@@ -28,7 +28,7 @@ std::string CommandDrop::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandDrop::CommandDrop()
+CommandDrop::CommandDrop() : Command("DROP")
 {
 	AddKeyword("drop");
 }

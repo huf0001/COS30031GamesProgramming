@@ -28,7 +28,7 @@ std::string CommandHiScore::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandHiScore::CommandHiScore()
+CommandHiScore::CommandHiScore() : Command("HISCORE")
 {
 	AddKeyword("hiscore");
 }

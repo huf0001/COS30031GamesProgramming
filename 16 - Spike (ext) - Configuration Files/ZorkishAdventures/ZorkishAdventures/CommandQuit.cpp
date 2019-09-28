@@ -28,7 +28,7 @@ std::string CommandQuit::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandQuit::CommandQuit()
+CommandQuit::CommandQuit() : Command("QUIT")
 {
 	AddKeyword("quit");
 	AddAlias("q");

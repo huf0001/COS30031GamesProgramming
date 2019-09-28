@@ -28,7 +28,7 @@ std::string CommandDebug::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandDebug::CommandDebug()
+CommandDebug::CommandDebug() : Command("DEBUG")
 {
 	AddKeyword("debug");
 }

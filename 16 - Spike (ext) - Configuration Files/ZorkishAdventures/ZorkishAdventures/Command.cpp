@@ -11,8 +11,9 @@ std::string Command::GetName()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Command::Command()
+Command::Command(std::string name)
 {
+	this->name = name;
 	keywords = std::vector<std::string>();
 	aliases = std::vector<std::string>();
 }

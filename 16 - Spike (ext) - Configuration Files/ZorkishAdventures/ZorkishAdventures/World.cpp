@@ -111,6 +111,12 @@ World::World(std::string filename)
 					std::cout << startConfigurationFormat;
 					loadedSuccessfully = false;
 				}
+				else if (!locations.count(splitLine[1]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The starting_location_id must be the id of a location that has already been created. World.locations doesn't contain a location with id \"" + splitLine[1] + "\".\n";
+					std::cout << startConfigurationFormat;
+					loadedSuccessfully = false;
+				}
 				else
 				{
 					currentLocation = locations[splitLine[1]];
@@ -303,7 +309,7 @@ World::World(std::string filename)
 				//Check the item's container exists
 				else if (!containers.count(splitLine[1]))
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The item's container_id must be the id of a container (i.e. location or container item) that has already been created. Map \"containers\" in World.World() does not include container \"" + splitLine[4] + "\".\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The item's container_id must be the id of a container (i.e. location or container item) that has already been created. Map \"containers\" in World.World() does not include container \"" + splitLine[1] + "\".\n";
 					std::cout << itemFormat;
 					loadedSuccessfully = false;
 				}
@@ -393,6 +399,7 @@ World::World(std::string filename)
 					else
 					{
 						gameObjects[splitLine[2]]->AddComponent((Component*) new Container(gameObjects[splitLine[2]], splitLine[3] == "Yes", splitLine[4] == "Yes"));
+						containers[splitLine[2]] = (Container*)gameObjects[splitLine[2]]->GetComponent("container");
 					}					
 				}
 				else if (splitLine[1] == "description")

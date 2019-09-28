@@ -20,7 +20,7 @@ std::string StageHelp::Setup()
 	result += "Zorkish :: Help\n";
 	result += "--------------------------------------------------------\n";
 	result += "Available Commands:\n";
-	result += CommandManager::Instance()->GetCommandSyntaxes();
+	result += CommandManager::Instance()->GetCommandSyntaxes(true);
 	result += "\n";
 	result += "Press Enter to return to the Main Menu\n";
 	result += ":> ";
