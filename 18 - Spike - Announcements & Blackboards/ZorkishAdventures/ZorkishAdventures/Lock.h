@@ -27,6 +27,7 @@ public:
 	//Public Methods
 	bool UnlockableWith(std::string unlockWith);
 	void Unlock(std::string unlockWith);
+	virtual Message* Notify(Message* message);
 };
 
 #endif

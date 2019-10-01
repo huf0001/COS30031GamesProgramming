@@ -29,6 +29,7 @@ public:
 	//Public Methods
 	void Subscribe(GameObject* subscriber);
 	void Unsubscribe(std::string subscriberId);
+	void UnsubscribeAll();
 	Message* SendMessage(Message* message);
 };
 

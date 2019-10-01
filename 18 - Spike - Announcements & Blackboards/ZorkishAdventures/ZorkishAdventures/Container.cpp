@@ -169,33 +169,44 @@ Message* Container::Notify(Message* message)
 {
 	if (message->GetSenderID() == "OPEN")
 	{
-		std::any* content = message->GetContent();
-		std::string messageContent = std::any_cast<std::string>(*content);
+		std::vector<std::string> messageContent = *(std::vector<std::string>*)message->GetContent();
 
-		if (messageContent == "open")
+		if (messageContent[0] == "open")
 		{
 			if (gameObject->HasComponent("lock"))
 			{
 				if (!((Lock*)gameObject->GetComponent("lock"))->GetIsLocked())
 				{
 					isOpen = true;
-					//std::any content = 
-					return new Message(gameObject->GetID(), "OPEN", "none", (std::any*)&"opened");
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("already unlocked"));
+				}
+				else if (messageContent.size() == 1)
+				{
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("locked"));
 				}
 				else
 				{
-					return new Message(gameObject->GetID(), "OPEN", "none", (std::any*) &"locked");
-				}
+					Message* msg = new Message(gameObject->GetID(), "container", gameObject->GetID(), "lock", (void*) new std::vector<std::string>({ "unlock", messageContent[1] } ));
+					Message* result = MessageManager::Instance()->SendMessage(msg);
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), result->GetContent());
+				}				
 			}
-			else if (isOpen)
-			{				
-				return new Message(gameObject->GetID(), "OPEN", "none", (std::any*) &"already open");
-			}
-			else 
+			else
 			{
-				isOpen = true;
-				return new Message(gameObject->GetID(), "OPEN", "none", (std::any*) &"opened");
-			}
+				if (messageContent.size() > 1)
+				{
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("no lock"));
+				}
+				else if (isOpen)
+				{
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("already open"));
+				}
+				else
+				{
+					isOpen = true;
+					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("opened"));
+				}
+			}			
 		}
 	}
 

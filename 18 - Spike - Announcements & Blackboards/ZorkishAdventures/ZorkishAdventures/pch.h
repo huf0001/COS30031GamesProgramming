@@ -17,7 +17,6 @@
 #include <sstream>
 
 //Basic data types
-#include <any>
 #include <string>
 
 //Data structures

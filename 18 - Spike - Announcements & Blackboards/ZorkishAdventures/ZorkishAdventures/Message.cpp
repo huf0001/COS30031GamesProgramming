@@ -12,17 +12,22 @@ std::string Message::GetSenderID()
 	return senderId;
 }
 
+std::string Message::GetSenderType()
+{
+	return senderType;
+}
+
 std::string Message::GetReceiverID()
 {
 	return receiverId;
 }
 
-std::string Message::GetForComponent()
+std::string Message::GetReceiverType()
 {
-	return forComponent;
+	return receiverType;
 }
 
-std::any* Message::GetContent()
+void* Message::GetContent()
 {
 	return content;
 }
@@ -34,12 +39,13 @@ std::any* Message::GetContent()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-Message::Message(std::string senderId, std::string receiverId, std::string forComponent, std::any* content)
+Message::Message(std::string senderId, std::string senderType, std::string receiverId, std::string receiverType, void* content)
 {
 	this->id = std::to_string(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 	this->senderId = senderId;
+	this->senderType = senderType;
 	this->receiverId = receiverId;
-	this->forComponent = forComponent;
+	this->receiverType = receiverType;
 	this->content = content;
 }
 

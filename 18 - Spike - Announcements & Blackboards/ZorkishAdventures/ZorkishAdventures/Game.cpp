@@ -58,6 +58,8 @@ void Game::SetNextStage(std::string stage)
 	if (currentStage->GetName() == "Gameplay")
 	{
 		CommandManager::Instance()->ResetAliases();
+		CommandManager::Instance()->LockCommands();
+		MessageManager::Instance()->UnsubscribeAll();
 	}
 
 	nextStage = StageManager::Instance()->GetStage(stage);

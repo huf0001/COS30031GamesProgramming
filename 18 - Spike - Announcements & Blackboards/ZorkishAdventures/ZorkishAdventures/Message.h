@@ -11,9 +11,10 @@ private:
 	//Private Fields
 	std::string id;
 	std::string senderId;
+	std::string senderType;
 	std::string receiverId;
-	std::string forComponent;
-	std::any* content;
+	std::string receiverType;
+	void* content;
 
 	//Private Methods
 
@@ -26,16 +27,13 @@ public:
 	//Public Properties
 	std::string GetID();
 	std::string GetSenderID();
+	std::string GetSenderType();
 	std::string GetReceiverID();
-	std::string GetForComponent();
-	std::any* GetContent();
-
-	/*template <typename T>
-	void SetContent(const std::vector<T>& content);*/
-	//void SetContent(std::any content);
+	std::string GetReceiverType();
+	void* GetContent();
 
 	//Constructor
-	Message(std::string senderId, std::string receiverId, std::string forComponent, std::any* content);
+	Message(std::string senderId, std::string senderType, std::string receiverId, std::string receiverType, void* content);
 
 	//Public Methods
 

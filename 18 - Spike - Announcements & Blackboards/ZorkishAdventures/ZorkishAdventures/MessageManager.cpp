@@ -43,6 +43,11 @@ void MessageManager::Unsubscribe(std::string subscriberId)
 	}
 }
 
+void MessageManager::UnsubscribeAll()
+{
+	subscribers.clear();
+}
+
 Message* MessageManager::SendMessage(Message* message)
 {
 	return !subscribers.count(message->GetReceiverID()) ? nullptr : subscribers[message->GetReceiverID()]->Notify(message);
@@ -56,3 +61,4 @@ Message* MessageManager::SendMessage(Message* message)
 		return subscribers[message->GetReceiverID()]->Notify(message);
 	}*/
 }
+

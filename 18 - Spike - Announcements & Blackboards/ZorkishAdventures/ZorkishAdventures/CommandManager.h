@@ -24,6 +24,7 @@ public:
 	std::string GetCommandSyntaxes(bool getAllCommands);
 	bool CanProcess(std::vector<std::string> input, World* world, Player* player);
 	std::string Process(std::vector<std::string> input, World* world, Player* player);
+	void LockCommands();
 	void ResetAliases();
 };
 

@@ -73,13 +73,13 @@ void GameObject::RemoveComponent(std::string component)
 
 Message* GameObject::Notify(Message* message)
 {
-	std::string forComponent = message->GetForComponent();
+	std::string receiverType = message->GetReceiverType();
 
-	if (forComponent != "none")
+	if (receiverType != "none")
 	{
-		if (HasComponent(forComponent))
+		if (HasComponent(receiverType))
 		{
-			return GetComponent(forComponent)->Notify(message);
+			return GetComponent(receiverType)->Notify(message);
 		}
 	}
 

@@ -1,8 +1,5 @@
-﻿  CommandOpen.cpp
-  CommandPut.cpp
-  Command.cpp
-  Item.cpp
-  Location.cpp
+﻿  GameObject.cpp
+  Lock.cpp
   ZorkishAdventures.cpp
   Generating Code...
   ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\18 - Spike - Announcements & Blackboards\ZorkishAdventures\Debug\ZorkishAdventures.exe

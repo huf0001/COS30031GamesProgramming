@@ -37,3 +37,26 @@ void Lock::Unlock(std::string unlockWith)
 		isLocked = false;
 	}
 }
+
+Message* Lock::Notify(Message* message)
+{
+	if (message->GetSenderID() == gameObject->GetID())
+	{
+		std::vector<std::string> messageContent = *(std::vector<std::string>*)message->GetContent();
+
+		if (messageContent.size() == 2 && messageContent[0] == "unlock")
+		{
+			if (UnlockableWith(messageContent[1]))
+			{
+				Unlock(messageContent[1]);
+				return new Message(gameObject->GetID(), "lock", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("unlocked"));
+			}
+			else
+			{
+				return new Message(gameObject->GetID(), "lock", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("can't unlock"));
+			}
+		}
+	}
+
+	return nullptr;
+}

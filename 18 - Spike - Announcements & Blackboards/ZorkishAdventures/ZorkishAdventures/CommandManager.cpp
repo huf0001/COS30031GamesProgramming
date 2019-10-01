@@ -163,6 +163,25 @@ std::string CommandManager::Process(std::vector<std::string> input, World* world
 	return "Error";
 }
 
+void CommandManager::LockCommands()
+{
+	for (std::pair<std::string, Command*> pair : availableCommands)
+	{
+		if (pair.first != "look" && pair.first != "help" && pair.first != "quit")
+		{
+			unavailableCommands[pair.first] = pair.second;
+		}
+	}
+
+	for (std::pair<std::string, Command*> pair : unavailableCommands)
+	{
+		if (availableCommands.count(pair.first))
+		{
+			availableCommands.erase(pair.first);
+		}
+	}
+}
+
 void CommandManager::ResetAliases()
 {
 	for (std::pair<std::string, Command*> pair : availableCommands)
