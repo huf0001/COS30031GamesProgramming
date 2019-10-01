@@ -34,23 +34,23 @@
 #include "StringManager.h"
 
 //Messaging System
-#include "Message.h"							//Implemented
-#include "MessageManager.h"						//Implemented
+#include "Message.h"							
+#include "MessageManager.h"						
 
 //Components
-#include "Component.h"							//Update
-#include "Container.h"				//Update
+#include "Component.h"							
+#include "Container.h"				
 #include "Description.h"			
-#include "Lock.h"					//Update
+#include "Lock.h"					
 #include "Movable.h"	
-#include "UnlockCommands.h"			//Update
+#include "UnlockCommands.h"			
 
 //GameObjects
-#include "GameObject.h"							//Update
-#include "Item.h"					//Update	
-#include "Player.h"					//Update
-#include "Path.h"					//Update
-#include "Location.h"				//Update
+#include "GameObject.h"							
+#include "Item.h"						
+#include "Player.h"					
+#include "Path.h"					
+#include "Location.h"				
 
 //World
 #include "ComponentFactory.h"
