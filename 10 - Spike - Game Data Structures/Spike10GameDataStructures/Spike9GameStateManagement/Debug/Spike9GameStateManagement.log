@@ -1,3 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Spike9GameStateManagement.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Help.cpp
-  Spike9GameStateManagement.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\10 - Spike - Game Data Structures\Spike10GameDataStructures\Debug\Spike10GameDataStructures.exe

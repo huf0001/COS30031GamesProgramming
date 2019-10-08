@@ -1,5 +1,0 @@
-﻿  Task 2 Demo.cpp
-c:\users\sam huffer\coding\cos30031 - 101633177\02 - lab - c++ for programmers\task 2 demo\task 2 demo\task 2 demo.cpp(119): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\sam huffer\coding\cos30031 - 101633177\02 - lab - c++ for programmers\task 2 demo\task 2 demo\task 2 demo.cpp(124): warning C4018: '<': signed/unsigned mismatch
-c:\users\sam huffer\coding\cos30031 - 101633177\02 - lab - c++ for programmers\task 2 demo\task 2 demo\task 2 demo.cpp(182): warning C4018: '<': signed/unsigned mismatch
-  Task 2 Demo.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\02 - Lab - C++ for Programmers\Task 2 Demo\Debug\Task 2 Demo.exe

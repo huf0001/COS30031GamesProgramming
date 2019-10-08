@@ -1,2 +1,0 @@
-Void World:Void World.txt
-Dungeon World:Dungeon World.txt
