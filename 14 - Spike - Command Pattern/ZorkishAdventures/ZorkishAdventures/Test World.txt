@@ -1,0 +1,94 @@
+#Test specification for Zorkish Adventures
+
+#World Name----------------------------------------------------------------------------------------
+
+W:Test World
+
+#Locations-----------------------------------------------------------------------------------------
+
+#Starting location: the void
+L:void:The Void:an empty, formless void.
+S:void
+
+#Where the player moves to next: the south room
+L:south_room:The South Room:an empty room.
+
+#The west room, which leads back outside into the void
+L:west_room:The West Room:an empty room.
+
+#The middle room, from which the player can go N/S/E/W
+L:middle_room:The Middle Room: an empty room.
+
+#The east room, which leads up to the attic
+L:east_room:The East Room:an empty room.
+
+#The attic full of items
+L:east_attic:The Attic:a dim attic.
+I:east_attic:book:Book:A dusty old book.
+I:east_attic:pencil:Pencil:A short, used pencil.
+I:east_attic:glasses:Glasses:A pair of glasses.
+I:east_attic:quill:Quill:A black and grey quill.
+C:east_attic:red_bag:Bag:A red bag.
+I:red_bag:gold_coin:Gold Coin:A gold coin. This is valuable.
+I:red_bag:silver_coin:Silver Coin:A silver coin. This is worth a bit.
+I:red_bag:copper_coin:Copper Coin:A copper coin. This isn't worth much.
+C:red_bag:small_box:Box:A small wooden box.
+
+#The north room, which leads to the cellar
+L:north_room:The North Room:an empty room.
+
+#The dark cellar
+L:north_cellar:The Cellar:a dark cellar.
+
+##Paths--------------------------------------------------------------------------------------------
+
+#Paths from void
+P:void:forward:south_room:A glowing white . . . something . . . in front of you . . . slowly moving FORWARD.
+
+#Paths from south_room
+P:south_room:north west:west_room:A door to the NORTH WEST.
+P:south_room:north:middle_room:A door to the NORTH.
+P:south_room:north east:east_room:A door to the NORTH EAST.
+
+#Paths from west_room
+P:west_room:north east:north_room:A door to the NORTH EAST.
+P:west_room:east:middle_room:A door to the EAST.
+P:west_room:south east:south_room:A door to the SOUTH EAST.
+P:west_room:outside:void:A door OUTSIDE.
+
+#Paths from middle_room
+P:middle_room:north:north_room:A door to the NORTH.
+P:middle_room:east:east_room:A door to the EAST.
+P:middle_room:south:south_room:A door to the SOUTH.
+P:middle_room:west:west_room:A door to the WEST.
+
+#Paths from east_room
+P:east_room:north west:north_room:A door to the NORTH WEST.
+P:east_room:west:west_room:A door to the WEST.
+P:east_room:south west:south_room:A door to the SOUTH WEST.
+P:east_room:up:east_attic:A ladder UP.
+
+#Paths from east_attic
+P:east_attic:down:east_room:A ladder back DOWN.
+
+#Paths from north_room
+P:north_room:south_west:west_room:A door to the SOUTH WEST.
+P:north_room:south:middle_room:A door to the SOUTH.
+P:north_room:south_east:east_room:A door to the SOUTH EAST.
+P:north_room:down:north_cellar:A trapdoor DOWN.
+
+#Paths from north_cellar
+P:north_cellar:up:north_room:A ladder back UP.
+
+#Direction Aliases---------------------------------------------------------------------------------
+
+A:north:n
+A:south:s
+A:east:e
+A:west:w
+A:north east:ne
+A:north west:nw
+A:south east:se
+A:south west:sw
+A:up:u
+A:down:d

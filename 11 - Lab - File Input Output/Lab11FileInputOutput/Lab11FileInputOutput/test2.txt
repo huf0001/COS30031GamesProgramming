@@ -1,0 +1,3 @@
+# This is a comment line. The next line is deliberately blank.
+
+12:string value:13.57

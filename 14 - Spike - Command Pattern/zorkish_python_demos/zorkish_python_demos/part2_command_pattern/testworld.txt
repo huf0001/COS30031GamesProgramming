@@ -1,0 +1,19 @@
+# [1] = start location id.
+# [2] = Adventure description...
+S:0:Test world one. Rock, trees, a nest and eggs...
+
+# [2]=name eg. "You have moved ... to [2]"
+# [3]=desc eg. "You are [3]"
+L:0: a field : standing at home sweet home. :u=1,s=3:1
+L:1: a tree : up a tree for a nice view. Quite a nice view really. :d=0:2
+L:3: a ponds edge : next to a medium sized pond. :n=0:4
+
+# [2]=name (no spaces) eg "You can see a [2]"
+# [3]=desc eg "You can see [3]"
+# [4]=flags (takeable, container, closed, locked, opaque)
+# [5]=contains (item id's)
+I:1: rock : a small plain rock plus added dust.::
+I:2: nest : a small birds nest made of twigs and mud.::3
+I:3: eggs : three small yellow eggs with brown dots.::
+I:4: pond : a medium sized pond.::5 
+I:5: water : pond water that is slightly green in colour.::
