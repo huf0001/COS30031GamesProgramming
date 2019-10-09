@@ -1,2 +1,51 @@
-﻿  CommandOpen.cpp
-  ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\19 - Spike (ext) - Messaging Comparison\ZorkishAdventures\Debug\ZorkishAdventures.exe
+﻿  Command.cpp
+  CommandAlias.cpp
+  CommandDebug.cpp
+  CommandDrop.cpp
+  CommandHelp.cpp
+  CommandHiScore.cpp
+  CommandLook.cpp
+  CommandManager.cpp
+  CommandMove.cpp
+  CommandOpen.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\19 - Spike (ext) - Messaging Comparison\ZorkishAdventures\ZorkishAdventures\CommandOpen.cpp(139,93): error C2660:  'MessageManager::SendMessage': function does not take 2 arguments
+  CommandPut.cpp
+  CommandQuit.cpp
+  CommandTake.cpp
+  Component.cpp
+  ComponentFactory.cpp
+  Container.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\19 - Spike (ext) - Messaging Comparison\ZorkishAdventures\ZorkishAdventures\MessageManager.h(71,11): message :  see declaration of 'MessageManager::SendMessage'
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\19 - Spike (ext) - Messaging Comparison\ZorkishAdventures\ZorkishAdventures\Container.cpp(135,94): error C2660:  'MessageManager::SendMessage': function does not take 2 arguments
+  Description.cpp
+  Game.cpp
+  GameObject.cpp
+  Item.cpp
+  Generating Code...
+  Compiling...
+  Location.cpp
+  Lock.cpp
+  Message.cpp
+  MessageManager.cpp
+  Movable.cpp
+  Notifiable.cpp
+  Path.cpp
+  Player.cpp
+  Stage.cpp
+  StageAbout.cpp
+  StageGameplay.cpp
+  StageHallOfFame.cpp
+  StageHelp.cpp
+  StageMainMenu.cpp
+  StageManager.cpp
+  StageNewHighScore.cpp
+  StageSelectAdventure.cpp
+  StringManager.cpp
+  UnlockCommands.cpp
+  World.cpp
+  Generating Code...
+  Compiling...
+  ZorkishAdventures.cpp
+  pch.cpp
+  Generating Code...
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\19 - Spike (ext) - Messaging Comparison\ZorkishAdventures\ZorkishAdventures\MessageManager.h(71,11): message :  see declaration of 'MessageManager::SendMessage'

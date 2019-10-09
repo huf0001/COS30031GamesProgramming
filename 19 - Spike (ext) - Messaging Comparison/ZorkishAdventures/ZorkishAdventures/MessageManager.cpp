@@ -232,19 +232,10 @@ Message* MessageManager::SendMessage(Message* message)
 			}
 
 			return nullptr;
-		default:
-			return nullptr;
-	}
-}
-
-Message* MessageManager::SendMessage(Message* message, std::string container)
-{
-	switch (receiverTypes[message->GetReceiverType()])
-	{
 		case ReceiverPath:
-			if (subscribedPathsInLocation.count(container) && subscribedPathsInLocation[container].count(message->GetReceiverID()))
+			if (subscribedPathsInLocation.count(message->GetReceiverParentID()) && subscribedPathsInLocation[message->GetReceiverParentID()].count(message->GetReceiverID()))
 			{
-				return subscribedPathsInLocation[container][message->GetReceiverID()]->Notify(message);
+				return subscribedPathsInLocation[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
 			}
 
 			return nullptr;
@@ -257,9 +248,9 @@ Message* MessageManager::SendMessage(Message* message, std::string container)
 		case ReceiverLandmine:
 		case ReceiverLock:
 		case ReceiverMovable:
-			if (subscribedItemsInContainer.count(container) && subscribedItemsInContainer[container].count(message->GetReceiverID()))
+			if (subscribedItemsInContainer.count(message->GetReceiverParentID()) && subscribedItemsInContainer[message->GetReceiverParentID()].count(message->GetReceiverID()))
 			{
-				return subscribedItemsInContainer[container][message->GetReceiverID()]->Notify(message);
+				return subscribedItemsInContainer[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
 			}
 
 			return nullptr;
@@ -267,4 +258,14 @@ Message* MessageManager::SendMessage(Message* message, std::string container)
 			return nullptr;
 	}
 }
+
+//Message* MessageManager::SendMessage(Message* message, std::string container)
+//{
+//	switch (receiverTypes[message->GetReceiverType()])
+//	{
+//		
+//		default:
+//			return nullptr;
+//	}
+//}
 

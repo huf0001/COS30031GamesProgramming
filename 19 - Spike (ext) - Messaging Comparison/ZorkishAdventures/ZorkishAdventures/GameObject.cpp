@@ -17,6 +17,26 @@ std::string GameObject::GetType()
 	return type;
 }
 
+std::string GameObject::GetParentID()
+{
+	return containerId;
+}
+
+void GameObject::SetContainerID(std::string value)
+{
+	containerId = value;
+}
+
+std::string GameObject::GetParentType()
+{
+	return containerType;
+}
+
+void GameObject::SetContainerType(std::string value)
+{
+	containerType = value;
+}
+
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
 GameObject::GameObject(std::string id, std::string name, std::string type)
@@ -24,6 +44,8 @@ GameObject::GameObject(std::string id, std::string name, std::string type)
 	this->id = id;
 	this->name = name;
 	this->type = type;
+	this->containerId = "null";
+	this->containerType = "null";
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------

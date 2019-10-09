@@ -50,7 +50,7 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 
 	std::string containerName;
 	std::string keyName;
-	std::string holdsContainer;
+	//std::string holdsContainer;
 
 	if (!StringManager::Instance()->VectorContainsString(input, "with"))
 	{
@@ -84,12 +84,12 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 		if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(keyNameVector))
 		{
 			keyItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(keyNameVector);
-			holdsContainer = world->GetCurrentLocation()->GetID();
+			//holdsContainer = world->GetCurrentLocation()->GetID();
 		}
 		else if (((Container*)player->GetComponent("container"))->HasItem(keyNameVector))
 		{
 			keyItem = ((Container*)player->GetComponent("container"))->GetItem(keyNameVector);
-			holdsContainer = player->GetID();
+			//holdsContainer = player->GetID();
 		}
 
 		if (keyItem == nullptr)
@@ -107,12 +107,12 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerNameVector))
 	{
 		containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerNameVector);
-		holdsContainer = world->GetCurrentLocation()->GetID();
+		//holdsContainer = world->GetCurrentLocation()->GetID();
 	}
 	else if (((Container*)player->GetComponent("container"))->HasItem(containerNameVector))
 	{
 		containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerNameVector);
-		holdsContainer = player->GetID();
+		//holdsContainer = player->GetID();
 	}
 
 	if (containerItem == nullptr)
@@ -130,8 +130,13 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	}	
 
 	//Send Message
-	Message* msg = new Message("OPEN", "command", containerItem->GetID(), "container", (void*)& messageContent);
-	Message* result = MessageManager::Instance()->SendMessage(msg, holdsContainer);
+	Message* msg = new Message(
+		"OPEN", "command", 
+		"null", "null", 
+		containerItem->GetID(), "container", 
+		containerItem->GetParentID(), containerItem->GetParentType(), 
+		(void*)& messageContent);
+	Message* result = MessageManager::Instance()->SendMessage(msg);
 	std::string output = *(std::string*)result->GetContent();
 
 	//Handle results

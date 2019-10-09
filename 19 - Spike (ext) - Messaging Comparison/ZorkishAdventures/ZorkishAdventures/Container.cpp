@@ -70,83 +70,7 @@ void Container::AddItem(Item* item)
 {
 	items.push_back(item);
 	MessageManager::Instance()->Subscribe(gameObject->GetID(), item);
-}
-
-Item* Container::GetItem(std::vector<std::string> input)
-{
-	if (!items.empty())
-	{
-		std::string string = StringManager::Instance()->VectorToString(input, ' ');
-
-		for (int i = 0; i < (int)items.size(); i++)
-		{
-			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
-			{
-				return items[i];
-			}
-		}
-	}
-
-	return nullptr;
-}
-
-//For testing only
-std::vector<Item*> Container::GetItems()
-{
-	return items;
-}
-
-std::string Container::ViewItem(std::vector<std::string> input)
-{
-	/*std::vector<std::string> inputCopy = std::vector<std::string>(input);
-	std::vector<std::string> name;
-
-	for(int i = input.size() - 1; i >= 0; i--)
-	{
-		inputCopy.pop_back();
-
-		if (input[i] != "in")
-		{
-			name.insert(name.begin(), input[i]);
-		}
-		else
-		{
-			Container* container = (Container*)GetItem(name);
-
-			if (container != nullptr)
-			{
-				return container->ViewItem(inputCopy);
-			}
-
-			return "You can't look in " + StringManager::Instance()->VectorToString(name, ' ') + "; it isn't there.";
-		}
-	}*/
-
-	Item* item = GetItem(input);
-
-	if (item != nullptr)
-	{
-		return ((Description*)item->GetComponent("description"))->GetDescription();
-	}
-
-	return "You cannot find '" + StringManager::Instance()->VectorToString(input, ' ') + "'; it isn't where you were looking.";
-}
-
-std::string Container::ViewItems()
-{
-	if (items.empty())
-	{
-		return "";
-	}
-
-	std::string result = "";
-
-	for (int i = 0; i < (int)items.size(); i++)
-	{
-		result += "\n\t- " + items[i]->GetName();
-	}
-
-	return result;
+	item->SetContainerID(gameObject->GetID());
 }
 
 void Container::RemoveItem(std::vector<std::string> input)
@@ -160,6 +84,7 @@ void Container::RemoveItem(std::vector<std::string> input)
 			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
 			{
 				MessageManager::Instance()->Unsubscribe("item", items[i]->GetID(), gameObject->GetID());
+				items[i]->SetContainerID("null");
 				items.erase(items.begin() + i);
 				break;
 			}
@@ -180,15 +105,33 @@ Message* Container::Notify(Message* message)
 				if (!((Lock*)gameObject->GetComponent("lock"))->GetIsLocked())
 				{
 					isOpen = true;
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("already unlocked"));
+					return new Message(
+						gameObject->GetID(), "container", 
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(), 
+						message->GetSenderParentID(), message->GetSenderParentType(),
+						(void*) new std::string("already unlocked")
+					);
 				}
 				else if (messageContent.size() == 1)
 				{
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("locked"));
+					return new Message(
+						gameObject->GetID(), "container",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(),
+						message->GetSenderParentID(), message->GetSenderParentType(),
+						(void*) new std::string("locked")
+					);
 				}
 				else
 				{
-					Message* msg = new Message(gameObject->GetID(), "container", gameObject->GetID(), "lock", (void*) new std::vector<std::string>({ "unlock", messageContent[1] } ));
+					Message* msg = new Message(
+						gameObject->GetID(), "container",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						gameObject->GetID(), "lock",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						(void*) new std::vector<std::string>({ "unlock", messageContent[1] })
+					);
 					Message* result = MessageManager::Instance()->SendMessage(msg);
 					std::string messageContent = *(std::string*)result->GetContent();
 
@@ -197,23 +140,47 @@ Message* Container::Notify(Message* message)
 						isOpen = true;
 					}
 
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), result->GetContent());
+					return new Message(
+						gameObject->GetID(), "container", 
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(), 
+						message->GetSenderParentID(), message->GetSenderParentType(),
+						result->GetContent()
+					);
 				}				
 			}
 			else
 			{
 				if (messageContent.size() > 1)
 				{
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("no lock"));
+					return new Message(
+						gameObject->GetID(), "container",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(),
+						message->GetSenderParentID(), message->GetSenderParentType(),
+						(void*) new std::string("no lock")
+					);
 				}
 				else if (isOpen)
 				{
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("already open"));
+					return new Message(
+						gameObject->GetID(), "container",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(),
+						message->GetSenderParentID(), message->GetSenderParentType(), 
+						(void*) new std::string("already open")
+					);
 				}
 				else
 				{
 					isOpen = true;
-					return new Message(gameObject->GetID(), "container", message->GetSenderID(), message->GetSenderType(), (void*) new std::string("opened"));
+					return new Message(
+						gameObject->GetID(), "container",
+						gameObject->GetParentID(), gameObject->GetParentType(),
+						message->GetSenderID(), message->GetSenderType(),
+						message->GetSenderParentID(), message->GetSenderParentType(),
+						(void*) new std::string("opened")
+					);
 				}
 			}			
 		}

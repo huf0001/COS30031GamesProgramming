@@ -229,9 +229,9 @@ World::World(std::string filename)
 					}
 
 					Path* path = new Path(splitLine[1], splitLine[2], splitLine[5], splitLine[6]);
-					locations[splitLine[3]]->AddPath(splitLine[4], path);
+					locations[splitLine[3]]->AddPath(splitLine[4], path);    //Automatically subscribes the path to MessageManager appropriately
 					gameObjects[path->GetID()] = (GameObject*)path;
-					MessageManager::Instance()->Subscribe(splitLine[3], path);
+					//MessageManager::Instance()->Subscribe(splitLine[3], path);
 				}
 			}
 			else if (splitLine[0] == "A")

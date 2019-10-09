@@ -69,7 +69,7 @@ public:
 	void Unsubscribe(std::string type, std::string subscriberId, std::string containerId);
 	void UnsubscribeAll();
 	Message* SendMessage(Message* message);
-	Message* SendMessage(Message* message, std::string);
+	//Message* SendMessage(Message* message, std::string);
 };
 
 #endif

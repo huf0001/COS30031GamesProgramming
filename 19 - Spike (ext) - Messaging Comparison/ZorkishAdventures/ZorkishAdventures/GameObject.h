@@ -16,6 +16,8 @@ protected:
 	std::string name;
 	std::string type;
 	std::map<std::string, Component*> components;
+	std::string containerId;
+	std::string containerType;
 
 	//Protected Methods
 
@@ -24,6 +26,10 @@ public:
 	std::string GetID();
 	std::string GetName();
 	std::string GetType();
+	std::string GetParentID();
+	void SetContainerID(std::string value);
+	std::string GetParentType();
+	void SetContainerType(std::string value);
 
 	//Constructor
 	GameObject(std::string id, std::string name, std::string type);
