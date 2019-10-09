@@ -15,14 +15,3 @@ Message* Notifiable::Notify(Message* message)
 {
 	return nullptr;
 }
-
-
-
-
-
-
-
-
-
-
-

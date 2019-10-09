@@ -52,6 +52,11 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	std::string keyName;
 	//std::string holdsContainer;
 
+	std::string containerParentID;
+	std::string containerParentType;
+	std::string keyParentID;
+	std::string keyParentType;
+
 	if (!StringManager::Instance()->VectorContainsString(input, "with"))
 	{
 		//Don't need to worry about a key, just skip to the container stuff
@@ -80,54 +85,109 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 			}
 		}
 
-		//Validate key exists
-		if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(keyNameVector))
-		{
-			keyItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(keyNameVector);
-			//holdsContainer = world->GetCurrentLocation()->GetID();
-		}
-		else if (((Container*)player->GetComponent("container"))->HasItem(keyNameVector))
-		{
-			keyItem = ((Container*)player->GetComponent("container"))->GetItem(keyNameVector);
-			//holdsContainer = player->GetID();
-		}
+		//Validate Key exists via messages
+		Message* msg = new Message(
+			"OPEN", "command",
+			"null", "null",
+			"messageManager", "messageManager",
+			"null", "null",
+			(void*) new std::vector<std::string>({ "access item from location", StringManager::Instance()->VectorToString(keyNameVector, ' '), world->GetCurrentLocation()->GetID()})
+		);
+		Message* result = MessageManager::Instance()->SendMessage(msg);
+		std::vector<std::string> outcome = *(std::vector<std::string>*)result->GetContent();
 
-		if (keyItem == nullptr)
+		if (outcome[0] == "null")
 		{
 			return "You cannot find \"" + StringManager::Instance()->VectorToString(keyNameVector, ' ') + "\" at your current location or in your inventory.";
 		}
 		else
 		{
-			keyName = keyItem->GetName();
-			messageContent.push_back(keyItem->GetID());
+			keyParentID = outcome[0];
+			keyParentType = outcome[1];
+			keyName = StringManager::Instance()->VectorToString(keyNameVector, ' ');
+			messageContent.push_back(keyName);
 		}
+
+		////Validate key exists
+		//if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(keyNameVector))
+		//{
+		//	keyItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(keyNameVector);
+		//	//holdsContainer = world->GetCurrentLocation()->GetID();
+		//}
+		//else if (((Container*)player->GetComponent("container"))->HasItem(keyNameVector))
+		//{
+		//	keyItem = ((Container*)player->GetComponent("container"))->GetItem(keyNameVector);
+		//	//holdsContainer = player->GetID();
+		//}
+
+		//if (keyItem == nullptr)
+		//{
+		//	return "You cannot find \"" + StringManager::Instance()->VectorToString(keyNameVector, ' ') + "\" at your current location or in your inventory.";
+		//}
+		//else
+		//{
+		//	keyName = keyItem->GetName();
+		//	messageContent.push_back(keyItem->GetID());
+		//}
 	}
 
-	//Validate container exists and is a container
-	if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerNameVector))
-	{
-		containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerNameVector);
-		//holdsContainer = world->GetCurrentLocation()->GetID();
-	}
-	else if (((Container*)player->GetComponent("container"))->HasItem(containerNameVector))
-	{
-		containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerNameVector);
-		//holdsContainer = player->GetID();
-	}
+	//Validate container exists and is a container via messages
+	Message* msg = new Message(
+		"OPEN", "command",
+		"null", "null",
+		"messageManager", "messageManager",
+		"null", "null",
+		(void*) new std::vector<std::string>({ "access item from location", StringManager::Instance()->VectorToString(containerNameVector, ' '), world->GetCurrentLocation()->GetID() })
+	);
+	Message* result = MessageManager::Instance()->SendMessage(msg);
+	std::vector<std::string> outputVector = *(std::vector<std::string>*)result->GetContent();
 
-	if (containerItem == nullptr)
+	if (outputVector[0] == "null")
 	{
 		return "You cannot find \"" + StringManager::Instance()->VectorToString(containerNameVector, ' ') + "\" at your current location or in your inventory.";
 	}
 	else
 	{
-		containerName = containerItem->GetName();
-		
-		if (!containerItem->HasComponent("container"))
-		{
-			return containerName + " is not a container; you cannot open it.";
-		}
-	}	
+		containerParentID = outputVector[0];
+		containerParentType = outputVector[1];
+		containerName = StringManager::Instance()->VectorToString(containerNameVector, ' ');
+
+		Message* msg = new Message(
+			"OPEN", "command",
+			"null", "null",
+			containerName, "item",
+			containerParentID, containerParentType,
+			(void*) new std::vector<std::string>({ "item is container" })
+		);
+		Message* outputVector = MessageManager::Instance()->SendMessage(msg);
+		//TODO: handle result
+	}
+
+	////Validate container exists and is a container
+	//if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerNameVector))
+	//{
+	//	containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerNameVector);
+	//	//holdsContainer = world->GetCurrentLocation()->GetID();
+	//}
+	//else if (((Container*)player->GetComponent("container"))->HasItem(containerNameVector))
+	//{
+	//	containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerNameVector);
+	//	//holdsContainer = player->GetID();
+	//}
+
+	//if (containerItem == nullptr)
+	//{
+	//	return "You cannot find \"" + StringManager::Instance()->VectorToString(containerNameVector, ' ') + "\" at your current location or in your inventory.";
+	//}
+	//else
+	//{
+	//	containerName = containerItem->GetName();
+	//	
+	//	if (!containerItem->HasComponent("container"))
+	//	{
+	//		return containerName + " is not a container; you cannot open it.";
+	//	}
+	//}	
 
 	//Send Message
 	Message* msg = new Message(

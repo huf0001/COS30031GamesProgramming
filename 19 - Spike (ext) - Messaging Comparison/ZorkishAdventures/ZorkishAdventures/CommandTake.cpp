@@ -50,7 +50,6 @@ std::vector<std::string> CommandTake::StandardiseInput(std::vector<std::string> 
 	return input;
 }
 
-//TODO: add UnlockCommands check when adding to inventory
 std::string CommandTake::TakeFromContainer(std::vector<std::string> itemName, GameObject* containerFrom, Player* player)
 {
 	Item* item = ((Container*)containerFrom->GetComponent("container"))->GetItem(itemName);

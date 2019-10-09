@@ -97,6 +97,8 @@ Message* GameObject::Notify(Message* message)
 {
 	std::string receiverType = message->GetReceiverType();
 
+	//TODO: handle request to receiverType gameObject of if this game object has a specified component
+
 	if (receiverType != "none")
 	{
 		if (HasComponent(receiverType))

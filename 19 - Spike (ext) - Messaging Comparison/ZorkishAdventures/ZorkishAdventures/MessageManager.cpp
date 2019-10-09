@@ -26,12 +26,13 @@ MessageManager::MessageManager()
 	subscribedItemsInContainer = std::map<std::string, std::map<std::string, Item*>>();
 
 	receiverTypes = std::map<std::string, ReceiverType>();
+	receiverTypes["messageManager"] = ReceiverMessageManager;
 	receiverTypes["player"] = ReceiverPlayer;
 	receiverTypes["world"] = ReceiverWorld;
 	receiverTypes["command"] = ReceiverCommand;
 	receiverTypes["location"] = ReceiverLocation;
 	receiverTypes["path"] = ReceiverPath;
-	receiverTypes["gameobject"] = ReceiverGameObject;
+	receiverTypes["gameObject"] = ReceiverGameObject;
 	receiverTypes["item"] = ReceiverItem;
 	receiverTypes["button"] = ReceiverButton;
 	receiverTypes["container"] = ReceiverContainer;
@@ -200,6 +201,8 @@ Message* MessageManager::SendMessage(Message* message)
 {
 	switch (receiverTypes[message->GetReceiverType()])
 	{
+		case ReceiverMessageManager:
+			return Notify(message);
 		case ReceiverPlayer:
 			if (subscribedPlayer != nullptr)
 			{
@@ -259,13 +262,40 @@ Message* MessageManager::SendMessage(Message* message)
 	}
 }
 
-//Message* MessageManager::SendMessage(Message* message, std::string container)
-//{
-//	switch (receiverTypes[message->GetReceiverType()])
-//	{
-//		
-//		default:
-//			return nullptr;
-//	}
-//}
+Message* MessageManager::Notify(Message* message)
+{
+	if (message->GetSenderType() == "command")
+	{
+		std::vector<std::string> messageContent = *(std::vector<std::string>*) message->GetContent();
+
+		if (messageContent[0] == "access item from location")
+		{
+			std::vector<std::string> itemID = StringManager::Instance()->StringToVector(messageContent[1], ' ');
+			std::string playerLocation = messageContent[2];
+			std::string parentID = "null";
+			std::string parentType = "null";
+
+			if (((Container*)subscribedPlayer->GetComponent("container"))->HasItem(itemID))
+			{
+				parentID = subscribedPlayer->GetID();
+				parentType = "player";
+			}
+			else if (subscribedLocations.count(playerLocation) && ((Container*)subscribedLocations[playerLocation]->GetComponent("container"))->HasItem(itemID))
+			{
+				parentID = playerLocation;
+				parentType = "location";
+			}
+
+			Message* reply = new Message(
+				"MessageManager", "MessageManager",
+				"null", "null",
+				message->GetSenderID(), message->GetSenderType(),
+				message->GetSenderParentID(), message->GetSenderParentType(),
+				(void*) new std::vector<std::string>({ parentID, parentType }) 
+			);
+		}
+	}
+
+	return nullptr;
+}
 
