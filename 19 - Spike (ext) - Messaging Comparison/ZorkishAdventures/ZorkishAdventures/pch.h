@@ -39,9 +39,12 @@
 #include "MessageManager.h"	
 
 //Components
-#include "Component.h"							
+#include "Component.h"	
+#include "Button.h"
 #include "Container.h"				
-#include "Description.h"			
+#include "Description.h"
+#include "Flammable.h"
+#include "Landmine.h"
 #include "Lock.h"					
 #include "Movable.h"	
 #include "UnlockCommands.h"			

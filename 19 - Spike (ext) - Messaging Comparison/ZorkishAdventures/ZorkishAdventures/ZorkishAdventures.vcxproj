@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CommandAlias.cpp" />
     <ClCompile Include="CommandDebug.cpp" />
     <ClCompile Include="CommandDrop.cpp" />
@@ -162,10 +163,13 @@
     <ClCompile Include="CommandPut.cpp" />
     <ClCompile Include="CommandQuit.cpp" />
     <ClCompile Include="CommandTake.cpp" />
+    <ClCompile Include="CommandUse.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="Description.cpp" />
+    <ClCompile Include="Flammable.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Landmine.cpp" />
     <ClCompile Include="Lock.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageManager.cpp" />
@@ -196,6 +200,7 @@
     <ClCompile Include="ZorkishAdventures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CommandAlias.h" />
     <ClInclude Include="CommandDebug.h" />
     <ClInclude Include="CommandDrop.h" />
@@ -206,10 +211,13 @@
     <ClInclude Include="CommandPut.h" />
     <ClInclude Include="CommandQuit.h" />
     <ClInclude Include="CommandTake.h" />
+    <ClInclude Include="CommandUse.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Description.h" />
+    <ClInclude Include="Flammable.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Landmine.h" />
     <ClInclude Include="Lock.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageManager.h" />

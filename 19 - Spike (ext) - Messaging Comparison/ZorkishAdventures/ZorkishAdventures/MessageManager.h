@@ -43,6 +43,7 @@ private:
 	std::map<std::string, std::map<std::string, Path*>> subscribedPathsInLocation;
 	std::map<std::string, std::map<std::string, Item*>> subscribedItemsInContainer;
 	std::map<std::string, ReceiverType> receiverTypes;
+	std::vector<Message*> queuedMessages;
 
 	//Constructor
 	MessageManager();
@@ -71,6 +72,8 @@ public:
 	void UnsubscribeAll();
 	Message* SendMessage(Message* message);
 	virtual Message* Notify(Message* message);
+	void QueueMessage(Message* message);
+	void SendQueuedMessages(std::string tag);
 };
 
 #endif

@@ -1,9 +1,9 @@
 ####World specification formatting for Zorkish Adventures--------------------------------------------------------------------------------------------
 
-#World Name 				"W:World Name"
+#World Name 			"W:World Name"
 
-#Starting Configuration 	"S:starting_location_id:available_command_id_1,available_command_id_2, . . ."
-#						- Command types: all, alias, debug, look, open, move, take, put, drop, help, hiscore, quit
+#Starting Configuration "S:starting_location_id:available_command_id_1,available_command_id_2, . . ."
+#						- Command types: all, alias, debug, look, use, open, move, take, put, drop, help, hiscore, quit
 #						- Default commands: look, help, quit
 #						- At least move or take must be made available from the start, so that the player can move to locations
 #						  that unlock further commands, or pick up items that unlock further commands. In the latter case,
@@ -23,9 +23,15 @@
 
 #Components				"C:component_type:game_object_id[:component-specific parameters]"
 
+#						"C:button:game_object_id:triggers_type:triggers_location
+
 #						"C:container:game_object_id:is_open?:always_open?"
 
 #						"C:description:game_object_id:description of game object"
+
+#						"C:flammable:game_object_id"
+
+#						"C:landmine:game_object_id"
 
 #						"C:lock:game_object_id:is_locked?:unlockable_with_item_id_1,unlockable_with_item_id_2, . . .". 
 #						- If not unlockable, specify "none".

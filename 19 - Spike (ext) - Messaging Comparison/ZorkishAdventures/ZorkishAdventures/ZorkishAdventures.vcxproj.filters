@@ -141,6 +141,18 @@
     <ClCompile Include="Notifiable.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Landmine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flammable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandUse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h">
@@ -264,6 +276,18 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Notifiable.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Landmine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flammable.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandUse.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

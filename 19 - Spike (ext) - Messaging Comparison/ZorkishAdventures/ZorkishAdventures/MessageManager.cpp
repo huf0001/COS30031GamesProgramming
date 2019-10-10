@@ -24,6 +24,7 @@ MessageManager::MessageManager()
 	subscribedLocations = std::map<std::string, Location*>();
 	subscribedPathsInLocation = std::map<std::string, std::map<std::string, Path*>>();
 	subscribedItemsInContainer = std::map<std::string, std::map<std::string, Item*>>();
+	queuedMessages = std::vector<Message*>();
 
 	receiverTypes = std::map<std::string, ReceiverType>();
 	receiverTypes["messageManager"] = ReceiverMessageManager;
@@ -199,66 +200,147 @@ void MessageManager::UnsubscribeAll()
 
 Message* MessageManager::SendMessage(Message* message)
 {
-	switch (receiverTypes[message->GetReceiverType()])
+	if (message->GetReceiverParentID() == "override" && message->GetReceiverParentType() == "any")
 	{
-		case ReceiverMessageManager:
-			return Notify(message);
-		case ReceiverPlayer:
-			if (subscribedPlayer != nullptr)
-			{
-				return subscribedPlayer->Notify(message);
-			}
+		switch (receiverTypes[message->GetReceiverType()])
+		{
+			/*case ReceiverCommand:
+				if (subscribedCommands.count(message->GetReceiverID()))
+				{
+					return subscribedCommands[message->GetReceiverID()].Notify(message);
+				}
 
-			return nullptr;
-		/*case ReceiverWorld:
-			if (subscribedWorld != nullptr)
-			{
-				return subscribedWorld->Notify(message);
-			}
-			else
-			{
+				return nullptr;*/
+			case ReceiverLocation:
+				if (subscribedLocations.count(message->GetReceiverID()))
+				{
+					return subscribedLocations[message->GetReceiverID()]->Notify(message);
+				}
+
 				return nullptr;
-			}
+			case ReceiverPath:
+				for (std::pair<std::string, std::map<std::string, Path*>> pair : subscribedPathsInLocation)
+				{
+					if (subscribedPathsInLocation[pair.first].count(message->GetReceiverID()))
+					{
+						return subscribedPathsInLocation[pair.first][message->GetReceiverID()]->Notify(message);
+					}
+				}
 
-			break;*/
-		/*case ReceiverCommand:
-			if (subscribedCommands.count(message->GetReceiverID()))
-			{
-				return subscribedCommands[message->GetReceiverID()].Notify(message);
-			}
+				return nullptr;
+			case ReceiverGameObject:
+			case ReceiverItem:
+			case ReceiverButton:
+			case ReceiverContainer:
+			case ReceiverDescription:
+			case ReceiverFlammable:
+			case ReceiverLandmine:
+			case ReceiverLock:
+			case ReceiverMovable:
+				for (std::pair<std::string, std::map<std::string, Item*>> pair : subscribedItemsInContainer)
+				{
+					if (subscribedItemsInContainer[pair.first].count(message->GetReceiverID()))
+					{
+						return subscribedItemsInContainer[pair.first][message->GetReceiverID()]->Notify(message);
+					}
+				}
 
-			return nullptr;*/
-		case ReceiverLocation:
-			if (subscribedLocations.count(message->GetReceiverID()))
-			{
-				return subscribedLocations[message->GetReceiverID()]->Notify(message);
-			}
+				return nullptr;
+			default:
+				return nullptr;
+		}
+	}
+	else
+	{
+		switch (receiverTypes[message->GetReceiverType()])
+		{
+			case ReceiverMessageManager:
+				return Notify(message);
+			case ReceiverPlayer:
+				if (subscribedPlayer != nullptr)
+				{
+					return subscribedPlayer->Notify(message);
+				}
 
-			return nullptr;
-		case ReceiverPath:
-			if (subscribedPathsInLocation.count(message->GetReceiverParentID()) && subscribedPathsInLocation[message->GetReceiverParentID()].count(message->GetReceiverID()))
-			{
-				return subscribedPathsInLocation[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
-			}
+				return nullptr;
+				/*case ReceiverWorld:
+					if (subscribedWorld != nullptr)
+					{
+						return subscribedWorld->Notify(message);
+					}
+					else
+					{
+						return nullptr;
+					}
 
-			return nullptr;
-		case ReceiverGameObject:
-		case ReceiverItem:
-		case ReceiverButton:
-		case ReceiverContainer:
-		case ReceiverDescription:
-		case ReceiverFlammable:
-		case ReceiverLandmine:
-		case ReceiverLock:
-		case ReceiverMovable:
-			if (subscribedItemsInContainer.count(message->GetReceiverParentID()) && subscribedItemsInContainer[message->GetReceiverParentID()].count(message->GetReceiverID()))
-			{
-				return subscribedItemsInContainer[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
-			}
+					break;*/
+					/*case ReceiverCommand:
+						if (subscribedCommands.count(message->GetReceiverID()))
+						{
+							return subscribedCommands[message->GetReceiverID()].Notify(message);
+						}
 
-			return nullptr;
-		default:
-			return nullptr;
+						return nullptr;*/
+			case ReceiverLocation:
+				if (subscribedLocations.count(message->GetReceiverID()))
+				{
+					return subscribedLocations[message->GetReceiverID()]->Notify(message);
+				}
+
+				return nullptr;
+			case ReceiverPath:
+				if (subscribedPathsInLocation.count(message->GetReceiverParentID()) && subscribedPathsInLocation[message->GetReceiverParentID()].count(message->GetReceiverID()))
+				{
+					return subscribedPathsInLocation[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
+				}
+
+				return nullptr;
+			case ReceiverGameObject:
+			case ReceiverItem:
+			case ReceiverButton:
+			case ReceiverContainer:
+			case ReceiverDescription:
+			case ReceiverFlammable:
+			case ReceiverLandmine:
+			case ReceiverLock:
+			case ReceiverMovable:
+				if (message->GetReceiverID() == "all")
+				{
+					if (subscribedItemsInContainer.count(message->GetReceiverParentID()))
+					{
+						std::vector<void*> results;
+
+						for (std::pair<std::string, Item*> pair : subscribedItemsInContainer[message->GetReceiverParentID()])
+						{
+							Message* reply = pair.second->Notify(message);
+							
+							if (reply != nullptr)
+							{
+								results.push_back(reply->GetContent());
+							}
+						}
+
+						return new Message(
+							message->GetReceiverID(), message->GetReceiverType(),
+							message->GetReceiverParentID(), message->GetReceiverParentType(),
+							message->GetSenderID(), message->GetSenderType(),
+							message->GetSenderParentID(), message->GetSenderParentType(),
+							(void*) new std::vector<void*>(results)
+						);
+					}
+				}
+				else
+				{
+					if (subscribedItemsInContainer.count(message->GetReceiverParentID()) && subscribedItemsInContainer[message->GetReceiverParentID()].count(message->GetReceiverID()))
+					{
+						return subscribedItemsInContainer[message->GetReceiverParentID()][message->GetReceiverID()]->Notify(message);
+					}
+				}
+
+				return nullptr;
+			default:
+				return nullptr;
+		}
 	}
 }
 
@@ -305,3 +387,38 @@ Message* MessageManager::Notify(Message* message)
 	return nullptr;
 }
 
+void MessageManager::QueueMessage(Message* message)
+{
+	queuedMessages.push_back(message);
+}
+
+void MessageManager::SendQueuedMessages(std::string tag)
+{
+	std::vector<Message*> stillQueuedMessages = std::vector<Message*>();
+	std::vector<void*> messageContent;
+	std::string messageTag;
+	int* messageDelayCount;
+
+	for (Message* message : queuedMessages)
+	{
+		messageContent = *(std::vector<void*>*)message->GetContent();
+		messageTag = *(std::string*)messageContent[0];
+
+		if (messageTag == tag)
+		{
+			messageDelayCount = (int*)messageContent[1];
+			*messageDelayCount -= 1;
+
+			if (*messageDelayCount == 0)
+			{
+				SendMessage(message);
+			}
+			else
+			{
+				stillQueuedMessages.push_back(message);
+			}
+		}
+	}
+
+	queuedMessages = stillQueuedMessages;
+}
