@@ -52,7 +52,7 @@ void Location::AddPath(std::string direction, Path* path)
 	}
 
 	paths[direction] = path;
-	path->SetContainerID(this->id);
+	path->SetParentID(this->id);
 	MessageManager::Instance()->Subscribe(this->id, path);
 }
 

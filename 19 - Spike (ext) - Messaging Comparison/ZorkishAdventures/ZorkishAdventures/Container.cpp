@@ -70,7 +70,84 @@ void Container::AddItem(Item* item)
 {
 	items.push_back(item);
 	MessageManager::Instance()->Subscribe(gameObject->GetID(), item);
-	item->SetContainerID(gameObject->GetID());
+	item->SetParentID(gameObject->GetID());
+}
+
+Item* Container::GetItem(std::vector<std::string> input)
+{
+	if (!items.empty())
+	{
+		std::string string = StringManager::Instance()->VectorToString(input, ' ');
+
+		for (int i = 0; i < (int)items.size(); i++)
+		{
+			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
+			{
+				return items[i];
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+//For testing only
+std::vector<Item*> Container::GetItems()
+{
+	return items;
+}
+
+std::string Container::ViewItem(std::vector<std::string> input)
+{
+	/*std::vector<std::string> inputCopy = std::vector<std::string>(input);
+	std::vector<std::string> name;
+
+	for(int i = input.size() - 1; i >= 0; i--)
+	{
+		inputCopy.pop_back();
+
+		if (input[i] != "in")
+		{
+			name.insert(name.begin(), input[i]);
+		}
+		else
+		{
+			Container* container = (Container*)GetItem(name);
+
+			if (container != nullptr)
+			{
+				return container->ViewItem(inputCopy);
+			}
+
+			return "You can't look in " + StringManager::Instance()->VectorToString(name, ' ') + "; it isn't there.";
+		}
+	}*/
+
+	Item* item = GetItem(input);
+
+	if (item != nullptr)
+	{
+		return ((Description*)item->GetComponent("description"))->GetDescription();
+	}
+
+	return "You cannot find '" + StringManager::Instance()->VectorToString(input, ' ') + "'; it isn't where you were looking.";
+}
+
+std::string Container::ViewItems()
+{
+	if (items.empty())
+	{
+		return "";
+	}
+
+	std::string result = "";
+
+	for (int i = 0; i < (int)items.size(); i++)
+	{
+		result += "\n\t- " + items[i]->GetName();
+	}
+
+	return result;
 }
 
 void Container::RemoveItem(std::vector<std::string> input)
@@ -84,7 +161,7 @@ void Container::RemoveItem(std::vector<std::string> input)
 			if (StringManager::Instance()->ToLowercase(items[i]->GetName()) == string)
 			{
 				MessageManager::Instance()->Unsubscribe("item", items[i]->GetID(), gameObject->GetID());
-				items[i]->SetContainerID("null");
+				items[i]->SetParentID("null");
 				items.erase(items.begin() + i);
 				break;
 			}
@@ -183,6 +260,40 @@ Message* Container::Notify(Message* message)
 					);
 				}
 			}			
+		}
+		else if (messageContent[0] == "is open")
+		{
+			std::string result;
+
+			if (gameObject->HasComponent("lock"))
+			{
+				Message* msgIsLocked = new Message(
+					gameObject->GetID(), "container",
+					gameObject->GetParentID(), gameObject->GetParentType(),
+					gameObject->GetID(), "lock",
+					gameObject->GetParentID(), gameObject->GetParentType(),
+					(void*) new std::vector<std::string>({ "is locked" })
+				);
+				Message* resultIsLocked = MessageManager::Instance()->SendMessage(msgIsLocked);
+				std::string messageContent = *(std::string*)resultIsLocked->GetContent();
+
+				result = 
+					(messageContent == "locked") ? "locked" 
+					: isOpen ? "open" 
+					: "closed";
+			}
+			else
+			{
+				result = isOpen ? "open" : "closed";
+			}
+
+			return new Message(
+				gameObject->GetID(), gameObject->GetType(),
+				gameObject->GetParentID(), gameObject->GetParentType(),
+				message->GetSenderID(), message->GetSenderType(),
+				message->GetSenderParentID(), message->GetSenderParentType(),
+				(void*) new std::string(result)
+			);
 		}
 	}
 

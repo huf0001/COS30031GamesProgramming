@@ -19,22 +19,22 @@ std::string GameObject::GetType()
 
 std::string GameObject::GetParentID()
 {
-	return containerId;
+	return parentId;
 }
 
-void GameObject::SetContainerID(std::string value)
+void GameObject::SetParentID(std::string value)
 {
-	containerId = value;
+	parentId = value;
 }
 
 std::string GameObject::GetParentType()
 {
-	return containerType;
+	return parentType;
 }
 
-void GameObject::SetContainerType(std::string value)
+void GameObject::SetParentType(std::string value)
 {
-	containerType = value;
+	parentType = value;
 }
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
@@ -44,8 +44,8 @@ GameObject::GameObject(std::string id, std::string name, std::string type)
 	this->id = id;
 	this->name = name;
 	this->type = type;
-	this->containerId = "null";
-	this->containerType = "null";
+	this->parentId = "null";
+	this->parentType = "null";
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,15 +96,25 @@ void GameObject::RemoveComponent(std::string component)
 Message* GameObject::Notify(Message* message)
 {
 	std::string receiverType = message->GetReceiverType();
-
-	//TODO: handle request to receiverType gameObject of if this game object has a specified component
-
-	if (receiverType != "none")
+	
+	if (receiverType == "gameObject")
 	{
-		if (HasComponent(receiverType))
+		std::vector<std::string> messageContent = *(std::vector<std::string>*) message->GetContent();
+
+		if (messageContent[0] == "has component")
 		{
-			return GetComponent(receiverType)->Notify(message);
+			return new Message(
+				id, type,
+				parentId, parentType,
+				message->GetSenderID(), message->GetSenderType(),
+				message->GetSenderParentID(), message->GetSenderParentType(),
+				(void*) new std::string(HasComponent(messageContent[1]) ? "Yes" : "No")
+			);
 		}
+	}
+	else if (HasComponent(receiverType))
+	{
+		return GetComponent(receiverType)->Notify(message);
 	}
 
 	return nullptr;

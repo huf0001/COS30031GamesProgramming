@@ -270,28 +270,34 @@ Message* MessageManager::Notify(Message* message)
 
 		if (messageContent[0] == "access item from location")
 		{
-			std::vector<std::string> itemID = StringManager::Instance()->StringToVector(messageContent[1], ' ');
+			std::vector<std::string> itemNameVector = StringManager::Instance()->StringToVector(messageContent[1], ' ');
 			std::string playerLocation = messageContent[2];
+			std::string itemID = "null";
+			std::string itemName = "null";
 			std::string parentID = "null";
 			std::string parentType = "null";
 
-			if (((Container*)subscribedPlayer->GetComponent("container"))->HasItem(itemID))
+			if (((Container*)subscribedPlayer->GetComponent("container"))->HasItem(itemNameVector))
 			{
+				itemID = ((Container*)subscribedPlayer->GetComponent("container"))->GetItem(itemNameVector)->GetID();
+				itemName = ((Container*)subscribedPlayer->GetComponent("container"))->GetItem(itemNameVector)->GetName();
 				parentID = subscribedPlayer->GetID();
 				parentType = "player";
 			}
-			else if (subscribedLocations.count(playerLocation) && ((Container*)subscribedLocations[playerLocation]->GetComponent("container"))->HasItem(itemID))
+			else if (subscribedLocations.count(playerLocation) && ((Container*)subscribedLocations[playerLocation]->GetComponent("container"))->HasItem(itemNameVector))
 			{
+				itemID = ((Container*)subscribedLocations[playerLocation]->GetComponent("container"))->GetItem(itemNameVector)->GetID();
+				itemName = ((Container*)subscribedLocations[playerLocation]->GetComponent("container"))->GetItem(itemNameVector)->GetName();
 				parentID = playerLocation;
 				parentType = "location";
 			}
 
-			Message* reply = new Message(
+			return new Message(
 				"MessageManager", "MessageManager",
 				"null", "null",
 				message->GetSenderID(), message->GetSenderType(),
 				message->GetSenderParentID(), message->GetSenderParentType(),
-				(void*) new std::vector<std::string>({ parentID, parentType }) 
+				(void*) new std::vector<std::string>({ itemID, itemName, parentID, parentType }) 
 			);
 		}
 	}

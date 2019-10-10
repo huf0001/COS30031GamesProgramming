@@ -34,8 +34,8 @@
 #include "StringManager.h"
 
 //Messaging System
-#include "Notifiable.h"
-#include "Message.h"							
+#include "Message.h"
+#include "Notifiable.h"							
 #include "MessageManager.h"	
 
 //Components

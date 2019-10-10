@@ -43,17 +43,16 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	std::vector<std::string> messageContent = std::vector<std::string>({ "open" });
 
 	Item* containerItem = nullptr;
-	Item* keyItem = nullptr;
-
 	std::vector<std::string> containerNameVector = std::vector<std::string>();
-	std::vector<std::string> keyNameVector = std::vector<std::string>();
-
+	std::string containerID;
 	std::string containerName;
-	std::string keyName;
-	//std::string holdsContainer;
-
 	std::string containerParentID;
 	std::string containerParentType;
+
+	Item* keyItem = nullptr;
+	std::vector<std::string> keyNameVector = std::vector<std::string>();
+	std::string keyID;
+	std::string keyName;
 	std::string keyParentID;
 	std::string keyParentType;
 
@@ -86,15 +85,15 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 		}
 
 		//Validate Key exists via messages
-		Message* msg = new Message(
+		Message* msgAccessKeyItemFromLocation = new Message(
 			"OPEN", "command",
 			"null", "null",
 			"messageManager", "messageManager",
 			"null", "null",
 			(void*) new std::vector<std::string>({ "access item from location", StringManager::Instance()->VectorToString(keyNameVector, ' '), world->GetCurrentLocation()->GetID()})
 		);
-		Message* result = MessageManager::Instance()->SendMessage(msg);
-		std::vector<std::string> outcome = *(std::vector<std::string>*)result->GetContent();
+		Message* resultAccessKeyItemFromLocation = MessageManager::Instance()->SendMessage(msgAccessKeyItemFromLocation);
+		std::vector<std::string> outcome = *(std::vector<std::string>*)resultAccessKeyItemFromLocation->GetContent();
 
 		if (outcome[0] == "null")
 		{
@@ -102,107 +101,64 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 		}
 		else
 		{
-			keyParentID = outcome[0];
-			keyParentType = outcome[1];
-			keyName = StringManager::Instance()->VectorToString(keyNameVector, ' ');
-			messageContent.push_back(keyName);
+			keyID = outcome[0];
+			keyName = outcome[1];
+			keyParentID = outcome[2];
+			keyParentType = outcome[3];
+			messageContent.push_back(keyID);
 		}
-
-		////Validate key exists
-		//if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(keyNameVector))
-		//{
-		//	keyItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(keyNameVector);
-		//	//holdsContainer = world->GetCurrentLocation()->GetID();
-		//}
-		//else if (((Container*)player->GetComponent("container"))->HasItem(keyNameVector))
-		//{
-		//	keyItem = ((Container*)player->GetComponent("container"))->GetItem(keyNameVector);
-		//	//holdsContainer = player->GetID();
-		//}
-
-		//if (keyItem == nullptr)
-		//{
-		//	return "You cannot find \"" + StringManager::Instance()->VectorToString(keyNameVector, ' ') + "\" at your current location or in your inventory.";
-		//}
-		//else
-		//{
-		//	keyName = keyItem->GetName();
-		//	messageContent.push_back(keyItem->GetID());
-		//}
 	}
 
-	//Validate container exists and is a container via messages
-	Message* msg = new Message(
+	//Validate container exists via messages
+	Message* msgAccessContainerItemFromLocation = new Message(
 		"OPEN", "command",
 		"null", "null",
 		"messageManager", "messageManager",
 		"null", "null",
 		(void*) new std::vector<std::string>({ "access item from location", StringManager::Instance()->VectorToString(containerNameVector, ' '), world->GetCurrentLocation()->GetID() })
 	);
-	Message* result = MessageManager::Instance()->SendMessage(msg);
-	std::vector<std::string> outputVector = *(std::vector<std::string>*)result->GetContent();
+	Message* resultAccessContainerItemFromLocation = MessageManager::Instance()->SendMessage(msgAccessContainerItemFromLocation);
+	std::vector<std::string> outputVector = *(std::vector<std::string>*)resultAccessContainerItemFromLocation->GetContent();
 
 	if (outputVector[0] == "null")
 	{
 		return "You cannot find \"" + StringManager::Instance()->VectorToString(containerNameVector, ' ') + "\" at your current location or in your inventory.";
 	}
-	else
-	{
-		containerParentID = outputVector[0];
-		containerParentType = outputVector[1];
-		containerName = StringManager::Instance()->VectorToString(containerNameVector, ' ');
+	
+	containerID = outputVector[0];
+	containerName = outputVector[1];
+	containerParentID = outputVector[2];
+	containerParentType = outputVector[3];
 
-		Message* msg = new Message(
-			"OPEN", "command",
-			"null", "null",
-			containerName, "item",
-			containerParentID, containerParentType,
-			(void*) new std::vector<std::string>({ "item is container" })
-		);
-		Message* outputVector = MessageManager::Instance()->SendMessage(msg);
-		//TODO: handle result
+	//Validate container is actually a container via messages
+	Message* msgHasContainerComponent = new Message(
+		"OPEN", "command",
+		"null", "null",
+		containerID, "gameObject",
+		containerParentID, containerParentType,
+		(void*) new std::vector<std::string>({ "has component", "container" })
+	);
+	Message* resultHasContainerComponent = MessageManager::Instance()->SendMessage(msgHasContainerComponent);
+
+	if (*(std::string*) resultHasContainerComponent->GetContent() == "No")
+	{
+		return containerName + " is not a container; you cannot open it.";
 	}
 
-	////Validate container exists and is a container
-	//if (((Container*)world->GetCurrentLocation()->GetComponent("container"))->HasItem(containerNameVector))
-	//{
-	//	containerItem = ((Container*)world->GetCurrentLocation()->GetComponent("container"))->GetItem(containerNameVector);
-	//	//holdsContainer = world->GetCurrentLocation()->GetID();
-	//}
-	//else if (((Container*)player->GetComponent("container"))->HasItem(containerNameVector))
-	//{
-	//	containerItem = ((Container*)player->GetComponent("container"))->GetItem(containerNameVector);
-	//	//holdsContainer = player->GetID();
-	//}
-
-	//if (containerItem == nullptr)
-	//{
-	//	return "You cannot find \"" + StringManager::Instance()->VectorToString(containerNameVector, ' ') + "\" at your current location or in your inventory.";
-	//}
-	//else
-	//{
-	//	containerName = containerItem->GetName();
-	//	
-	//	if (!containerItem->HasComponent("container"))
-	//	{
-	//		return containerName + " is not a container; you cannot open it.";
-	//	}
-	//}	
-
-	//Send Message
-	Message* msg = new Message(
+	//Open / unlock container via messages
+	Message* msgOpenContainerItem = new Message(
 		"OPEN", "command", 
 		"null", "null", 
-		containerItem->GetID(), "container", 
-		containerItem->GetParentID(), containerItem->GetParentType(), 
+		containerID, "container", 
+		containerParentID, containerParentType, 
 		(void*)& messageContent);
-	Message* result = MessageManager::Instance()->SendMessage(msg);
-	std::string output = *(std::string*)result->GetContent();
+	Message* resultOpenContainerItem = MessageManager::Instance()->SendMessage(msgOpenContainerItem);
+	std::string output = *(std::string*)resultOpenContainerItem->GetContent();
 
 	//Handle results
 	if (output == "already unlocked")
 	{
-		return containerName + " is already unlocked. Just open it normally.";
+		return containerName + " is already unlocked. Try looking inside it normally.";
 	}
 	else if (output == "locked")	//Tried to open with "open [container]"
 	{
@@ -214,11 +170,21 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	}
 	else if (output == "unlocked")
 	{
-		if (((Container*)containerItem->GetComponent("container"))->GetIsOpen())
+		//Verify via messages that the container was opened / unlocked
+		Message* msgContainerOpen = new Message(
+			"OPEN", "command",
+			"null", "null",
+			containerID, "container",
+			containerParentID, containerParentType,
+			(void*) new std::vector<std::string>({ "is open" }));
+		Message* resultContainerOpen = MessageManager::Instance()->SendMessage(msgContainerOpen);
+		std::string outputContainerOpen = *(std::string*)resultContainerOpen->GetContent();
+
+		if (outputContainerOpen == "open")
 		{
 			return "You unlocked and opened " + containerName + ". " + CommandManager::Instance()->Process(StringManager::Instance()->StringToVector("look in " + StringManager::Instance()->ToLowercase(containerName), ' '), world, player);
 		}
-		else if (((Lock*)containerItem->GetComponent("lock"))->GetIsLocked())
+		else if (outputContainerOpen == "locked")
 		{
 			return "You try to unlock " + containerName + " with " + keyName + ", but the lock stays locked. It seems stuck. It shouldn't be. This is not right at all.";
 		}
@@ -241,6 +207,6 @@ std::string CommandOpen::Process(std::vector<std::string> input, World* world, P
 	}
 	else
 	{
-		return "Error: invalid message \"" + output + "\" sent to / received from " + containerItem->GetID() + "'s component container.";
+		return "Error: invalid message \"" + output + "\" sent to / received from " + containerName + "'s container component.";
 	}
 }

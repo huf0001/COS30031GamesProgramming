@@ -22,6 +22,7 @@ std::string StageGameplay::Setup()
 {
 	setup = true;
 	player = new Player("player_1", "Player 1");
+	MessageManager::Instance()->Subscribe(player);
 	std::string result;
 
 	result += "Zorkish :: " + world->GetName();
@@ -36,6 +37,7 @@ std::string StageGameplay::Setup()
 void StageGameplay::SetWorld(World* world)
 {
 	this->world = world;
+	MessageManager::Instance()->Subscribe(world);
 }
 
 std::string StageGameplay::Update(std::string input)

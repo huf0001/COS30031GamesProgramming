@@ -68,6 +68,16 @@ Message* Lock::Notify(Message* message)
 				);
 			}
 		}
+		else if (messageContent[0] == "is locked")
+		{
+			return new Message(
+				gameObject->GetID(), gameObject->GetType(),
+				gameObject->GetParentID(), gameObject->GetParentType(),
+				message->GetSenderID(), message->GetSenderType(),
+				message->GetSenderParentID(), message->GetSenderParentType(),
+				(void*) new std::string(isLocked ? "locked" : "unlocked")
+			);
+		}
 	}
 
 	return nullptr;
