@@ -1,21 +1,34 @@
 ﻿  About.cpp
+  Container.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Container.cpp(27,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Container.cpp(45,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Container.cpp(99,21): warning C4018:  '<': signed/unsigned mismatch
+  ContainerItem.cpp
   Game.cpp
   Gameplay.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Container.cpp(119,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(167,24): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(346,24): warning C4018:  '<': signed/unsigned mismatch
   HallOfFame.cpp
   Help.cpp
+  Item.cpp
+  Location.cpp
   MainMenu.cpp
   NewHighScore.cpp
+  Path.cpp
+  pch.cpp
+  Player.cpp
   SelectAdventure.cpp
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\Gameplay.cpp(472,23): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\SelectAdventure.cpp(69,20): warning C4018:  '<=': signed/unsigned mismatch
+  Stage.cpp
   StageManager.cpp
   StringManager.cpp
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\SelectAdventure.cpp(97,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\StringManager.cpp(36,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\StringManager.cpp(52,20): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\StringManager.cpp(78,20): warning C4018:  '<': signed/unsigned mismatch
+  World.cpp
   ZorkishAdventures.cpp
   Generating Code...
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\12 - Spike - Game Graphs from Data\ZorkishAdventures\ZorkishAdventures\StringManager.cpp(93,20): warning C4018:  '<': signed/unsigned mismatch

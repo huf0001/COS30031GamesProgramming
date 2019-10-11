@@ -1,2 +1,47 @@
-﻿  Container.cpp
+﻿  CommandAlias.cpp
+  CommandDebug.cpp
+  CommandDrop.cpp
+  CommandHelp.cpp
+  CommandHiScore.cpp
+  CommandLook.cpp
+  CommandOpen.cpp
+  CommandPut.cpp
+  CommandQuit.cpp
+  CommandTake.cpp
+  Component.cpp
+  ComponentFactory.cpp
+  Description.cpp
+  GameObject.cpp
+  Lock.cpp
+  Message.cpp
+  MessageManager.cpp
+  Movable.cpp
+  StageAbout.cpp
+  Command.cpp
+  Generating Code...
+  Compiling...
+  CommandManager.cpp
+  Container.cpp
+  Game.cpp
+  StageGameplay.cpp
+  StageHallOfFame.cpp
+  StageHelp.cpp
+  Item.cpp
+  Location.cpp
+  StageMainMenu.cpp
+  CommandMove.cpp
+  StageNewHighScore.cpp
+  Path.cpp
+  pch.cpp
+  Player.cpp
+  StageSelectAdventure.cpp
+  Stage.cpp
+  StageManager.cpp
+  StringManager.cpp
+  UnlockCommands.cpp
+  World.cpp
+  Generating Code...
+  Compiling...
+  ZorkishAdventures.cpp
+  Generating Code...
   ZorkishAdventures.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\18 - Spike - Announcements & Blackboards\ZorkishAdventures\Debug\ZorkishAdventures.exe
