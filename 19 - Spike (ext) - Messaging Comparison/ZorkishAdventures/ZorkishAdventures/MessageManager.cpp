@@ -308,7 +308,7 @@ Message* MessageManager::SendMessage(Message* message)
 				{
 					if (subscribedItemsInContainer.count(message->GetReceiverParentID()))
 					{
-						std::vector<void*> results;
+						std::vector<void*> replies;
 
 						for (std::pair<std::string, Item*> pair : subscribedItemsInContainer[message->GetReceiverParentID()])
 						{
@@ -316,7 +316,7 @@ Message* MessageManager::SendMessage(Message* message)
 							
 							if (reply != nullptr)
 							{
-								results.push_back(reply->GetContent());
+								replies.push_back(reply->GetContent());
 							}
 						}
 
@@ -325,7 +325,7 @@ Message* MessageManager::SendMessage(Message* message)
 							message->GetReceiverParentID(), message->GetReceiverParentType(),
 							message->GetSenderID(), message->GetSenderType(),
 							message->GetSenderParentID(), message->GetSenderParentType(),
-							(void*) new std::vector<void*>(results)
+							(void*) new std::vector<void*>(replies)
 						);
 					}
 				}

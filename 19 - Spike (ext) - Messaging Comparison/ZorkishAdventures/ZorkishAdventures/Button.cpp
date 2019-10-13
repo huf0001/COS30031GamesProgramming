@@ -16,7 +16,7 @@ Message* Button::Notify(Message* message)
 {
 	std::string messageContent = *(std::string*)message->GetContent();
 
-	if (messageContent == "trigger")
+	if (messageContent == "use")
 	{
 		return MessageManager::Instance()->SendMessage(new Message(
 			gameObject->GetID(), gameObject->GetType(),

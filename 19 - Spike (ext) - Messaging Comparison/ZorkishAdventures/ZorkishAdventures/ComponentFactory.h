@@ -7,17 +7,21 @@ class ComponentFactory
 {
 private:
 	//Enum
-	enum ComponentID
+	enum ComponentType
 	{
-		ContainerID,
-		//DescriptionID,
-		LockID,
-		MovableID
+		ComponentButton,
+		ComponentContainer,
+		ComponentDescription,
+		ComponentFlammable,
+		ComponentLandmine,
+		ComponentLock,
+		ComponentMovable,
+		ComponentUnlockCommands
 	};
 
 	//Private Fields
 	static ComponentFactory* instance;
-	std::map<std::string, ComponentID> componentIds;
+	std::map<std::string, ComponentType> componentTypes;
 
 	//Constructor
 	ComponentFactory();
@@ -35,7 +39,7 @@ public:
 
 	//Methods
 	Component* CreateComponent(std::string componentId, GameObject* gameObject);
-	//Component* CreateComponent(std::string componentId, GameObject* gameObject, std::string);
+	bool ComponentTypeExists(std::string type);
 };
 
 #endif

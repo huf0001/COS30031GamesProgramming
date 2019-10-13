@@ -51,8 +51,11 @@ World::World(std::string filename)
 		std::string aliasFormat = "\tFormat: \"A:direction name:direction alias\".\n\n";
 		std::string itemFormat = "\tFormat: \"I:container_id:item_id:Item Name:item description:component_id_1,component_id_2, . . .\".\n\n";
 		std::string generalComponentFormat = "\tGeneral Format: \"C:component_type:game_object_id[:component specific parameters]\".\n\n";
+		std::string buttonComponentFormat = "\tButton Format: \"C:button:game_object_id:triggers_type:triggers_at_location_id\".\n\n";
 		std::string containerComponentFormat = "\tContainer Format: \"C:container:game_object_id:is_open?:always_open?\".\n\n";
 		std::string descriptionComponentFormat = "\tDescription Format: \"C:description:game_object_id:description of game object\".\n\n";
+		std::string flammableComponentFormat = "\tFlammable Format: \"C:flammable:game_object_id\".\n\n";
+		std::string landmineComponentFormat = "\tLandmine Format: \"C:landmine:game_object_id\".\n\n";
 		std::string lockComponentFormat = "\tLock Format: \"C:lock:game_object_id:is_locked?:unlockable_with_item_id_1,unlockable_with_item_id_2, . . .\". If not unlockable, specify \"none\".\n\n";
 		std::string movableComponentFormat = "\tMovable Format: \"C:movable:game_object_id\".\n\n";
 		std::string unlockCommandsComponentFormat = "\tUnlock Commands Format: \"C:unlock_commands:game_object_id:command_id_1,command_id_2, . . .\".\n\n";
@@ -329,21 +332,30 @@ World::World(std::string filename)
 
 						for (std::string componentId : componentIds)
 						{
-							Component* component = ComponentFactory::Instance()->CreateComponent(componentId, (GameObject*)item);
-
-							if (component == nullptr)
+							if (!ComponentFactory::Instance()->ComponentTypeExists(componentId))
 							{
-								std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Invalid component ID \"" + componentId + "\". ComponentFactory cannot produce Components with that component ID.\n";
+								std::cout << "Error, \"" << filename << "\", line " << lineCount << ": \"" + componentId + "\" is not a valid component type.\n";
 								std::cout << itemFormat;
 								loadedSuccessfully = false;
 							}
 							else
 							{
-								item->AddComponent(component);
+								Component* component = ComponentFactory::Instance()->CreateComponent(componentId, (GameObject*)item);
 
-								if (componentId == "container")
+								if (component == nullptr)
 								{
-									containers[item->GetID()] = (Container*)component;
+									std::cout << "Error, \"" << filename << "\", line " << lineCount << ": ComponentFactory cannot produce Components of type \"" + componentId + "\".\n";
+									std::cout << itemFormat;
+									loadedSuccessfully = false;
+								}
+								else
+								{
+									item->AddComponent(component);
+
+									if (componentId == "container")
+									{
+										containers[item->GetID()] = (Container*)component;
+									}
 								}
 							}
 						}
@@ -364,6 +376,12 @@ World::World(std::string filename)
 					std::cout << generalComponentFormat;
 					loadedSuccessfully = false;
 				}
+				else if (!ComponentFactory::Instance()->ComponentTypeExists(splitLine[1]))
+				{
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": \"" + splitLine[1] + "\" is not a valid component type.\n";
+					std::cout << generalComponentFormat;
+					loadedSuccessfully = false;
+				}
 				else if (splitLine[2].length() == 0)
 				{
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": You must specify the id of the game object the component will be assigned to.\n";
@@ -375,6 +393,34 @@ World::World(std::string filename)
 					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": The component's game_object_id must be the id of a game object that has already been created. Map \"gameObjects\" in World.World() does not include game object \"" + splitLine[2] + "\".\n";
 					std::cout << generalComponentFormat;
 					loadedSuccessfully = false;
+				}
+				else if (splitLine[1] == "button")
+				{
+					if (splitLine.size() != 5)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading button component. Values required (including prefix \"C\"): 5. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalComponentFormat;
+						std::cout << buttonComponentFormat;
+						loadedSuccessfully = false;
+					}
+					else if (!ComponentFactory::Instance()->ComponentTypeExists(splitLine[3]))
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": \"" + splitLine[3] + "\" is not a valid component type.\n";
+						std::cout << generalComponentFormat;
+						std::cout << containerComponentFormat;
+						loadedSuccessfully = false;
+					}
+					else if (!locations.count(splitLine[4]))
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": triggers_at_location_id must be the id of a location that has already been created. Map \"locations\" in World.World() does not include location \"" + splitLine[2] + "\".\n";
+						std::cout << generalComponentFormat;
+						std::cout << containerComponentFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Button(gameObjects[splitLine[2]], splitLine[3], splitLine[4]));
+					}					
 				}
 				else if (splitLine[1] == "container")
 				{		
@@ -424,6 +470,34 @@ World::World(std::string filename)
 					else
 					{
 						gameObjects[splitLine[2]]->AddComponent((Component*) new Description(gameObjects[splitLine[2]], splitLine[3]));
+					}
+				}
+				else if (splitLine[1] == "flammable")
+				{
+					if (splitLine.size() != 3)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading flammable component. Values required (including prefix \"C\"): 3. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalComponentFormat;
+						std::cout << flammableComponentFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Flammable(gameObjects[splitLine[2]]));
+					}
+				}
+				else if (splitLine[1] == "landmine")
+				{
+					if (splitLine.size() != 3)
+					{
+						std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Wrong number of values for loading landmine component. Values required (including prefix \"C\"): 3. Values given: " << splitLine.size() << ".\n";
+						std::cout << generalComponentFormat;
+						std::cout << landmineComponentFormat;
+						loadedSuccessfully = false;
+					}
+					else
+					{
+						gameObjects[splitLine[2]]->AddComponent((Component*) new Landmine(gameObjects[splitLine[2]]));
 					}
 				}
 				else if (splitLine[1] == "lock")
@@ -502,7 +576,7 @@ World::World(std::string filename)
 				}
 				else
 				{
-					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": Invalid component type \"" + splitLine[1] + "\". No component exists of that type.\n";
+					std::cout << "Error, \"" << filename << "\", line " << lineCount << ": World.World() cannot process components of type \"" + splitLine[1] + "\".\n";
 					std::cout << generalComponentFormat;
 					loadedSuccessfully = false;
 				}				

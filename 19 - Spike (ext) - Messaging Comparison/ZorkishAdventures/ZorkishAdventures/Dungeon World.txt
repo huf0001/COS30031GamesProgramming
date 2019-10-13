@@ -23,7 +23,7 @@
 
 #Components				"C:component_type:game_object_id[:component-specific parameters]"
 
-#						"C:button:game_object_id:triggers_type:triggers_location
+#						"C:button:game_object_id:triggers_type:triggers_at_location_id
 
 #						"C:container:game_object_id:is_open?:always_open?"
 
@@ -90,7 +90,7 @@ L:dungeon_6:Dungeon 6: a cold, dark dungeon with a 6 painted on the wall.
 C:unlock_commands:dungeon_6:use
 I:dungeon_6:red_button:Red Button:A big, red button mounted on the wall.:none
 C:button:red_button:landmine:dungeon_6
-I:dungeon_6:landmine_a:Landmine A:A landmine affixed to the ground.:landmine
+I:dungeon_6:landmine:Landmine:A landmine affixed to the ground.:landmine
 I:dungeon_6:bush:Bush:A short, squat bush.:flammable
 I:dungeon_6:tree:Tree:A nice, shady tree.:flammable
 

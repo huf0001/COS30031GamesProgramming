@@ -18,28 +18,45 @@ ComponentFactory* ComponentFactory::Instance()
 
 ComponentFactory::ComponentFactory()
 {
-	componentIds = std::map<std::string, ComponentID>();
-	componentIds["container"] = ComponentID::ContainerID;
-	//componentIds["description"] = ComponentID::DescriptionID;
-	//componentIds["lock"] = ComponentID::LockID;
-	componentIds["movable"] = ComponentID::MovableID;
+	componentTypes = std::map<std::string, ComponentType>();
+	componentTypes["button"] = ComponentType::ComponentButton;
+	componentTypes["container"] = ComponentType::ComponentContainer;
+	componentTypes["description"] = ComponentType::ComponentDescription;
+	componentTypes["flammable"] = ComponentType::ComponentFlammable;
+	componentTypes["landmine"] = ComponentType::ComponentLandmine;
+	componentTypes["lock"] = ComponentType::ComponentLock;
+	componentTypes["movable"] = ComponentType::ComponentMovable;
+	componentTypes["unlock_commands"] = ComponentType::ComponentUnlockCommands;
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
 
 Component* ComponentFactory::CreateComponent(std::string componentId, GameObject* gameObject)
 {
-	switch (componentIds[componentId])
+	switch (componentTypes[componentId])
 	{
-		case ComponentID::ContainerID:
+		//case ComponentType::ComponentButton:
+		//	return (Component*) new Button(gameObject);
+		case ComponentType::ComponentContainer:
 			return (Component*) new Container(gameObject, false, false);
-		//case ComponentID::DescriptionID:
+		//case ComponentType::ComponentDescription:
 		//	return (Component*) new Description(gameObject);
-		//case ComponentID::LockID:
+		case ComponentType::ComponentFlammable:
+			return (Component*) new Flammable(gameObject);
+		case ComponentType::ComponentLandmine:
+			return (Component*) new Landmine(gameObject);
+		//case ComponentType::ComponentLock:
 		//	return (Component*) new Lock(gameObject, true, std::vector<std::string>());
-		case ComponentID::MovableID:
+		case ComponentType::ComponentMovable:
 			return (Component*) new Movable(gameObject);
+		//case ComponentType::ComponentUnlockCommands:
+		//	return (Component*) new UnlockCommands(gameObject);
 		default:
 			return nullptr;
 	}
+}
+
+bool ComponentFactory::ComponentTypeExists(std::string type)
+{
+	return componentTypes.count(type);
 }

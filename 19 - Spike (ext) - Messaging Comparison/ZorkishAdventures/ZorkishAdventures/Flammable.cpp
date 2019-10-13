@@ -33,4 +33,6 @@ Message* Flammable::Notify(Message* message)
 			(void*) new std::string(gameObject->GetName() + " bursts into flames and is destroyed.")
 		);
 	}
+
+	return nullptr;
 }
