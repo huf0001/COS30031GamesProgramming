@@ -7,6 +7,7 @@ class Flammable : Component
 {
 private:
 	//Private Fields
+	bool ignited;
 
 	//Private Methods
 

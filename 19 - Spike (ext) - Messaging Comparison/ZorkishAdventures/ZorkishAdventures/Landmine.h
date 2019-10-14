@@ -7,6 +7,7 @@ class Landmine : Component
 {
 private:
 	//Private Fields
+	bool detonated;
 
 	//Private Methods
 

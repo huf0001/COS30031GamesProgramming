@@ -71,6 +71,7 @@ void Container::AddItem(Item* item)
 	items.push_back(item);
 	MessageManager::Instance()->Subscribe(gameObject->GetID(), item);
 	item->SetParentID(gameObject->GetID());
+	item->SetParentType(gameObject->GetType());
 }
 
 Item* Container::GetItem(std::vector<std::string> input)
@@ -162,6 +163,7 @@ void Container::RemoveItem(std::vector<std::string> input)
 			{
 				MessageManager::Instance()->Unsubscribe("item", items[i]->GetID(), gameObject->GetID());
 				items[i]->SetParentID("null");
+				items[i]->SetParentType("null");
 				items.erase(items.begin() + i);
 				break;
 			}

@@ -308,7 +308,7 @@ Message* MessageManager::SendMessage(Message* message)
 				{
 					if (subscribedItemsInContainer.count(message->GetReceiverParentID()))
 					{
-						std::vector<void*> replies;
+						std::vector<Message*> replies;
 
 						for (std::pair<std::string, Item*> pair : subscribedItemsInContainer[message->GetReceiverParentID()])
 						{
@@ -316,7 +316,7 @@ Message* MessageManager::SendMessage(Message* message)
 							
 							if (reply != nullptr)
 							{
-								replies.push_back(reply->GetContent());
+								replies.push_back(reply);
 							}
 						}
 
@@ -325,7 +325,7 @@ Message* MessageManager::SendMessage(Message* message)
 							message->GetReceiverParentID(), message->GetReceiverParentType(),
 							message->GetSenderID(), message->GetSenderType(),
 							message->GetSenderParentID(), message->GetSenderParentType(),
-							(void*) new std::vector<void*>(replies)
+							(void*) new std::vector<Message*>(replies)
 						);
 					}
 				}
@@ -407,7 +407,6 @@ void MessageManager::SendQueuedMessages(std::string tag)
 		if (messageTag == tag)
 		{
 			messageDelayCount = (int*)messageContent[1];
-			*messageDelayCount -= 1;
 
 			if (*messageDelayCount == 0)
 			{
@@ -415,6 +414,7 @@ void MessageManager::SendQueuedMessages(std::string tag)
 			}
 			else
 			{
+				*messageDelayCount -= 1;
 				stillQueuedMessages.push_back(message);
 			}
 		}

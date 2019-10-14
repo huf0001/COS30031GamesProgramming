@@ -27,6 +27,7 @@ CommandManager::CommandManager()
 	allCommands["take"] = (Command*) new CommandTake();
 	allCommands["put"] = (Command*) new CommandPut();
 	allCommands["drop"] = (Command*) new CommandDrop();
+	allCommands["use"] = (Command*) new CommandUse();
 	allCommands["help"] = (Command*) new CommandHelp();
 	allCommands["quit"] = (Command*) new CommandQuit();
 	allCommands["alias"] = (Command*) new CommandAlias();
@@ -44,6 +45,7 @@ CommandManager::CommandManager()
 	unavailableCommands["take"] = allCommands["take"];
 	unavailableCommands["put"] = allCommands["put"];
 	unavailableCommands["drop"] = allCommands["drop"];
+	unavailableCommands["use"] = allCommands["use"];
 	unavailableCommands["alias"] = allCommands["alias"];
 	unavailableCommands["debug"] = allCommands["debug"];
 	unavailableCommands["hiscore"] = allCommands["hiscore"];

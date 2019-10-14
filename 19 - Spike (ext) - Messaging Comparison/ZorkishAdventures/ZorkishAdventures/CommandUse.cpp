@@ -28,7 +28,7 @@ std::string CommandUse::GetSyntax()
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
-CommandUse::CommandUse() : Command("use")
+CommandUse::CommandUse() : Command("USE")
 {
 	AddKeyword("use");
 }
@@ -41,7 +41,6 @@ std::string CommandUse::Process(std::vector<std::string> input, World* world, Pl
 
 	std::string usableName = StringManager::Instance()->VectorToString(input, ' ');
 	Item* usableItem = nullptr;
-	Button* usableComponent = nullptr;
 	
 	if (((Container*)player->GetComponent("container"))->HasItem(input))
 	{
@@ -62,14 +61,28 @@ std::string CommandUse::Process(std::vector<std::string> input, World* world, Pl
 	}
 	else
 	{
+		std::string result = "";
 		Message* msgUse = new Message(
 			"USE", "command",
 			"null", "null",
-			usableItem->GetID(), usableItem->GetType(),
+			usableItem->GetID(), "button",
 			usableItem->GetParentID(), usableItem->GetParentType(),
 			(void*) new std::string("use")
 		);
 		Message* replyUse = MessageManager::Instance()->SendMessage(msgUse);
+		std::vector<std::string> messageContent = *(std::vector<std::string>*)replyUse->GetContent();
+		MessageManager::Instance()->SendQueuedMessages("remove");
 
+		for (int i = 0; i < (int)messageContent.size(); i++)
+		{
+			if (i != 0)
+			{
+				result += "\n";
+			}
+
+			result += messageContent[i];
+		}
+
+		return result;
 	}
 }

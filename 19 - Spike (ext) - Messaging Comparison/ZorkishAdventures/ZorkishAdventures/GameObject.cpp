@@ -112,6 +112,16 @@ Message* GameObject::Notify(Message* message)
 			);
 		}
 	}
+	else if (receiverType == type)
+	{
+		std::vector<void*> messageContent = *(std::vector<void*>*) message->GetContent();
+
+		if (*(std::string*)messageContent[0] == "remove" && HasComponent("container"))
+		{
+			Container* containerComponent = (Container*)GetComponent("container");
+			containerComponent->RemoveItem(*(std::vector<std::string>*)messageContent[2]);
+		}
+	}
 	else if (HasComponent(receiverType))
 	{
 		return GetComponent(receiverType)->Notify(message);
