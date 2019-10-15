@@ -130,11 +130,15 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,6 +24,12 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,6 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
