@@ -1,0 +1,7 @@
+﻿  AssetManager.cpp
+  AudioManager.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\pch.h(18,10): error C1083:  Cannot open include file: 'SDL_images.h': No such file or directory
+  Main.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\pch.h(18,10): error C1083:  Cannot open include file: 'SDL_images.h': No such file or directory
+  Generating Code...
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\pch.h(18,10): error C1083:  Cannot open include file: 'SDL_images.h': No such file or directory
