@@ -29,6 +29,7 @@ GameManager::GameManager()
 	assetManager = AssetManager::Instance();
 	audioManager = AudioManager::Instance();
 	graphics = Graphics::Instance();
+	timer = Timer::Instance();
 
 	if (!Graphics::GetInitialised())
 	{
@@ -46,6 +47,8 @@ GameManager::~GameManager()
 	audioManager = 0;
 	Graphics::Release();
 	graphics = 0;
+	Timer::Release();
+	timer = 0;
 				//SDL_DestroyRenderer(renderer);
 }
 
@@ -55,6 +58,7 @@ void GameManager::Run()
 {
 	while (running)
 	{
+		timer->Update();
 				//SDL_Event* event;
 
 		while (SDL_PollEvent(&events) != 0)
@@ -96,12 +100,17 @@ void GameManager::Run()
 			}
 		}
 
-		graphics->Render();
+		if (timer->GetDeltaTime() >= 1.0f / FRAME_RATE)
+		{
+			//std::cout << "DeltaTime: " << timer->GetDeltaTime() << std::endl;
+			graphics->Render();
+			timer->Reset();
+		}
 				//SDL_RenderClear(renderer);
 					//SDL_RenderCopy(renderer, text, NULL, &dest);
 				//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				//SDL_RenderPresent(renderer);
-		SDL_Delay(1000 / 60);
+		//SDL_Delay(1000 / 60);
 	}
 
 	Release();

@@ -22,12 +22,12 @@ bool Graphics::GetInitialised()
 
 int Graphics::GetScreenHeight()
 {
-	return screenHeight;
+	return SCREEN_HEIGHT;
 }
 
 int Graphics::GetScreenWidth()
 {
-	return screenWidth;
+	return SCREEN_WIDTH;
 }
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ bool Graphics::Init()
 		return false;
 	}
 
-	window = SDL_CreateWindow("SDL2 Tasks", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("SDL2 Tasks", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 	if (window == NULL)
 	{

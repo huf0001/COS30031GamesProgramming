@@ -8,8 +8,8 @@ class Graphics
 private:
 	//Private Fields
 	static Graphics* instance;
-	static const int screenWidth = 800;
-	static const int screenHeight = 600;
+	static const int SCREEN_WIDTH = 800;
+	static const int SCREEN_HEIGHT = 600;
 	static bool initialised;
 
 	SDL_Window* window;

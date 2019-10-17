@@ -13,8 +13,10 @@ private:
 	AssetManager* assetManager;
 	AudioManager* audioManager;
 	Graphics* graphics;
+	Timer* timer;
 	SDL_Event events;
 	bool running;
+	const int FRAME_RATE = 60;
 
 	//Constructor
 	GameManager();

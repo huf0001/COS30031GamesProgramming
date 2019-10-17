@@ -9,6 +9,9 @@
 //Data Structures
 #include <map>
 
+//Maths
+#include <math.h>
+
 //Output to terminal
 #include <iostream>
 #include <stdio.h>
@@ -21,9 +24,12 @@
 
 //Classes unique to this project---------------------------------------------------------------------------------------------------------------------
 
+#include "MathHelper.h"
 #include "AssetManager.h"
 #include "AudioManager.h"
+#include "GameEntity.h"
 #include "Graphics.h"
+#include "Timer.h"
 #include "GameManager.h"
 
 #endif
