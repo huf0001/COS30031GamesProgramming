@@ -9,7 +9,9 @@
 //Data Structures
 #include <map>
 
-//Maths
+//Number stuff
+#include <cstdlib>	//Random numbers
+#include <ctime>
 #include <math.h>
 
 //Output to terminal

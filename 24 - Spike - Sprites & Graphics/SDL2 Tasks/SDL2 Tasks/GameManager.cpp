@@ -2,7 +2,7 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-GameManager* GameManager::instance = 0;
+GameManager* GameManager::instance = NULL;
 
 GameManager* GameManager::Instance()
 {
@@ -29,10 +29,22 @@ GameManager::GameManager()
 		running = false;
 	}
 
-	std::string path = SDL_GetBasePath();
-	path.append("Assets/Images/LyokoBinaryWall.png");
-	background = new Texture(path);
-	displayBackground = true;
+	std::srand(std::time(0));	//Initialise std::rand
+
+	textures["background"] = new Texture("LyokoBinaryWall.png");
+	textures["background"]->SetPos(Vector2(Graphics::GetScreenWidth() * 0.5f, Graphics::GetScreenHeight() * 0.5f));
+	textures["background"]->SetWidth(Graphics::GetScreenWidth());
+	textures["background"]->SetHeight(Graphics::GetScreenHeight());
+
+	textures["sprite1"] = new Texture("SpriteSheet.png", 0, 0, 136, 190);
+	textures["sprite1"]->SetPos(Vector2(100, 0));
+	textures["sprite1"]->SetActive(false);
+	textures["sprite2"] = new Texture("SpriteSheet.png", 136, 0, 136, 190);
+	textures["sprite2"]->SetPos(Vector2(100, 0));
+	textures["sprite2"]->SetActive(false);
+	textures["sprite3"] = new Texture("SpriteSheet.png", 272, 0, 136, 190);
+	textures["sprite3"]->SetPos(Vector2(100, 0));
+	textures["sprite3"]->SetActive(false);
 }
 
 //Destructor-----------------------------------------------------------------------------------------------------------------------------------------
@@ -45,8 +57,18 @@ GameManager::~GameManager()
 	audioManager = NULL;
 	Graphics::Release();
 	graphics = NULL;
-	delete background;
-	background = NULL;
+	
+	for (auto pair : textures)
+	{
+		if (pair.second != NULL)
+		{
+			delete pair.second;
+			pair.second = NULL;
+		}
+	}
+
+	textures.clear();
+
 	Timer::Release();
 	timer = NULL;
 }
@@ -76,18 +98,18 @@ void GameManager::Run()
 
 						//Background
 						case SDL_SCANCODE_0:
-							displayBackground = !displayBackground;
+							textures["background"]->SetActive(!textures["background"]->GetActive());
 							break;
 
 						//Images
 						case SDL_SCANCODE_1:
-							displayBackground = !displayBackground;
+							ToggleSprite(textures["sprite1"]);
 							break;
 						case SDL_SCANCODE_2:
-							displayBackground = !displayBackground;
+							ToggleSprite(textures["sprite2"]);
 							break;
 						case SDL_SCANCODE_3:
-							displayBackground = !displayBackground;
+							ToggleSprite(textures["sprite3"]);
 							break;
 
 						//Music
@@ -108,6 +130,20 @@ void GameManager::Run()
 						case SDL_SCANCODE_7:
 							audioManager->PlaySFX("MortarLaunch.wav", 0, 3);
 							break;
+
+						//Included these for testing width and height changes; now no longer necessary
+						/*case SDL_SCANCODE_W:
+							textures["background"]->SetHeight(textures["background"]->GetHeight() + 10);
+							break;
+						case SDL_SCANCODE_S:
+							textures["background"]->SetHeight(textures["background"]->GetHeight() - 10);
+							break;
+						case SDL_SCANCODE_A:
+							textures["background"]->SetWidth(textures["background"]->GetWidth() - 10);
+							break;
+						case SDL_SCANCODE_D:
+							textures["background"]->SetWidth(textures["background"]->GetWidth() + 10);
+							break;*/
 					}
 
 					break;
@@ -118,9 +154,12 @@ void GameManager::Run()
 		{
 			graphics->ClearBackBuffer();
 
-			if (displayBackground)
+			for (std::pair<std::string, Texture*> pair : textures)
 			{
-				background->Render();
+				if (pair.second->GetActive())
+				{
+					pair.second->Render();
+				}
 			}
 
 			graphics->Render();
@@ -131,8 +170,18 @@ void GameManager::Run()
 	Release();
 }
 
+void GameManager::ToggleSprite(Texture* sprite)
+{
+	sprite->SetActive(!sprite->GetActive());
+
+	if (sprite->GetActive())
+	{
+		sprite->SetPos(Vector2(std::rand() % Graphics::GetScreenWidth(), std::rand() % Graphics::GetScreenHeight()));
+	}
+}
+
 void GameManager::Release()
 {
 	delete instance;
-	instance = 0;
+	instance = NULL;
 }

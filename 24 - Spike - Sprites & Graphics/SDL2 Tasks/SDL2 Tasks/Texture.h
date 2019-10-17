@@ -10,6 +10,13 @@ private:
 	SDL_Texture* texture;
 	Graphics* graphics;
 
+	int width;
+	int height;
+
+	bool clipped;
+	SDL_Rect renderRect;
+	SDL_Rect clipRect;
+
 	//Private Methods
 
 protected:
@@ -19,9 +26,14 @@ protected:
 
 public:
 	//Public Properties
+	int GetWidth();
+	void SetWidth(int value);
+	int GetHeight();
+	void SetHeight(int value);
 
 	//Constructor
-	Texture(std::string path);
+	Texture(std::string filename);
+	Texture(std::string filename, int x, int y, int w, int h);
 
 	//Destructor
 	~Texture();

@@ -2,7 +2,7 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-AudioManager* AudioManager::instance = 0;
+AudioManager* AudioManager::instance = NULL;
 
 AudioManager* AudioManager::Instance()
 {
@@ -92,5 +92,5 @@ void AudioManager::PlaySFX(std::string filename, int loops, int channel)
 void AudioManager::Release() 
 {
 	delete instance;
-	instance = 0;
+	instance = NULL;
 }

@@ -41,7 +41,7 @@ public:
 	bool Init();
 	SDL_Texture* LoadTexture(std::string path);
 	void ClearBackBuffer();
-	void DrawTexture(SDL_Texture* texture);
+	void DrawTexture(SDL_Texture* texture, SDL_Rect* clip = NULL, SDL_Rect* rend = NULL);
 	void Render();
 	static void Release();
 };

@@ -14,12 +14,11 @@ private:
 	AssetManager* assetManager;
 	AudioManager* audioManager;
 	Graphics* graphics;
+	std::map<std::string, Texture*> textures;
 	Timer* timer;
 	SDL_Event events;
 	bool running;
 
-	Texture* background;
-	bool displayBackground;
 
 	//Constructor
 	GameManager();
@@ -40,6 +39,7 @@ public:
 
 	//Public Methods
 	void Run();
+	void ToggleSprite(Texture* sprite);
 	static void Release();
 };
 

@@ -2,7 +2,7 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-Graphics* Graphics::instance = 0;
+Graphics* Graphics::instance = NULL;
 bool Graphics::initialised = false;
 
 Graphics* Graphics::Instance()
@@ -118,9 +118,9 @@ void Graphics::ClearBackBuffer()
 	SDL_RenderClear(renderer);
 }
 
-void Graphics::DrawTexture(SDL_Texture* texture)
+void Graphics::DrawTexture(SDL_Texture* texture, SDL_Rect* clip, SDL_Rect* rend)
 {
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderCopy(renderer, texture, clip , rend);
 }
 
 void Graphics::Render()
@@ -131,6 +131,6 @@ void Graphics::Render()
 void Graphics::Release()
 {
 	delete instance;
-	instance = 0;
+	instance = NULL;
 	initialised = false;
 }

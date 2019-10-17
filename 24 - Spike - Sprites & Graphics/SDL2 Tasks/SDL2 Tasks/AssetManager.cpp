@@ -2,7 +2,7 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-AssetManager* AssetManager::instance = 0;
+AssetManager* AssetManager::instance = NULL;
 
 AssetManager* AssetManager::Instance()
 {
@@ -25,10 +25,32 @@ AssetManager::AssetManager()
 
 AssetManager::~AssetManager()
 {
+	for (auto texture : textures)
+	{
+		if (texture.second != NULL)
+		{
+			SDL_DestroyTexture(texture.second);
+		}
+	}
 
+	textures.clear();
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
+
+//Load a .png file
+SDL_Texture* AssetManager::GetTexture(std::string filename)
+{
+	std::string fullPath = SDL_GetBasePath();
+	fullPath.append("Assets/Images/" + filename);
+
+	if (textures[fullPath] == nullptr)
+	{
+		textures[fullPath] = Graphics::Instance()->LoadTexture(fullPath);
+	}
+
+	return textures[fullPath];
+}
 
 //Load a .mp3 music file
 Mix_Music* AssetManager::GetMusic(std::string filename)
@@ -71,5 +93,5 @@ Mix_Chunk* AssetManager::GetChunk(std::string filename)
 void AssetManager::Release()
 {
 	delete instance;
-	instance = 0;
+	instance = NULL;
 }

@@ -9,6 +9,7 @@ private:
 	//Private Fields
 	static AssetManager* instance;
 
+	std::map<std::string, SDL_Texture*> textures;
 	std::map<std::string, Mix_Music*> music;
 	std::map<std::string, Mix_Chunk*> sfx;
 
@@ -28,6 +29,7 @@ public:
 	static AssetManager* Instance();
 
 	//Public Methods
+	SDL_Texture* GetTexture(std::string filename);
 	Mix_Music* GetMusic(std::string filename);
 	Mix_Chunk* GetChunk(std::string filename);
 

@@ -2,7 +2,7 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-Timer* Timer::instance = 0;
+Timer* Timer::instance = NULL;
 
 Timer* Timer::Instance()
 {
@@ -62,5 +62,5 @@ void Timer::Reset()
 void Timer::Release()
 {
 	delete instance;
-	instance = 0;
+	instance = NULL;
 }

@@ -1,10 +1,5 @@
-﻿  AssetManager.cpp
-  AudioManager.cpp
-  GameEntity.cpp
-  GameManager.cpp
-  Graphics.cpp
-  Main.cpp
-  Texture.cpp
-  Timer.cpp
-  Generating Code...
+﻿  GameManager.cpp
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(32,22): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(179,80): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(179,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
   SDL2 Tasks.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\Debug\SDL2 Tasks.exe
