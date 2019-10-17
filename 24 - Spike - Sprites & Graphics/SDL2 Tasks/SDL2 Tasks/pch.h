@@ -24,12 +24,20 @@
 
 //Classes unique to this project---------------------------------------------------------------------------------------------------------------------
 
+//Utility Stuff
 #include "MathHelper.h"
+#include "Timer.h"
+
+//Media Managers
 #include "AssetManager.h"
 #include "AudioManager.h"
-#include "GameEntity.h"
 #include "Graphics.h"
-#include "Timer.h"
+
+//Game Entities
+#include "GameEntity.h"
+#include "Texture.h"
+
+//Game Manager
 #include "GameManager.h"
 
 #endif

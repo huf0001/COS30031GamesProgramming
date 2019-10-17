@@ -135,6 +135,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +145,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

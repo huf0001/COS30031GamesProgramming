@@ -4,7 +4,7 @@
   GameManager.cpp
   Graphics.cpp
   Main.cpp
-  MathHelper.cpp
+  Texture.cpp
   Timer.cpp
   Generating Code...
   SDL2 Tasks.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\24 - Spike - Sprites & Graphics\SDL2 Tasks\Debug\SDL2 Tasks.exe

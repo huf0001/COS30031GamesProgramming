@@ -32,7 +32,7 @@ public:
 	float GetRotation(SPACE space = world);
 	void SetRotation(float value);
 
-	//Constructor
+	//Constructors
 	GameEntity(float x = 0.0f, float y = 0.0f);
 	GameEntity(Vector2 pos);
 

@@ -6,14 +6,16 @@
 class Graphics
 {
 private:
+	//Private Constants
+	static const int SCREEN_WIDTH = 1200;
+	static const int SCREEN_HEIGHT = 600;
+
 	//Private Fields
 	static Graphics* instance;
-	static const int SCREEN_WIDTH = 800;
-	static const int SCREEN_HEIGHT = 600;
-	static bool initialised;
-
 	SDL_Window* window;
 	SDL_Surface* backBuffer;
+	SDL_Renderer* renderer;
+	static bool initialised;
 
 	//Constructor
 	Graphics();
@@ -37,6 +39,9 @@ public:
 
 	//Public Methods
 	bool Init();
+	SDL_Texture* LoadTexture(std::string path);
+	void ClearBackBuffer();
+	void DrawTexture(SDL_Texture* texture);
 	void Render();
 	static void Release();
 };

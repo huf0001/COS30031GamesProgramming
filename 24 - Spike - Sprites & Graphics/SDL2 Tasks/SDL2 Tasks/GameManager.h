@@ -6,17 +6,20 @@
 class GameManager
 {
 private:
+	//Private Constants
+	const int FRAME_RATE = 60;
+
 	//Private Fields
 	static GameManager* instance;
-	//SDL_Window* window;
-	//SDL_Renderer* renderer;
 	AssetManager* assetManager;
 	AudioManager* audioManager;
 	Graphics* graphics;
 	Timer* timer;
 	SDL_Event events;
 	bool running;
-	const int FRAME_RATE = 60;
+
+	Texture* background;
+	bool displayBackground;
 
 	//Constructor
 	GameManager();

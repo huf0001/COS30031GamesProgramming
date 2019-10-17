@@ -1,6 +1,6 @@
 #include "GameEntity.h"
 
-//Public Properties
+//Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
 bool GameEntity::GetActive()
 {
@@ -62,7 +62,7 @@ void GameEntity::SetRotation(float value)
 	}
 }
 
-//Constructor
+//Constructors---------------------------------------------------------------------------------------------------------------------------------------
 
 GameEntity::GameEntity(Vector2 pos)
 {
@@ -78,14 +78,14 @@ GameEntity::GameEntity(float x, float y)
 	parent = NULL;
 }
 
-//Destructor
+//Destructor-----------------------------------------------------------------------------------------------------------------------------------------
 
 GameEntity::~GameEntity()
 {
 
 }
 
-//Public Methods
+//Public Methods-------------------------------------------------------------------------------------------------------------------------------------
 
 void GameEntity::Update()
 {

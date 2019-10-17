@@ -18,13 +18,6 @@ GameManager* GameManager::Instance()
 
 GameManager::GameManager()
 {
-				/*if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-				{
-					std::cerr << "Error initialising SDL: " << SDL_GetError() << std::endl;
-				}*/
-
-				//renderer = SDL_CreateRenderer(window, -1, 0);
-
 	running = true;
 	assetManager = AssetManager::Instance();
 	audioManager = AudioManager::Instance();
@@ -35,6 +28,11 @@ GameManager::GameManager()
 	{
 		running = false;
 	}
+
+	std::string path = SDL_GetBasePath();
+	path.append("Assets/Images/LyokoBinaryWall.png");
+	background = new Texture(path);
+	displayBackground = true;
 }
 
 //Destructor-----------------------------------------------------------------------------------------------------------------------------------------
@@ -42,14 +40,15 @@ GameManager::GameManager()
 GameManager::~GameManager()
 {
 	AssetManager::Release();
-	assetManager = 0;
+	assetManager = NULL;
 	AudioManager::Release();
-	audioManager = 0;
+	audioManager = NULL;
 	Graphics::Release();
-	graphics = 0;
+	graphics = NULL;
+	delete background;
+	background = NULL;
 	Timer::Release();
-	timer = 0;
-				//SDL_DestroyRenderer(renderer);
+	timer = NULL;
 }
 
 //Methods--------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +58,6 @@ void GameManager::Run()
 	while (running)
 	{
 		timer->Update();
-				//SDL_Event* event;
 
 		while (SDL_PollEvent(&events) != 0)
 		{
@@ -72,28 +70,44 @@ void GameManager::Run()
 					switch (events.key.keysym.scancode)
 					{
 						//Quit
-					case SDL_SCANCODE_ESCAPE:
-						running = false;
-						break;
+						case SDL_SCANCODE_ESCAPE:
+							running = false;
+							break;
+
+						//Background
+						case SDL_SCANCODE_0:
+							displayBackground = !displayBackground;
+							break;
+
+						//Images
+						case SDL_SCANCODE_1:
+							displayBackground = !displayBackground;
+							break;
+						case SDL_SCANCODE_2:
+							displayBackground = !displayBackground;
+							break;
+						case SDL_SCANCODE_3:
+							displayBackground = !displayBackground;
+							break;
 
 						//Music
-					case SDL_SCANCODE_9:
-						audioManager->HandleMusic("FogOfWar1.mp3");
-						break;
-					case SDL_SCANCODE_0:
-						audioManager->HandleMusic("Var_3.mp3");
-						break;
+						case SDL_SCANCODE_8:
+							audioManager->HandleMusic("FogOfWar1.mp3");
+							break;
+						case SDL_SCANCODE_9:
+							audioManager->HandleMusic("Var_3.mp3");
+							break;
 
 						//SFX
-					case SDL_SCANCODE_6:
-						audioManager->PlaySFX("BuildingDestroyed.wav", 0, 1);
-						break;
-					case SDL_SCANCODE_7:
-						audioManager->PlaySFX("MortarHit.wav", 0, 2);
-						break;
-					case SDL_SCANCODE_8:
-						audioManager->PlaySFX("MortarLaunch.wav", 0, 3);
-						break;
+						case SDL_SCANCODE_5:
+							audioManager->PlaySFX("BuildingDestroyed.wav", 0, 1);
+							break;
+						case SDL_SCANCODE_6:
+							audioManager->PlaySFX("MortarHit.wav", 0, 2);
+							break;
+						case SDL_SCANCODE_7:
+							audioManager->PlaySFX("MortarLaunch.wav", 0, 3);
+							break;
 					}
 
 					break;
@@ -102,15 +116,16 @@ void GameManager::Run()
 
 		if (timer->GetDeltaTime() >= 1.0f / FRAME_RATE)
 		{
-			//std::cout << "DeltaTime: " << timer->GetDeltaTime() << std::endl;
+			graphics->ClearBackBuffer();
+
+			if (displayBackground)
+			{
+				background->Render();
+			}
+
 			graphics->Render();
 			timer->Reset();
 		}
-				//SDL_RenderClear(renderer);
-					//SDL_RenderCopy(renderer, text, NULL, &dest);
-				//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-				//SDL_RenderPresent(renderer);
-		//SDL_Delay(1000 / 60);
 	}
 
 	Release();
