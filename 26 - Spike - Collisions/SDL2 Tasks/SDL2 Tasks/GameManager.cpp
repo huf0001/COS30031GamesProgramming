@@ -59,6 +59,12 @@ GameManager::GameManager()
 	renderOrder.push_back("movingRect");
 	shapes.push_back((Shape*)gameEntities["movingRect"]);
 
+	////Used childRect to test that axis aligned rotation of rectangles was working with regards to GetBottomLeft() and GetTopRight()
+	//gameEntities["childRect"] = new Rectangle(100, 100, Graphics::Instance()->GetColour("blue"), true, Graphics::GetScreenWidth() * 0.5f, Graphics::GetScreenHeight() * 0.5f);
+	//renderOrder.push_back("childRect");
+	//shapes.push_back((Shape*)gameEntities["childRect"]);
+	//gameEntities["childRect"]->SetParent(gameEntities["movingRect"]);
+
 	//Circles
 	gameEntities["fixedCircle"] = new Circle(150, Graphics::Instance()->GetColour("green"), true, Graphics::GetScreenWidth() * 0.5f, Graphics::GetScreenHeight() * 0.5f);
 	renderOrder.push_back("fixedCircle");
@@ -73,6 +79,7 @@ GameManager::GameManager()
 	currentShapes = Shape::ShapeRectangle;
 	fixedShape = (Shape*)gameEntities["fixedRect"];
 	movingShape = (Shape*)gameEntities["movingRect"];
+	moveShapes = true;
 }
 
 //Destructor-----------------------------------------------------------------------------------------------------------------------------------------
@@ -169,45 +176,56 @@ void GameManager::Input()
 
 			//Render circles or rectangles?
 			case SDL_SCANCODE_C:
-				currentShapes = Shape::ShapeCircle;
-				fixedShape = (Shape*)gameEntities["fixedCircle"];
-				movingShape = (Shape*)gameEntities["movingCircle"];
-
-				for (Shape* s : shapes)
+				if (currentShapes != Shape::ShapeCircle)
 				{
-					if (s->GetType() == currentShapes && !s->GetActive())
+					currentShapes = Shape::ShapeCircle;
+					fixedShape = (Shape*)gameEntities["fixedCircle"];
+					movingShape = (Shape*)gameEntities["movingCircle"];
+
+					for (Shape* s : shapes)
 					{
-						s->SetActive(true);
-						s->SetColour(graphics->GetColour("green"));
-						s->SetColliding(false);
-					}
-					else if (s->GetType() != currentShapes && s->GetActive())
-					{
-						s->SetActive(false);
+						if (s->GetType() == currentShapes && !s->GetActive())
+						{
+							s->SetActive(true);
+							s->SetColour(graphics->GetColour("green"));
+							s->SetColliding(false);
+						}
+						else if (s->GetType() != currentShapes && s->GetActive())
+						{
+							s->SetActive(false);
+						}
 					}
 				}
 
 				break;
 
 			case SDL_SCANCODE_R:
-				currentShapes = Shape::ShapeRectangle;
-				fixedShape = (Shape*)gameEntities["fixedRect"];
-				movingShape = (Shape*)gameEntities["movingRect"];
-
-				for (Shape* s : shapes)
+				if (currentShapes != Shape::ShapeRectangle)
 				{
-					if (s->GetType() == currentShapes && !s->GetActive())
+					currentShapes = Shape::ShapeRectangle;
+					fixedShape = (Shape*)gameEntities["fixedRect"];
+					movingShape = (Shape*)gameEntities["movingRect"];
+
+					for (Shape* s : shapes)
 					{
-						s->SetActive(true);
-						s->SetColour(graphics->GetColour("green"));
-						s->SetColliding(false);
-					}
-					else if (s->GetType() != currentShapes && s->GetActive())
-					{
-						s->SetActive(false);
+						if (s->GetType() == currentShapes && !s->GetActive())
+						{
+							s->SetActive(true);
+							s->SetColour(graphics->GetColour("green"));
+							s->SetColliding(false);
+						}
+						else if (s->GetType() != currentShapes && s->GetActive())
+						{
+							s->SetActive(false);
+						}
 					}
 				}
 
+				break;
+
+			//Move shapes?
+			case SDL_SCANCODE_SPACE:
+				moveShapes = !moveShapes;
 				break;
 			}
 
@@ -222,7 +240,10 @@ void GameManager::Update()
 	timer->Update();
 
 	//Move moving shape
-	MoveShape(movingShape);
+	if (moveShapes)
+	{
+		MoveShape(movingShape);
+	}
 
 	//Check collisions
 	if (currentShapes == Shape::ShapeCircle)
@@ -246,6 +267,7 @@ void GameManager::MoveShape(Shape* shape)
 	{
 		timeSinceMove -= 500;
 		shape->SetPos(Vector2(std::rand() % Graphics::GetScreenWidth(), std::rand() % Graphics::GetScreenHeight()));
+		shape->SetRotation(std::rand() % 360);
 	}
 }
 
@@ -254,7 +276,7 @@ void GameManager::CheckCircleCollision(Shape* a, Shape* b)
 	Circle* circleA = (Circle*)a;
 	Circle* circleB = (Circle*)b;
 
-	bool colliding = Distance(circleB->GetPos(GameEntity::world), circleA->GetPos(GameEntity::world)) < circleB->GetRadius() + circleA->GetRadius();
+	bool colliding = Distance(circleB->GetPos(GameEntity::world), circleA->GetPos(GameEntity::world)) <= circleB->GetRadius() + circleA->GetRadius();
 
 	circleA->SetColliding(colliding);
 	circleB->SetColliding(colliding);
@@ -266,10 +288,41 @@ void GameManager::CheckRectangleCollision(Shape* a, Shape* b)
 	Rectangle* rectB = (Rectangle*)b;
 	bool colliding = false;
 
-	//TODO: rectangle collisions checking algorithm
+	colliding = CheckAxisAlignedRectangleCollision(rectA, rectB);
 
-	rectA->SetColliding(colliding);
-	rectB->SetColliding(colliding);
+	a->SetColliding(colliding);
+	b->SetColliding(colliding);
+}
+
+bool GameManager::CheckAxisAlignedRectangleCollision(Rectangle* a, Rectangle* b)
+{
+	int aBottom = a->GetBottomLeft(GameEntity::world).y;
+	int aTop = a->GetTopRight(GameEntity::world).y;
+	int aLeft = a->GetBottomLeft(GameEntity::world).x;
+	int aRight = a->GetTopRight(GameEntity::world).x;
+	int bBottom = b->GetBottomLeft(GameEntity::world).y;
+	int bTop = b->GetTopRight(GameEntity::world).y;
+	int bLeft = b->GetBottomLeft(GameEntity::world).x;
+	int bRight = b->GetTopRight(GameEntity::world).x;
+
+	if (aTop < bBottom)
+	{
+		return false;
+	}
+	if (aBottom > bTop)
+	{
+		return false;
+	}
+	if (aLeft > bRight)
+	{
+		return false;
+	}
+	if (aRight < bLeft)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 void GameManager::UpdateColour(Shape* shape)

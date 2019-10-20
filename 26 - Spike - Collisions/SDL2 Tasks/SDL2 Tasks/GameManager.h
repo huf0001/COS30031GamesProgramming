@@ -25,6 +25,7 @@ private:
 	Shape* fixedShape;
 	Shape* movingShape;
 	float timeSinceMove;
+	bool moveShapes;
 	
 	//Constructor
 	GameManager();
@@ -50,6 +51,7 @@ public:
 	void MoveShape(Shape* shape);
 	void CheckCircleCollision(Shape* a, Shape* b);
 	void CheckRectangleCollision(Shape* a, Shape* b);
+	bool CheckAxisAlignedRectangleCollision(Rectangle* a, Rectangle* b);
 	void UpdateColour(Shape* shape);
 	void Render();
 	void ToggleSprite(Texture* sprite);

@@ -20,12 +20,14 @@ protected:
 
 public:
 	//Public Properties
-	float GetWidth();
-	void SetWidth(float value);
+	Vector2 GetTopRight(SPACE space);
 	float GetHeight();
 	void SetHeight(float value);
 	bool GetOutlined();
 	void SetOutlined(bool value);
+	Vector2 GetBottomLeft(SPACE space);
+	float GetWidth();
+	void SetWidth(float value);
 
 	//Constructor
 	Rectangle(int w, int h, SDL_Color colour, bool outlined, float x = 0.0f, float y = 0.0f);

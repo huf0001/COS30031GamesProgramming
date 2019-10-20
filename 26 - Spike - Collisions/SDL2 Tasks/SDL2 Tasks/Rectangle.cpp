@@ -2,15 +2,20 @@
 
 //Public Properties----------------------------------------------------------------------------------------------------------------------------------
 
-float Rectangle::GetWidth()
+//Y-axis starts at top and goes to bottom, therefore bottom and top to the computer are inverted compared to our perception
+//Assumes rectangles don't themselves rotate but might be rotated around a parent but remain axis-aligned
+Vector2 Rectangle::GetTopRight(SPACE space)
 {
-	return width;
-}
+	Vector2 localPos = GetPos(local);
+	Vector2 localOffset = Vector2(width * 0.5, height * 0.5);
 
-void Rectangle::SetWidth(float value)
-{
-	width = value;
-	renderRect.w = value;
+	if (space == local || GetParent() == NULL)
+	{
+		return localPos + localOffset;
+	}
+
+	//Parent pos + rotated offset relative to parent + local offset of bottom right
+	return GetParent()->GetPos(world) + RotateVector(localPos, GetParent()->GetRotation(local)) + localOffset;
 }
 
 float Rectangle::GetHeight()
@@ -23,6 +28,44 @@ void Rectangle::SetHeight(float value)
 	height = value;
 	renderRect.h = value;
 }
+
+bool Rectangle::GetOutlined()
+{
+	return outlined;
+}
+
+void Rectangle::SetOutlined(bool value)
+{
+	outlined = value;
+}
+
+//Y-axis starts at top and goes to bottom, therefore bottom and top to the computer are inverted compared to our perception
+//Assumes rectangles don't themselves rotate but might be rotated around a parent but remain axis-aligned
+Vector2 Rectangle::GetBottomLeft(SPACE space)
+{
+	Vector2 localPos = GetPos(local);
+	Vector2 localOffset = Vector2(width * 0.5, height * 0.5);
+
+	if (space == local || GetParent() == NULL)
+	{
+		return localPos - localOffset;
+	}
+
+	//Parent pos + rotated offset relative to parent + local offset of top left
+	return GetParent()->GetPos(world) + RotateVector(localPos, GetParent()->GetRotation(local)) - localOffset;
+}
+
+float Rectangle::GetWidth()
+{
+	return width;
+}
+
+void Rectangle::SetWidth(float value)
+{
+	width = value;
+	renderRect.w = value;
+}
+
 
 //Constructor----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -55,4 +98,8 @@ void Rectangle::Render()
 
 	//Draw rectangle of width width and height height, and of colour Rectangle.colour
 	graphics->DrawRectangle(colour, outlined, &renderRect);
+	
+	////Check axis-aligned rotation of GetBottomLeft() and GetTopRight()
+	//graphics->DrawCircle(graphics->GetColour("green"), true, 10, GetBottomLeft(world));
+	//graphics->DrawCircle(graphics->GetColour("blue"), true, 10, GetTopRight(world));
 }

@@ -7,7 +7,7 @@ class Graphics
 {
 private:
 	//Private Constants
-	static const int SCREEN_WIDTH = 1200;
+	static const int SCREEN_WIDTH = 600;
 	static const int SCREEN_HEIGHT = 600;
 
 	//Private Fields

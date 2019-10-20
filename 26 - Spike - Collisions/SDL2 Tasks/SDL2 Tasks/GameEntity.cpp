@@ -35,7 +35,7 @@ GameEntity* GameEntity::GetParent()
 
 void GameEntity::SetParent(GameEntity* value)
 {
-	pos = GetPos(world) - parent->GetPos(world);
+	pos = GetPos(world) - value->GetPos(world);
 	parent = value;
 }
 
