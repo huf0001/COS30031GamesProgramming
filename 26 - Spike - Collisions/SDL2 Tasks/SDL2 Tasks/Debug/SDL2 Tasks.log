@@ -1,46 +1,17 @@
-﻿  AudioManager.cpp
-  Circle.cpp
-  GameEntity.cpp
-  GameManager.cpp
+﻿  GameManager.cpp
 C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(26,22): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(268,79): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(268,37): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(269,34): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(298,14): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(299,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(300,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(301,13): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(302,14): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(303,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(304,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(305,13): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(368,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(387,80): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-  Graphics.cpp
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(387,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(168,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(169,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(173,53): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(173,41): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(187,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(188,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(189,16): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(193,54): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-  Main.cpp
-  Rectangle.cpp
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Graphics.cpp(193,42): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(10,52): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(10,38): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(29,17): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(47,52): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(47,38): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(66,17): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(75,16): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(77,17): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(84,16): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-  Shape.cpp
-  Texture.cpp
-  Timer.cpp
-  Generating Code...
-C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\Rectangle.cpp(86,17): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(269,79): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(269,37): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(270,34): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(299,14): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(300,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(301,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(302,13): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(303,14): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(304,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(305,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(306,13): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(352,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(371,80): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\SDL2 Tasks\GameManager.cpp(371,38): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
   SDL2 Tasks.vcxproj -> C:\Users\Sam Huffer\Coding\COS30031 - 101633177\26 - Spike - Collisions\SDL2 Tasks\Debug\SDL2 Tasks.exe
